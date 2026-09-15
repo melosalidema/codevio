@@ -1,0 +1,288 @@
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/dela-gothic-one@5.0.19/index.min.css');
+
+.cardContainer {
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  padding: 0 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 0;
+  width: min(1000px, 100%);
+  height: 500px;
+  border-radius: 25px;
+  padding: 50px;
+  transform-origin: top;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-family: 'Dela Gothic One', sans-serif;
+  overflow: hidden;
+
+  &:nth-child(1) {
+    background: rgba(219, 54, 78, 0.18);
+  }
+
+  &:nth-child(2) {
+    background: rgba(26, 26, 46, 0.25);
+  }
+
+  &:nth-child(3) {
+    background: rgba(252, 223, 228, 0.22);
+  }
+
+  h2 {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .body {
+    display: flex;
+    height: 100%;
+    margin-top: 40px;
+    gap: 50px;
+    min-height: 0;
+  }
+}
+
+.description {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 4px;
+  color: #fff;
+  font-family: 'Dela Gothic One', sans-serif;
+  min-width: 0;
+
+  .headline {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0;
+    color: #fff;
+    margin: 0 0 18px;
+  }
+
+  p {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #fff;
+    opacity: 0.82;
+    margin: 0 0 24px;
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+
+    a {
+      font-family: 'Dela Gothic One', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 100px;
+      border: 0.5px solid currentColor;
+      color: #fff;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, background 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    svg {
+      color: #fff;
+      opacity: 0.75;
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+
+  .inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.95) contrast(1.05);
+  }
+}
+
+@media (max-width: 1100px) {
+  .cardContainer {
+    padding: 0 28px;
+  }
+
+  .card {
+    height: 480px;
+    padding: 42px;
+    border-radius: 22px;
+
+    .body {
+      gap: 36px;
+    }
+  }
+
+  .description {
+    .headline {
+      font-size: 31px;
+    }
+
+    p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .cardContainer {
+    height: auto;
+    min-height: 100vh;
+    padding: 24px 22px 16px;
+  }
+
+  .card {
+    top: 0 !important;
+    width: 100%;
+    height: auto;
+    min-height: 620px;
+    padding: 32px;
+    border-radius: 20px;
+
+    .body {
+      flex-direction: column-reverse;
+      gap: 28px;
+      margin-top: 28px;
+    }
+  }
+
+  .description {
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 0;
+
+    .headline {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cardContainer {
+    min-height: 100vh;
+    padding: 16px 14px 12px;
+  }
+
+  .card {
+    min-height: auto;
+    padding: 22px;
+    border-radius: 18px;
+
+    h2 {
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .body {
+      margin-top: 22px;
+      gap: 22px;
+    }
+  }
+
+  .description {
+    .headline {
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    p {
+      font-size: 11px;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    span {
+      gap: 7px;
+
+      a {
+        font-size: 9px;
+        padding: 8px 14px;
+      }
+
+      svg {
+        width: 18px;
+      }
+    }
+  }
+
+  .imageContainer {
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 18px;
+  }
+
+  .description {
+    .headline {
+      font-size: 21px;
+    }
+
+    p {
+      font-size: 10px;
+    }
+  }
+}
