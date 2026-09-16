@@ -1,4 +1,5 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 
 const SOCIAL_ICONS = {
@@ -70,6 +71,7 @@ export const StaggeredMenu = ({
   className,
   logoUrl = '/src/assets/logos/reactbits-gh-white.svg',
   logoOpenUrl = null,
+  logoLink = '/',
   menuButtonColor = '#fcdfe4',
   changeMenuColorOnOpen = true,
   isFixed = false,
@@ -402,7 +404,17 @@ export const StaggeredMenu = ({
           className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20"
           aria-label="Main navigation header"
         >
-          <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
+          <Link
+            to={logoLink}
+            className="sm-logo flex items-center select-none pointer-events-auto"
+            aria-label="Codevio home"
+            onClick={() => {
+              closeMenu();
+              if (window.location.pathname === logoLink) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <img
               src={(open && logoOpenUrl && window.innerWidth < 1024) ? logoOpenUrl : logoUrl}
               alt="Logo"
@@ -411,7 +423,7 @@ export const StaggeredMenu = ({
               width={110}
               height={24}
             />
-          </div>
+          </Link>
 
           <button
             ref={toggleBtnRef}
@@ -454,16 +466,16 @@ export const StaggeredMenu = ({
               {items && items.length ? (
                 items.map((it, idx) => (
                   <li className="sm-panel-itemWrap relative overflow-hidden leading-none" key={it.label + idx}>
-                    <a
+                    <Link
                       className="sm-panel-item relative font-semibold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]"
-                      href={it.link}
+                      to={it.link}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
                         {it.label}
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 ))
               ) : (
@@ -547,9 +559,8 @@ export const StaggeredMenu = ({
 
 .sm-scope .sm-toggle {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -557,9 +568,12 @@ export const StaggeredMenu = ({
   font-weight: 500;
   line-height: 1;
   overflow: visible;
-  padding: 8px;
+  padding: 0;
+  width: 44px;
+  height: 44px;
   min-width: 44px;
   min-height: 44px;
+  box-sizing: border-box;
 }
 
 .sm-scope .sm-toggle:focus-visible {

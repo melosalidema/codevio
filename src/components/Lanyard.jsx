@@ -18,6 +18,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import StaggeredMenu from './StaggeredMenu';
 import Grainient from './Grainient';
+import { NAV_ITEMS, SOCIAL_ITEMS } from '../data/site';
 
 import cardGLB from '../assets/card.glb?url';
 import lanyard from '../assets/codevio_strip1.png';
@@ -29,17 +30,6 @@ import './Lanyard.css';
 
 gsap.registerPlugin(ScrollTrigger);
 extend({ MeshLineGeometry, MeshLineMaterial });
-
-const NAV_ITEMS = [
-  { label: 'Home', link: '/' },
-  { label: 'About', link: '/about' },
-  { label: 'Contact', link: '/contact' },
-];
-
-const SOCIAL_ITEMS = [
-  { label: 'Instagram', link: 'https://www.instagram.com/codev.io/' },
-  { label: 'LinkedIn', link: 'https://www.linkedin.com/company/codevio00/' },
-];
 
 function SplitWord({ text, className = '' }) {
   return (
@@ -59,11 +49,13 @@ export default function Lanyard({
   gravity = [0, -40, 0],
   fov = 20,
   transparent = true,
+  textVisible = undefined,
 }) {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.innerWidth < 768
   );
   const [active, setActive] = useState(false);
+  const [spinning, setSpinning] = useState(true);
 
   const wrapperRef = useRef(null);
   const leftDecoRef = useRef(null);
@@ -77,7 +69,23 @@ export default function Lanyard({
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(() => setActive(true), 300);
+    if (textVisible === undefined) {
+      const t = setTimeout(() => setActive(true), 300);
+      return () => clearTimeout(t);
+    }
+
+    if (textVisible) setActive(true);
+  }, [textVisible]);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const t = setTimeout(() => setSpinning(false), 4000);
+    return () => clearTimeout(t);
+  }, [active]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setActive(true), 3000);
     return () => clearTimeout(t);
   }, []);
 
@@ -142,7 +150,7 @@ export default function Lanyard({
 
       <div ref={wrapperRef} className="lanyard-scroll-wrapper">
         <div className="lanyard-sticky">
-          <div className="lanyard-nav">
+          <div className="lanyard-nav lanyard-nav--fixed">
             <StaggeredMenu
               position="right"
               items={NAV_ITEMS}
@@ -183,7 +191,7 @@ export default function Lanyard({
                 gravity={active ? gravity : [0, 0, 0]}
                 timeStep={isMobile ? 1 / 30 : 1 / 60}
               >
-                <Band isMobile={isMobile} />
+                <Band isMobile={isMobile} active={active} spinning={spinning} />
               </Physics>
 
               <Environment blur={0.75}>
@@ -232,7 +240,7 @@ export default function Lanyard({
   );
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
+function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning }) {
   const band = useRef();
   const fixed = useRef();
   const j1 = useRef();
@@ -348,7 +356,17 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
 
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
-      card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
+
+      if (spinning) {
+        card.current.setAngvel({ x: ang.x, y: 1.5, z: ang.z });
+      } else if (active) {
+        const facingFront = Math.cos(rot.y) > 0.999;
+        card.current.setAngvel({
+          x: ang.x,
+          y: facingFront ? 0 : 1.2,
+          z: ang.z,
+        });
+      }
     }
   });
 

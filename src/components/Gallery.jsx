@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Lenis from "@studio-freight/lenis";
 
 import styles from "./Gallery.module.scss";
 

@@ -5,9 +5,8 @@ import Footer from '../components/Footer';
 import SplashScreen from '../components/SplashScreen';
 import Lanyard from '../components/Lanyard';
 import LogoLoop from '../components/LogoLoop';
-import GiantInfoCard from '@/components/GiantInfoCard';
-import VideoShowcase from '@/components/VideoShowcase';
-import ImagesParallax from '@/components/ImagesParallax';
+import PositioningStrip from '@/components/PositioningStrip';
+import OffersTeaser from '@/components/OffersTeaser';
 
 import {
   SiReact,
@@ -21,9 +20,7 @@ import {
   SiPostgresql,
   SiNodedotjs,
   SiFigma,
-  SiCanva,
 } from 'react-icons/si';
-import Gallery from '@/components/Gallery';
 
 const IconWrapper = ({ children }) => (
   <span style={{ color: 'white', display: 'inline-flex', alignItems: 'center' }}>
@@ -67,6 +64,12 @@ export default function Home() {
         ariaLabel="Technology partners"
         marginY="10rem"
       />
+
+      <div className="relative z-10 mx-auto h-px w-full max-w-7xl bg-white/10" />
+
+      <PositioningStrip />
+      <OffersTeaser />
+
       {/* <ImagesParallax /> 
       <Gallery />
       */}

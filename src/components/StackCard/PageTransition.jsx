@@ -25,14 +25,14 @@ const contentVariants = {
   },
 };
 
-export default function PageTransition({ children }) {
+export default function PageTransition({ label = 'Our Services', children }) {
   return (
     <>
       <style>{`
         @import url('https://cdn.jsdelivr.net/npm/@fontsource/dela-gothic-one@5.0.19/index.min.css');
       `}</style>
 
-      <div style={{ position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'relative' }}>
         <motion.div
           variants={curtainVariants}
           initial="initial"
@@ -63,7 +63,7 @@ export default function PageTransition({ children }) {
               margin: 0,
             }}
           >
-            Our Services
+            {label}
           </motion.p>
         </motion.div>
 

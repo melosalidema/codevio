@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Content() {
   return (
     <div className="relative h-full w-full overflow-hidden bg-[#121417] px-6 py-8 text-white sm:px-10 md:px-12 lg:px-16">

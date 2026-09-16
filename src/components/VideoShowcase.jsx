@@ -35,7 +35,7 @@ export default function VideoShowcase({
         />
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/45 to-transparent p-5 font-['Bebas_Neue'] text-sm uppercase tracking-[0.18em] text-white sm:p-7">
-          <p>We craft bold design and clean webflow.</p>
+          <p>We craft bold design and clean code.</p>
           <p className="hidden sm:block">Codevio Studio</p>
         </div>
       </motion.div>

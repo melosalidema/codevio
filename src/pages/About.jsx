@@ -5,21 +5,13 @@ import Footer from '../components/Footer';
 import Grainient from '../components/Grainient';
 import StaggeredMenu from '../components/StaggeredMenu';
 
+import useDocumentTitle from '../lib/useDocumentTitle';
+import { NAV_ITEMS, SOCIAL_ITEMS } from '../data/site';
+
 import logo from '../assets/logo.png';
 import logoAlt from '../assets/logo_alt.png';
 
 import '../components/Lanyard.css';
-
-const NAV_ITEMS = [
-  { label: 'Home', link: '/' },
-  { label: 'About', link: '/about' },
-  { label: 'Contact', link: '/contact' },
-];
-
-const SOCIAL_ITEMS = [
-  { label: 'Instagram', link: 'https://www.instagram.com/codev.io/' },
-  { label: 'LinkedIn', link: 'https://www.linkedin.com/company/codevio00/' },
-];
 
 // Purely decorative snippet rendered in the "studio.js" panel.
 // Each line is a list of { text, colorClass } tokens.
@@ -34,7 +26,7 @@ const CODE_LINES = [
   [{ t: '// this is how we work', c: COMMENT }],
   [
     { t: 'const ', c: KEYWORD },
-    { t: 'codev', c: PLAIN },
+    { t: 'codevio', c: PLAIN },
     { t: ' = {', c: MUTED },
   ],
   [
@@ -90,6 +82,8 @@ const CODE_LINES = [
 ];
 
 export default function About() {
+  useDocumentTitle('About');
+
   return (
     <>
       <main className="relative min-h-screen overflow-hidden px-6 py-24 text-white">
@@ -136,38 +130,38 @@ export default function About() {
         <section className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 pt-32 lg:grid-cols-2">
           <div className="flex flex-col gap-8">
             <span className="text-sm uppercase tracking-[0.3em] text-[#f5b8c4]">
-              About Codev
+              About Codevio
             </span>
 
             <h1
               className="text-4xl leading-tight sm:text-5xl md:text-6xl"
               style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
             >
-              We design and build products people actually enjoy using.
+              We design, build, and ship products people actually enjoy using.
             </h1>
 
             <p className="max-w-xl text-lg text-white/80 sm:text-xl">
-              Codev is a small studio of designers and engineers who turn ideas
-              into fast, well-crafted digital products. From the first sketch
-              to the last line of code, we care about the details most teams
-              skip — motion that feels intentional, interfaces that get out of
-              the way, and code built to last past launch day.
+              Codevio is a two-to-three person studio of senior designers and
+              engineers. We help early-stage founders turn ideas into launched,
+              well-crafted digital products — brand, website, and working
+              software shipped in fixed sprints, weeks not quarters.
             </p>
 
             <p className="max-w-xl text-base text-white/60 sm:text-lg">
-              We work end to end: product strategy, interface design, and full
-              stack development, so nothing gets lost in translation between
-              the people designing the experience and the people shipping it.
+              We work end to end: product strategy, interface design, and
+              full-stack development, so nothing gets lost between the people
+              designing the experience and the people shipping it. Fixed scope,
+              a named ship date, and no handoffs.
             </p>
 
             <div className="mt-4 grid grid-cols-3 gap-8">
               <div>
-                <p className="text-3xl font-semibold">50+</p>
+                <p className="text-3xl font-semibold">25+</p>
                 <p className="text-sm text-white/60">projects shipped</p>
               </div>
               <div>
-                <p className="text-3xl font-semibold">10+</p>
-                <p className="text-sm text-white/60">tools we build with daily</p>
+                <p className="text-3xl font-semibold">3</p>
+                <p className="text-sm text-white/60">senior makers, zero handoffs</p>
               </div>
               <div>
                 <p className="text-3xl font-semibold">100%</p>
@@ -178,7 +172,7 @@ export default function About() {
 
           <div className="relative">
             <div className="absolute -inset-4 -z-10 rounded-3xl bg-[#db364e]/10 blur-2xl" />
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-md">
+            <div className="liquid-glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
               <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
                 <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
                 <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
@@ -186,7 +180,7 @@ export default function About() {
                 <span className="ml-3 text-xs text-white/40">studio.js</span>
               </div>
 
-              <pre className="flex overflow-x-auto p-6 font-mono text-sm leading-relaxed">
+              <pre className="flex overflow-x-auto bg-black/55 p-6 text-left font-mono text-sm leading-relaxed">
                 <code className="mr-4 select-none whitespace-pre text-white/30">
                   {CODE_LINES.map((_, i) => `${i + 1}\n`).join('')}
                 </code>
