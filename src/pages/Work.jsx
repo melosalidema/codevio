@@ -17,25 +17,26 @@ export default function Work() {
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}
-          className="block text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
+          className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
         >
           Work
         </motion.span>
 
         <motion.h1
           {...fadeUp(0.05)}
-          className="mt-6 max-w-4xl text-4xl leading-tight sm:text-5xl md:text-6xl"
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
-          Recent launches.
+          Launch examples.
         </motion.h1>
 
         <motion.p
           {...fadeUp(0.1)}
-          className="mt-8 max-w-2xl text-lg text-white/75"
+          className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75"
         >
-          Every project below shipped inside a fixed sprint. Full case studies
-          are being written up — ask us for a walkthrough of any recent launch.
+          The examples below illustrate the kind of launches we take on. Real
+          case studies are being written up — ask us for a walkthrough of a
+          recent sprint.
         </motion.p>
       </section>
 
@@ -55,6 +56,12 @@ export default function Work() {
               <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/55 px-4 py-1.5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.14em] text-[#fcdfe4] backdrop-blur-sm">
                 {project.metric}
               </span>
+
+              {project.illustrative && (
+                <span className="absolute right-4 top-4 rounded-full border border-white/15 bg-black/55 px-3 py-1 font-['Bebas_Neue'] text-[0.65rem] uppercase tracking-[0.14em] text-white/60 backdrop-blur-sm">
+                  Illustrative
+                </span>
+              )}
             </div>
 
             <div className="flex flex-1 flex-col p-7">

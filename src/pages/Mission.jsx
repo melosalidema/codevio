@@ -19,14 +19,14 @@ export default function Mission() {
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}
-          className="block text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
+          className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
         >
           {MISSION.eyebrow}
         </motion.span>
 
         <motion.h1
           {...fadeUp(0.05)}
-          className="mt-6 max-w-4xl text-4xl leading-tight sm:text-5xl md:text-6xl"
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           {MISSION.statement}
@@ -34,7 +34,7 @@ export default function Mission() {
 
         <motion.p
           {...fadeUp(0.1)}
-          className="mt-8 max-w-3xl text-lg text-white/80 sm:text-xl"
+          className="mx-auto mt-8 max-w-3xl text-center text-lg text-white/80 sm:text-xl"
         >
           {MISSION.body}
         </motion.p>
@@ -64,7 +64,7 @@ export default function Mission() {
       <section className="relative z-10 mx-auto mt-28 max-w-6xl">
         <motion.h2
           {...fadeUp()}
-          className="text-3xl uppercase sm:text-4xl"
+          className="text-center text-3xl uppercase sm:text-4xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           How we think
@@ -106,7 +106,7 @@ export default function Mission() {
       <section className="relative z-10 mx-auto mt-28 max-w-6xl">
         <motion.h2
           {...fadeUp()}
-          className="text-3xl uppercase sm:text-4xl"
+          className="text-center text-3xl uppercase sm:text-4xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           How we work

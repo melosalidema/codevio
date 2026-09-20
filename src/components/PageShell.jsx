@@ -39,7 +39,7 @@ export default function PageShell({ title, transitionLabel, children }) {
           />
         </div>
 
-        <div className="lanyard-nav">
+        <div className="lanyard-nav lanyard-nav--fixed">
           <StaggeredMenu
             position="right"
             items={NAV_ITEMS}

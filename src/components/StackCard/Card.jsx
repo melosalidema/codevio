@@ -8,7 +8,7 @@ const headlines = [
   'Impossible to ignore.',
 ];
 
-const Card = ({ i, title, description, headline, src, progress, range, targetScale }) => {
+const Card = ({ i, title, description, headline, price, priceNote, src, progress, range, targetScale }) => {
   const container = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -29,6 +29,14 @@ const Card = ({ i, title, description, headline, src, progress, range, targetSca
 
         <div className={styles.body}>
           <div className={styles.description}>
+            {price ? (
+              <p className={styles.price}>
+                {price}
+                {priceNote ? (
+                  <span className={styles.priceNote}>{priceNote}</span>
+                ) : null}
+              </p>
+            ) : null}
             <p className={styles.headline}>{headline ?? headlines[i]}</p>
             <p>{description}</p>
 

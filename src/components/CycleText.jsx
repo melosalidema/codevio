@@ -15,7 +15,7 @@ export default function CycleText() {
 
   return (
     <div>
-      <span className="font-mono text-xl text-pink-600">
+      <span className="font-['Bebas_Neue'] text-xl text-pink-600">
         System.out.println(
         <AnimatePresence mode="wait">
           <motion.span
@@ -24,7 +24,7 @@ export default function CycleText() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.08 }}
-            className="inline-block font-mono text-xl text-blue-700"
+            className="inline-block font-['Bebas_Neue'] text-xl text-blue-700"
           >
             &quot;{words[index]}&quot;
           </motion.span>

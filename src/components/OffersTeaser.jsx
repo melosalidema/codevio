@@ -15,7 +15,7 @@ export default function OffersTeaser() {
     <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 text-white sm:px-10 md:px-12">
       <motion.h2
         {...fadeUp()}
-        className="text-3xl uppercase sm:text-4xl"
+        className="text-center text-3xl uppercase sm:text-4xl"
         style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
       >
         Launch sprints
@@ -23,22 +23,30 @@ export default function OffersTeaser() {
 
       <motion.p
         {...fadeUp(0.05)}
-        className="mt-4 max-w-2xl font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
+        className="mx-auto mt-4 max-w-2xl text-center font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
       >
         Fixed scope, fixed timeline, a named ship date. Pick the sprint that
         matches where your idea is right now.
       </motion.p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {OFFERS.map((offer, i) => (
           <motion.div
             key={offer.title}
             {...fadeUp(i * 0.06)}
             className="liquid-glass flex flex-col rounded-2xl border border-white/10 p-7 transition-colors duration-300 hover:border-[#b02a3d]/70"
           >
-            <span className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.2em] text-[#f5b8c4]">
-              {offer.timeline}
-            </span>
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.2em] text-[#f5b8c4]">
+                {offer.timeline}
+              </span>
+              <span className="font-['Bebas_Neue'] text-xl leading-none text-white">
+                {offer.price}
+                <span className="ml-1 text-xs uppercase tracking-[0.12em] text-white/50">
+                  {offer.priceNote}
+                </span>
+              </span>
+            </div>
 
             <h3
               className="mt-3 text-xl"

@@ -23,14 +23,14 @@ export default function Services() {
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}
-          className="block text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
+          className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
         >
           Services
         </motion.span>
 
         <motion.h1
           {...fadeUp(0.05)}
-          className="mt-6 max-w-4xl text-4xl leading-tight sm:text-5xl md:text-6xl"
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           Launch sprints. Fixed scope. Senior hands.
@@ -38,7 +38,7 @@ export default function Services() {
 
         <motion.p
           {...fadeUp(0.1)}
-          className="mt-8 max-w-2xl text-lg text-white/75"
+          className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75"
         >
           No open-ended scope, no handoffs, no surprise invoices. Pick the
           package that matches where your idea is right now.
@@ -48,7 +48,7 @@ export default function Services() {
       <section className="relative z-10 mx-auto mt-24 max-w-6xl">
         <motion.h2
           {...fadeUp()}
-          className="text-3xl uppercase sm:text-4xl"
+          className="text-center text-3xl uppercase sm:text-4xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           What we do
@@ -56,7 +56,7 @@ export default function Services() {
 
         <motion.p
           {...fadeUp(0.05)}
-          className="mt-4 max-w-2xl font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
+          className="mx-auto mt-4 max-w-2xl text-center font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
         >
           Four disciplines, one senior team. Every package bundles these into a
           fixed-scope outcome.
@@ -109,7 +109,7 @@ export default function Services() {
       <section className="relative z-10 mx-auto mt-28 max-w-6xl">
         <motion.h2
           {...fadeUp()}
-          className="text-3xl uppercase sm:text-4xl"
+          className="text-center text-3xl uppercase sm:text-4xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           What&apos;s inside each package
@@ -117,41 +117,49 @@ export default function Services() {
 
         <motion.p
           {...fadeUp(0.05)}
-          className="mt-4 max-w-2xl font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
+          className="mx-auto mt-4 max-w-2xl text-center font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
         >
           Fixed scope, named exclusions, optional add-ons. No surprise invoices.
         </motion.p>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-5xl gap-5 md:grid-cols-2">
           {OFFERS.map((offer, i) => (
             <motion.div
               key={offer.title}
               {...fadeUp(i * 0.06)}
-              className="liquid-glass flex flex-col rounded-2xl border border-white/10 p-7"
+              className="liquid-glass flex flex-col rounded-2xl border border-white/10 p-5"
             >
-              <span className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.2em] text-[#f5b8c4]">
-                {offer.timeline}
-              </span>
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
+                  {offer.timeline}
+                </span>
+                <span className="font-['Bebas_Neue'] text-lg leading-none text-white">
+                  {offer.price}
+                  <span className="ml-1 text-xs uppercase tracking-[0.12em] text-white/50">
+                    {offer.priceNote}
+                  </span>
+                </span>
+              </div>
 
               <h3
-                className="mt-3 text-xl"
+                className="mt-2 text-lg"
                 style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
               >
                 {offer.title}
               </h3>
 
-              <p className="mt-3 font-['Bebas_Neue'] text-lg tracking-[0.04em] text-white/70">
+              <p className="mt-2 font-['Bebas_Neue'] text-base tracking-[0.04em] text-white/70">
                 {offer.headline}
               </p>
 
-              <p className="mt-6 font-['Bebas_Neue'] text-sm uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
                 Deliverables
               </p>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-2 flex flex-col gap-1.5">
                 {offer.deliverables.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/70"
+                    className="flex items-start gap-2.5 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/70"
                   >
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#db364e]" />
                     {item}
@@ -159,42 +167,42 @@ export default function Services() {
                 ))}
               </ul>
 
-              <p className="mt-6 font-['Bebas_Neue'] text-sm uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
                 Not included
               </p>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-2 flex flex-col gap-1.5">
                 {offer.excludes.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/45"
+                    className="flex items-start gap-2.5 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/45"
                   >
-                    <X className="mt-1 size-4 shrink-0 text-[#b02a3d]" strokeWidth={3} />
+                    <X className="mt-1 size-3.5 shrink-0 text-[#b02a3d]" strokeWidth={3} />
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-6 font-['Bebas_Neue'] text-sm uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
                 Add-ons
               </p>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-2 flex flex-col gap-1.5">
                 {offer.addOns.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/60"
+                    className="flex items-start gap-2.5 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/60"
                   >
-                    <Plus className="mt-1 size-4 shrink-0 text-[#f5b8c4]" strokeWidth={3} />
+                    <Plus className="mt-1 size-3.5 shrink-0 text-[#f5b8c4]" strokeWidth={3} />
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-auto pt-8">
-                <p className="font-['Bebas_Neue'] text-base uppercase tracking-[0.06em] text-white/45">
+              <div className="mt-auto pt-6">
+                <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.06em] text-white/45">
                   {offer.forWho}
                 </p>
 
-                <p className="mt-3 border-t border-white/10 pt-4 font-['Bebas_Neue'] text-sm uppercase tracking-[0.14em] text-[#f5b8c4]">
+                <p className="mt-2 border-t border-white/10 pt-3 font-['Bebas_Neue'] text-xs uppercase tracking-[0.14em] text-[#f5b8c4]">
                   Next step → {offer.nextStep}
                 </p>
               </div>
@@ -206,31 +214,31 @@ export default function Services() {
       <section className="relative z-10 mx-auto mt-28 max-w-6xl">
         <motion.h2
           {...fadeUp()}
-          className="text-3xl uppercase sm:text-4xl"
+          className="text-center text-3xl uppercase sm:text-4xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           How packages work
         </motion.h2>
 
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PACKAGE_RULES.map((rule, i) => (
             <motion.div
               key={rule.title}
               {...fadeUp(i * 0.05)}
-              className="border-t border-white/15 pt-6"
+              className="liquid-glass flex flex-col rounded-2xl border border-white/10 p-5 transition-colors duration-300 hover:border-[#b02a3d]/70"
             >
-              <span className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.2em] text-[#f5b8c4]">
+              <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
                 0{i + 1}
               </span>
 
               <h3
-                className="mt-3 text-lg"
+                className="mt-2 text-lg"
                 style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
               >
                 {rule.title}
               </h3>
 
-              <p className="mt-3 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/60">
+              <p className="mt-2 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/60">
                 {rule.body}
               </p>
             </motion.div>
@@ -241,7 +249,7 @@ export default function Services() {
       <section className="relative z-10 mx-auto mt-28 max-w-6xl">
         <motion.h2
           {...fadeUp()}
-          className="text-3xl uppercase sm:text-4xl"
+          className="text-center text-3xl uppercase sm:text-4xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           Who this is for

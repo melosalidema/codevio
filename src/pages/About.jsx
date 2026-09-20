@@ -6,7 +6,7 @@ import Grainient from '../components/Grainient';
 import StaggeredMenu from '../components/StaggeredMenu';
 
 import useDocumentTitle from '../lib/useDocumentTitle';
-import { NAV_ITEMS, SOCIAL_ITEMS } from '../data/site';
+import { NAV_ITEMS, SOCIAL_ITEMS, STATS } from '../data/site';
 
 import logo from '../assets/logo.png';
 import logoAlt from '../assets/logo_alt.png';
@@ -109,7 +109,7 @@ export default function About() {
           />
         </div>
 
-        <div className="lanyard-nav">
+        <div className="lanyard-nav lanyard-nav--fixed">
           <StaggeredMenu
             position="right"
             items={NAV_ITEMS}
@@ -155,18 +155,12 @@ export default function About() {
             </p>
 
             <div className="mt-4 grid grid-cols-3 gap-8">
-              <div>
-                <p className="text-3xl font-semibold">25+</p>
-                <p className="text-sm text-white/60">projects shipped</p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold">3</p>
-                <p className="text-sm text-white/60">senior makers, zero handoffs</p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold">100%</p>
-                <p className="text-sm text-white/60">obsessed with detail</p>
-              </div>
+              {STATS.map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-3xl font-semibold">{stat.value}</p>
+                  <p className="text-sm text-white/60">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -180,7 +174,7 @@ export default function About() {
                 <span className="ml-3 text-xs text-white/40">studio.js</span>
               </div>
 
-              <pre className="flex overflow-x-auto bg-black/55 p-6 text-left font-mono text-sm leading-relaxed">
+              <pre className="flex overflow-x-auto bg-black/55 p-6 text-left font-['Bebas_Neue'] text-sm leading-relaxed tracking-[0.04em]">
                 <code className="mr-4 select-none whitespace-pre text-white/30">
                   {CODE_LINES.map((_, i) => `${i + 1}\n`).join('')}
                 </code>

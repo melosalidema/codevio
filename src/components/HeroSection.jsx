@@ -58,15 +58,13 @@ export default function HeroSection() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=Barlow:wght@400;500&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html { scroll-behavior: auto; }
 
         body {
           background: #5533FF;
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Bebas Neue', sans-serif;
           overflow-x: hidden;
         }
 
@@ -96,8 +94,8 @@ export default function HeroSection() {
         }
 
         .nav-brand {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 900;
+          font-family: 'Dela Gothic One', sans-serif;
+          font-weight: 400;
           font-size: 18px;
           color: #fff;
           letter-spacing: 0.08em;
@@ -134,8 +132,8 @@ export default function HeroSection() {
 
         .hero-line {
           display: block;
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 900;
+          font-family: 'Dela Gothic One', sans-serif;
+          font-weight: 400;
           font-size: clamp(80px, 13vw, 200px);
           letter-spacing: -0.01em;
           color: #fff;
@@ -159,9 +157,9 @@ export default function HeroSection() {
         }
 
         .hero-subtext {
-          font-family: 'Barlow', sans-serif;
-          font-size: clamp(11px, 1.1vw, 14px);
-          font-weight: 500;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(14px, 1.4vw, 18px);
+          font-weight: 400;
           color: rgba(255,255,255,0.65);
           letter-spacing: 0.06em;
           line-height: 1.7;
@@ -179,9 +177,9 @@ export default function HeroSection() {
         }
 
         .hero-cta-text {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 800;
-          font-size: 13px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-weight: 400;
+          font-size: 15px;
           letter-spacing: 0.14em;
           color: #fff;
           text-transform: uppercase;
@@ -257,9 +255,9 @@ export default function HeroSection() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: 'Dela Gothic One', sans-serif;
           font-size: 32px;
-          font-weight: 800;
+          font-weight: 400;
           color: rgba(255,255,255,0.15);
           letter-spacing: 0.1em;
         }

@@ -4,6 +4,7 @@ import brandingImg from '../assets/branding.png';
 import workImg1 from '../assets/sidescroll1.jpg';
 import workImg2 from '../assets/sidescroll2.jpg';
 import workImg3 from '../assets/sidescroll3.jpg';
+import entryImg from '../assets/sidescroll4.jpg';
 
 export const SITE = {
   name: 'Codevio',
@@ -33,7 +34,7 @@ export const NAV_ITEMS = [
 export const MISSION = {
   eyebrow: 'Our Mission',
   statement: 'We compress the distance between “we have an idea” and “we’re live.”',
-  body: 'Codevio is a two-to-three person studio of senior designers and engineers. We help early-stage founders in the EU and US ship brand, website, and working software in fixed sprints — weeks, not quarters — without agency bloat, handoffs, or surprise invoices.',
+  body: 'Codevio is a two-to-three person studio of senior designers and engineers. We help early-stage founders in the EU and US look credible before launch or their next round — shipping brand, website, and working software in fixed sprints, weeks not quarters, without agency bloat, handoffs, or surprise invoices.',
   commitments: [
     'We only take work we can ship inside a fixed sprint.',
     'Scope is locked before we start — extras become the next sprint.',
@@ -43,9 +44,9 @@ export const MISSION = {
 };
 
 export const STATS = [
-  { value: '25+', label: 'projects shipped' },
+  { value: '2–3', label: 'week launch sprints' },
   { value: '3', label: 'senior makers, zero handoffs' },
-  { value: '100%', label: 'obsessed with detail' },
+  { value: '30', label: 'days post-launch support' },
 ];
 
 export const VALUES = [
@@ -135,11 +136,48 @@ export const PACKAGE_RULES = [
 
 export const OFFERS = [
   {
-    title: 'Launch Site Sprint',
+    title: 'Landing Page Sprint',
+    headline: 'Idea → live landing page in 1 week.',
+    description:
+      'One sharp, fast-loading page that puts your idea in front of real people — and a low-risk way to see how we work before a full sprint.',
+    timeline: '1 week',
+    price: '€500',
+    priceNote: 'one-time',
+    deliverables: [
+      'One high-converting landing page',
+      'Copy shaping and messaging',
+      'Responsive build and analytics',
+      'Deploy and launch checklist',
+      '7 days post-launch support',
+    ],
+    forWho: 'Founders validating an idea or testing messaging before a full sprint.',
+    clientInputs: [
+      'One decision-maker on the kickoff call',
+      'Copy and asset direction within 1 business day',
+      'Domain and hosting access',
+    ],
+    excludes: [
+      'Multi-page sites',
+      'Brand identity from scratch',
+      'Paid media and ongoing content',
+    ],
+    addOns: [
+      'Extra page',
+      'Blog or CMS setup',
+      'Advanced motion pass',
+    ],
+    nextStep: 'Website Sprint or MVP Sprint',
+    image: entryImg,
+    color: '#f5b8c4',
+  },
+  {
+    title: 'Website Sprint',
     headline: 'Idea → live site in 2–3 weeks.',
     description:
       'A brand-sharp, fast-loading website that makes you look credible from day one. Built to convert visitors into early users, customers, and investors.',
     timeline: '2–3 weeks',
+    price: '€750',
+    priceNote: 'one-time',
     deliverables: [
       'Brand direction and visual system',
       '5–7 page responsive site',
@@ -175,6 +213,8 @@ export const OFFERS = [
     description:
       'Your core product built for real users: the flow that proves the idea, shipped on a modern stack you can keep building on.',
     timeline: '4–6 weeks',
+    price: '€1,000',
+    priceNote: 'one-time',
     deliverables: [
       'Product scoping and user flows',
       'Auth, payments, and core feature set',
@@ -209,6 +249,8 @@ export const OFFERS = [
     description:
       'A monthly slice of senior design and engineering capacity for the pages, features, and tuning that come after v1.',
     timeline: 'Monthly',
+    price: '€1,500–2,000',
+    priceNote: 'per month',
     deliverables: [
       'New pages and product iterations',
       'Performance and conversion tuning',
@@ -279,7 +321,8 @@ export const ICP = {
   ],
 };
 
-// PLACEHOLDER case studies — replace with real projects (name, metric, image, tags)
+// ILLUSTRATIVE examples — not real client work yet. Replace with real case
+// studies (name, metric, image, tags) and remove `illustrative: true`.
 export const CASE_STUDIES = [
   {
     name: 'SaaS waitlist launch',
@@ -288,6 +331,7 @@ export const CASE_STUDIES = [
       'Brand direction, landing page, and waitlist flow for a seed-stage B2B tool ahead of its demo day.',
     tags: ['Brand', 'Website'],
     image: workImg1,
+    illustrative: true,
   },
   {
     name: 'Marketplace MVP',
@@ -296,6 +340,7 @@ export const CASE_STUDIES = [
       'Two-sided marketplace MVP with payments and admin tooling, shipped on React and Supabase.',
     tags: ['MVP', 'Full-stack'],
     image: workImg2,
+    illustrative: true,
   },
   {
     name: 'Rebrand & relaunch',
@@ -304,5 +349,6 @@ export const CASE_STUDIES = [
       'New identity system and site for an established brand that had outgrown its first website.',
     tags: ['Branding', 'Website'],
     image: workImg3,
+    illustrative: true,
   },
 ];

@@ -67,9 +67,9 @@ function TextSection({ eyebrow, heading, body, index }) {
           transitionDelay: visible ? '0.05s' : '0s',
         }}>
           <span style={{
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontSize: 11,
-            fontWeight: 600,
+            fontFamily: '"Bebas Neue", sans-serif',
+            fontSize: 14,
+            fontWeight: 400,
             letterSpacing: '0.25em',
             color: '#C4A96B',
           }}>{eyebrow}</span>
@@ -83,9 +83,9 @@ function TextSection({ eyebrow, heading, body, index }) {
               key={i}
               style={{
                 display: 'block',
-                fontFamily: '"Syne", sans-serif',
+                fontFamily: '"Dela Gothic One", sans-serif',
                 fontSize: 'clamp(2.8rem, 5vw, 5rem)',
-                fontWeight: 800,
+                fontWeight: 400,
                 lineHeight: 1.0,
                 letterSpacing: '-0.03em',
                 color: i === 0 ? '#0D0D0D' : '#C4A96B',
@@ -102,8 +102,8 @@ function TextSection({ eyebrow, heading, body, index }) {
 
         {/* body */}
         <p style={{
-          fontFamily: '"DM Sans", sans-serif',
-          fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+          fontFamily: '"Bebas Neue", sans-serif',
+          fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)',
           lineHeight: 1.85,
           color: '#5A5A5A',
           margin: 0,
@@ -145,8 +145,6 @@ export default function LanyardLayout() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans&family=Space+Grotesk:wght@600&display=swap');
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         .ll-root {
