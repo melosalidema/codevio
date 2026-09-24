@@ -25,7 +25,12 @@ const contentVariants = {
   },
 };
 
-export default function PageTransition({ label = 'Our Services', children }) {
+export default function PageTransition({
+  label = 'Our Services',
+  background = 'linear-gradient(135deg, #0a0a0f 0%, #7b2233 52%, #db364e 100%)',
+  textColor = '#ffffff',
+  children,
+}) {
   return (
     <>
       <style>{`
@@ -40,7 +45,7 @@ export default function PageTransition({ label = 'Our Services', children }) {
           style={{
             position: 'fixed',
             inset: 0,
-            background: '#db364e',
+            background,
             transformOrigin: 'top',
             zIndex: 9999,
             display: 'flex',
@@ -58,7 +63,7 @@ export default function PageTransition({ label = 'Our Services', children }) {
               fontFamily: "'Dela Gothic One', sans-serif",
               fontSize: 'clamp(32px, 6vw, 80px)',
               fontWeight: 400,
-              color: '#fff',
+              color: textColor,
               letterSpacing: 0,
               margin: 0,
             }}

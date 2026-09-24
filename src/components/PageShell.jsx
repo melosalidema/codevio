@@ -1,17 +1,16 @@
 import Footer from './Footer';
 import Grainient from './Grainient';
 import StaggeredMenu from './StaggeredMenu';
-import PageTransition from './StackCard/PageTransition';
 
 import useDocumentTitle from '../lib/useDocumentTitle';
-import { NAV_ITEMS, SOCIAL_ITEMS } from '../data/site';
+import { NAV_ITEMS, PAGE_THEME, SOCIAL_ITEMS } from '../data/site';
 
 import logo from '../assets/logo.png';
 import logoAlt from '../assets/logo_alt.png';
 
 import './Lanyard.css';
 
-export default function PageShell({ title, transitionLabel, children }) {
+export default function PageShell({ title, children }) {
   useDocumentTitle(title);
 
   return (
@@ -19,9 +18,9 @@ export default function PageShell({ title, transitionLabel, children }) {
       <main className="relative min-h-screen px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
-            color1="#0a0a0f"
-            color2="#db364e"
-            color3="#7b2233"
+            color1={PAGE_THEME.backgroundColor}
+            color2={PAGE_THEME.gradientColors[1]}
+            color3={PAGE_THEME.gradientColors[2]}
             timeSpeed={0.2}
             warpStrength={1.2}
             warpFrequency={4.5}
@@ -48,18 +47,18 @@ export default function PageShell({ title, transitionLabel, children }) {
             logoUrl={logo}
             logoOpenUrl={logoAlt}
             displayItemNumbering={true}
-            colors={['#fcdfe4', '#f5b8c4']}
-            menuButtonColor="#fcdfe4"
-            openMenuButtonColor="#fcdfe4"
-            accentColor="#db364e"
+            colors={PAGE_THEME.menuColors}
+            menuButtonColor={PAGE_THEME.menuButtonColor}
+            openMenuButtonColor={PAGE_THEME.openMenuButtonColor}
+            menuTextColor={PAGE_THEME.menuTextColor}
+            menuHoverColor={PAGE_THEME.menuHoverColor}
+            accentColor={PAGE_THEME.accentColor}
             closeOnClickAway={true}
             isFixed={false}
           />
         </div>
 
-        <PageTransition label={transitionLabel ?? title}>
-          {children}
-        </PageTransition>
+        {children}
       </main>
 
       <Footer />

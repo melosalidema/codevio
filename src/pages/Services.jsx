@@ -19,7 +19,7 @@ const CORE_SERVICE_ICONS = [Compass, PenTool, CodeXml, Rocket];
 
 export default function Services() {
   return (
-    <PageShell title="Services" transitionLabel="Our Services">
+    <PageShell title="Services">
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}

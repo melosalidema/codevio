@@ -6,12 +6,111 @@ import Grainient from '../components/Grainient';
 import StaggeredMenu from '../components/StaggeredMenu';
 
 import useDocumentTitle from '../lib/useDocumentTitle';
-import { NAV_ITEMS, SOCIAL_ITEMS, STATS } from '../data/site';
+import { NAV_ITEMS, PAGE_THEME, SOCIAL_ITEMS, STATS } from '../data/site';
 
 import logo from '../assets/logo.png';
 import logoAlt from '../assets/logo_alt.png';
 
 import '../components/Lanyard.css';
+
+function MacWindowControls() {
+  return (
+    <>
+      <style>{`
+        .mac-window-controls {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .mac-window-control {
+          position: relative;
+          display: grid;
+          width: 0.75rem;
+          height: 0.75rem;
+          place-items: center;
+          border-radius: 9999px;
+          transform: translateY(0) scale(1);
+          transition:
+            transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 180ms ease;
+          will-change: transform;
+        }
+
+        .mac-window-control--close {
+          background: #ff5f56;
+        }
+
+        .mac-window-control--minimize {
+          background: #ffbd2e;
+        }
+
+        .mac-window-control--maximize {
+          background: #28c840;
+        }
+
+        .mac-window-control:hover {
+          filter: brightness(1.06);
+          transform: translateY(-1px) scale(1.18);
+        }
+
+        .mac-window-control__symbol {
+          color: rgba(25, 0, 0, 0.62);
+          font-family: Arial, sans-serif;
+          font-size: 0.56rem;
+          font-weight: 600;
+          line-height: 1;
+          opacity: 0;
+          transform: translateY(1px) scale(0.82);
+          transition:
+            opacity 180ms ease,
+            transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: opacity, transform;
+        }
+
+        .mac-window-control--close .mac-window-control__symbol {
+          font-size: 0.62rem;
+          font-weight: 400;
+        }
+
+        .mac-window-control--minimize .mac-window-control__symbol {
+          font-size: 0.62rem;
+        }
+
+        .mac-window-control--maximize .mac-window-control__symbol {
+          font-size: 0.55rem;
+        }
+
+        .mac-window-control:hover .mac-window-control__symbol {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .mac-window-control,
+          .mac-window-control__symbol {
+            transition: none;
+          }
+        }
+      `}</style>
+
+      <div className="mac-window-controls" aria-hidden="true">
+        {[
+          ['close', '×'],
+          ['minimize', '−'],
+          ['maximize', '+'],
+        ].map(([variant, symbol]) => (
+          <span
+            className={`mac-window-control mac-window-control--${variant}`}
+            key={variant}
+          >
+            <span className="mac-window-control__symbol">{symbol}</span>
+          </span>
+        ))}
+      </div>
+    </>
+  );
+}
 
 // Purely decorative snippet rendered in the "studio.js" panel.
 // Each line is a list of { text, colorClass } tokens.
@@ -89,9 +188,9 @@ export default function About() {
       <main className="relative min-h-screen overflow-hidden px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
-            color1="#0a0a0f"
-            color2="#db364e"
-            color3="#7b2233"
+            color1={PAGE_THEME.backgroundColor}
+            color2={PAGE_THEME.gradientColors[1]}
+            color3={PAGE_THEME.gradientColors[2]}
             timeSpeed={0.2}
             warpStrength={1.2}
             warpFrequency={4.5}
@@ -118,10 +217,12 @@ export default function About() {
             logoUrl={logo}
             logoOpenUrl={logoAlt}
             displayItemNumbering={true}
-            colors={['#fcdfe4', '#f5b8c4']}
-            menuButtonColor="#fcdfe4"
-            openMenuButtonColor="#fcdfe4"
-            accentColor="#db364e"
+            colors={PAGE_THEME.menuColors}
+            menuButtonColor={PAGE_THEME.menuButtonColor}
+            openMenuButtonColor={PAGE_THEME.openMenuButtonColor}
+            menuTextColor={PAGE_THEME.menuTextColor}
+            menuHoverColor={PAGE_THEME.menuHoverColor}
+            accentColor={PAGE_THEME.accentColor}
             closeOnClickAway={true}
             isFixed={false}
           />
@@ -168,9 +269,7 @@ export default function About() {
             <div className="absolute -inset-4 -z-10 rounded-3xl bg-[#db364e]/10 blur-2xl" />
             <div className="liquid-glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
               <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-                <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+                <MacWindowControls />
                 <span className="ml-3 text-xs text-white/40">studio.js</span>
               </div>
 

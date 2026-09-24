@@ -13,7 +13,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function Work() {
   return (
-    <PageShell title="Work" transitionLabel="Our Work">
+    <PageShell title="Work">
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}

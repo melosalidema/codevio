@@ -16,6 +16,19 @@ export const SITE = {
   responseTime: 'We reply within one business day.',
 };
 
+export const PAGE_THEME = {
+  backgroundColor: '#0a0a0f',
+  textColor: '#ffffff',
+  transitionBackground: 'linear-gradient(135deg, #0a0a0f 0%, #7b2233 52%, #db364e 100%)',
+  gradientColors: ['#0a0a0f', '#db364e', '#7b2233'],
+  menuColors: ['#fcdfe4', '#f5b8c4'],
+  menuButtonColor: '#fcdfe4',
+  openMenuButtonColor: '#1c1210',
+  menuTextColor: '#1c1210',
+  menuHoverColor: '#db364e',
+  accentColor: '#db364e',
+};
+
 export const SOCIAL_ITEMS = [
   { label: 'Instagram', link: 'https://www.instagram.com/codev.io/' },
   { label: 'LinkedIn', link: 'https://www.linkedin.com/company/codevio00/' },

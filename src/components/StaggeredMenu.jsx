@@ -73,6 +73,9 @@ export const StaggeredMenu = ({
   logoOpenUrl = null,
   logoLink = '/',
   menuButtonColor = '#fcdfe4',
+  openMenuButtonColor = '#1c1210',
+  menuTextColor = '#1c1210',
+  menuHoverColor = '#db364e',
   changeMenuColorOnOpen = true,
   isFixed = false,
   accentColor = '#db364e',
@@ -298,25 +301,25 @@ export const StaggeredMenu = ({
       if (!btn) return;
       colorTweenRef.current?.kill();
       if (changeMenuColorOnOpen) {
-        const targetColor = opening ? '#1a1a2e' : menuButtonColor;
+        const targetColor = opening ? openMenuButtonColor : menuButtonColor;
         colorTweenRef.current = gsap.to(btn, { color: targetColor, delay: 0.18, duration: 0.3, ease: 'power2.out' });
       } else {
         gsap.set(btn, { color: menuButtonColor });
       }
     },
-    [menuButtonColor, changeMenuColorOnOpen]
+    [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]
   );
 
   React.useEffect(() => {
     if (toggleBtnRef.current) {
       if (changeMenuColorOnOpen) {
-        const targetColor = openRef.current ? '#1a1a2e' : menuButtonColor;
+        const targetColor = openRef.current ? openMenuButtonColor : menuButtonColor;
         gsap.set(toggleBtnRef.current, { color: targetColor });
       } else {
         gsap.set(toggleBtnRef.current, { color: menuButtonColor });
       }
     }
-  }, [changeMenuColorOnOpen, menuButtonColor]);
+  }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
 
   const toggleMenu = useCallback(() => {
     const target = !openRef.current;
@@ -374,7 +377,13 @@ export const StaggeredMenu = ({
         className={
           (className ? className + ' ' : '') + 'staggered-menu-wrapper pointer-events-none relative w-full h-full'
         }
-        style={accentColor ? { ['--sm-accent']: accentColor } : undefined}
+        style={{
+          ['--sm-accent']: accentColor,
+          ['--sm-menu-button']: menuButtonColor,
+          ['--sm-surface']: colors?.[0] ?? '#fcdfe4',
+          ['--sm-text']: menuTextColor,
+          ['--sm-hover']: menuHoverColor,
+        }}
         data-position={position}
         data-open={open || undefined}
       >
@@ -564,7 +573,7 @@ export const StaggeredMenu = ({
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #fcdfe4;
+  color: var(--sm-menu-button, #fcdfe4);
   font-weight: 500;
   line-height: 1;
   overflow: visible;
@@ -577,7 +586,7 @@ export const StaggeredMenu = ({
 }
 
 .sm-scope .sm-toggle:focus-visible {
-  outline: 2px solid #db364eaa;
+  outline: 2px solid var(--sm-hover, #db364e);
   outline-offset: 4px;
   border-radius: 6px;
 }
@@ -611,7 +620,7 @@ export const StaggeredMenu = ({
   right: 0;
   width: clamp(300px, 42vw, 460px);
   height: 100%;
-  background: #fcdfe4;
+  background: var(--sm-surface, #fcdfe4);
   display: flex;
   flex-direction: column;
   padding: clamp(5rem, 12vh, 7rem) clamp(1.25rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
@@ -675,14 +684,17 @@ export const StaggeredMenu = ({
 
 .sm-scope .sm-panel-item {
   position: relative;
-  color: #1c1210;
+  color: var(--sm-text, #1c1210);
   font-weight: 600;
   font-size: clamp(1.8rem, 6vw, 3.2rem);
   cursor: pointer;
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  transition: background 0.25s, color 0.25s;
+  -webkit-text-stroke: 0 transparent;
+  paint-order: stroke fill;
+  text-shadow: none;
+  transition: color 0.25s, -webkit-text-stroke-color 0.25s, text-shadow 0.25s;
   display: inline-block;
   text-decoration: none;
   padding-right: 1.3em;
@@ -698,8 +710,13 @@ export const StaggeredMenu = ({
   transform-origin: 50% 100%;
 }
 
-.sm-scope .sm-panel-item:hover {
-  color: var(--sm-accent, #db364e);
+.sm-scope .sm-panel-item:hover,
+.sm-scope .sm-panel-item:focus-visible {
+  color: var(--sm-hover, #db364e);
+  -webkit-text-stroke: 1px var(--sm-text, #1c1210);
+  text-shadow:
+    -4px 4px 0 var(--sm-text, #1c1210),
+    -5px 5px 0 #fff;
 }
 
 .sm-scope .sm-panel-list[data-numbering] {
@@ -748,7 +765,7 @@ export const StaggeredMenu = ({
 }
 
 .sm-scope .sm-socials-link {
-  color: #1c1210;
+  color: var(--sm-text, #1c1210);
   text-decoration: none;
   position: relative;
   width: 42px;
@@ -763,12 +780,12 @@ export const StaggeredMenu = ({
 }
 
 .sm-scope .sm-socials-link:hover {
-  color: var(--sm-accent, #db364e);
-  background: rgba(219, 54, 78, 0.08);
+  color: var(--sm-hover, #db364e);
+  background: color-mix(in srgb, var(--sm-hover, #db364e) 8%, transparent);
 }
 
 .sm-scope .sm-socials-link:focus-visible {
-  outline: 2px solid var(--sm-accent, #db364e);
+  outline: 2px solid var(--sm-hover, #db364e);
   outline-offset: 3px;
 }
 
