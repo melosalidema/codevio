@@ -33,6 +33,7 @@
   --social-bg: rgba(244, 243, 236, 0.5);
   --selection-background: #db364e;
   --selection-foreground: #ffffff;
+  --scrollbar-thumb: #ffffff;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -58,6 +59,17 @@
 ::selection {
   background: var(--selection-background);
   color: var(--selection-foreground);
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -281,7 +293,8 @@
 
   .home-offers {
     max-width: 1080px !important;
-    padding-block: 48px !important;
+    padding-top: 48px !important;
+    padding-bottom: 128px !important;
   }
 
   .home-offers .grid {
@@ -290,6 +303,7 @@
 
   .home-offers .rounded-2xl {
     padding: 21px !important;
+    padding-bottom: 64px !important;
   }
 
   .services-core-grid {

@@ -12,7 +12,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function OffersTeaser() {
   return (
-    <section className="home-offers relative z-10 mx-auto w-full max-w-7xl px-6 py-16 text-white sm:px-10 md:px-12">
+    <section className="home-offers relative z-10 mx-auto w-full max-w-7xl px-6 pt-16 pb-32 text-white sm:px-10 md:px-12">
       <motion.h2
         {...fadeUp()}
         className="text-center text-3xl uppercase sm:text-4xl"
@@ -34,7 +34,7 @@ export default function OffersTeaser() {
           <motion.div
             key={offer.title}
             {...fadeUp(i * 0.06)}
-            className="liquid-glass flex flex-col rounded-2xl border border-white/10 p-7 transition-colors duration-300 hover:border-[#b02a3d]/70"
+            className="liquid-glass flex flex-col rounded-2xl border border-white/10 p-7 pb-16 transition-colors duration-300 hover:border-[#b02a3d]/70"
           >
             <div className="flex items-baseline justify-between gap-3">
               <span className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.2em] text-[#f5b8c4]">

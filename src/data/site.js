@@ -18,8 +18,6 @@ export const SITE = {
 
 export const PAGE_THEME = {
   backgroundColor: '#0a0a0f',
-  textColor: '#ffffff',
-  transitionBackground: 'linear-gradient(135deg, #0a0a0f 0%, #7b2233 52%, #db364e 100%)',
   gradientColors: ['#0a0a0f', '#db364e', '#7b2233'],
   menuColors: ['#fcdfe4', '#f5b8c4'],
   menuButtonColor: '#fcdfe4',
