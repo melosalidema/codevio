@@ -30,7 +30,7 @@ export const PAGE_THEME = {
 export const SOCIAL_ITEMS = [
   { label: 'Instagram', link: 'https://www.instagram.com/codev.io/' },
   { label: 'LinkedIn', link: 'https://www.linkedin.com/company/codevio00/' },
-  { label: 'X', link: 'https://x.com/codev_io' },
+  { label: 'X', link: 'https://x.com/codevio_agency' },
 ];
 
 export const NAV_ITEMS = [

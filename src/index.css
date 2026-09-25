@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+.site-route {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-route-content {
+  display: flex;
+  min-height: 100vh;
+  flex: 1;
+  flex-direction: column;
+}
+
+.site-route-content > main {
+  min-height: 0;
+  flex: 1;
+}
+
 .liquid-glass {
   background:
     linear-gradient(

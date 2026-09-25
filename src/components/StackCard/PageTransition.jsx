@@ -37,7 +37,7 @@ export default function PageTransition({
         @import url('https://cdn.jsdelivr.net/npm/@fontsource/dela-gothic-one@5.0.19/index.min.css');
       `}</style>
 
-      <div style={{ position: 'relative' }}>
+      <div className="site-route" style={{ position: 'relative' }}>
         <motion.div
           variants={curtainVariants}
           initial="initial"
@@ -73,6 +73,7 @@ export default function PageTransition({
         </motion.div>
 
         <motion.div
+          className="site-route-content"
           variants={contentVariants}
           initial="initial"
           animate="animate"
