@@ -19,7 +19,7 @@ export default function CaseStudy() {
 
   return (
     <PageShell title={project.name}>
-      <article className="relative z-10 mx-auto max-w-6xl pt-16">
+      <article className="relative z-10 mx-auto max-w-5xl pt-12">
         <motion.div {...fadeUp()}>
           <Link
             to="/work"
@@ -29,13 +29,13 @@ export default function CaseStudy() {
           </Link>
         </motion.div>
 
-        <div className="mt-10 grid items-end gap-10 lg:grid-cols-[1fr_0.8fr]">
+        <div className="mt-8 grid items-end gap-8 lg:grid-cols-[1fr_0.8fr]">
           <motion.div {...fadeUp(0.05)}>
             <span className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.2em] text-[#f5b8c4]">
               Case study
             </span>
             <h1
-              className="mt-5 text-4xl leading-tight sm:text-5xl md:text-6xl"
+              className="mt-4 text-3xl leading-tight sm:text-4xl md:text-5xl"
               style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
             >
               {project.name}
@@ -44,7 +44,7 @@ export default function CaseStudy() {
 
           <motion.p
             {...fadeUp(0.1)}
-            className="font-['Bebas_Neue'] text-2xl leading-snug tracking-[0.03em] text-white/70"
+            className="font-['Bebas_Neue'] text-xl leading-snug tracking-[0.03em] text-white/70"
           >
             {project.description}
           </motion.p>
@@ -52,31 +52,31 @@ export default function CaseStudy() {
 
         <motion.div
           {...fadeUp(0.15)}
-          className="relative mt-14 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
+          className="relative mt-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
         >
           <img
             src={project.image}
             alt={project.name}
-            className="aspect-[16/7] w-full object-cover"
+            className="aspect-[16/6] w-full object-cover"
           />
           <span className="absolute bottom-5 left-5 rounded-full border border-white/20 bg-black/60 px-4 py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.14em] text-[#fcdfe4] backdrop-blur-sm">
             {project.metric}
           </span>
         </motion.div>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+        <div className="mt-12 grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
           <motion.aside {...fadeUp(0.2)} className="lg:sticky lg:top-10 lg:self-start">
             <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-white/45">
               What we shipped
             </p>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-4 flex flex-col gap-2.5">
               {project.deliverables.map((item) => (
-                <li key={item} className="border-b border-white/10 pb-3 font-['Bebas_Neue'] text-lg text-white/75">
+                <li key={item} className="border-b border-white/10 pb-2.5 font-['Bebas_Neue'] text-base text-white/75">
                   {item}
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span key={tag} className="rounded-full border border-white/20 px-3 py-1 font-['Bebas_Neue'] text-xs uppercase tracking-[0.12em] text-white/60">
                   {tag}
@@ -85,25 +85,25 @@ export default function CaseStudy() {
             </div>
           </motion.aside>
 
-          <motion.div {...fadeUp(0.25)} className="flex flex-col gap-10">
+          <motion.div {...fadeUp(0.25)} className="flex flex-col gap-8">
             <section>
               <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">The challenge</p>
-              <p className="mt-3 text-2xl leading-snug text-white/85">{project.challenge}</p>
+              <p className="mt-3 text-xl leading-snug text-white/85">{project.challenge}</p>
             </section>
             <section>
               <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">Our approach</p>
-              <p className="mt-3 text-2xl leading-snug text-white/85">{project.approach}</p>
+              <p className="mt-3 text-xl leading-snug text-white/85">{project.approach}</p>
             </section>
-            <section className="rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-7">
+            <section className="rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-6">
               <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">The outcome</p>
-              <p className="mt-3 text-2xl leading-snug" style={{ fontFamily: "'Dela Gothic One', sans-serif" }}>
+              <p className="mt-3 text-xl leading-snug" style={{ fontFamily: "'Dela Gothic One', sans-serif" }}>
                 {project.outcome}
               </p>
             </section>
           </motion.div>
         </div>
 
-        <motion.div {...fadeUp(0.3)} className="mt-20 flex justify-between border-t border-white/10 pt-8">
+        <motion.div {...fadeUp(0.3)} className="mt-16 flex justify-between border-t border-white/10 pt-6">
           <Link to="/work" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 hover:text-white">
             <ArrowLeft className="size-4" /> All work
           </Link>
