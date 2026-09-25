@@ -12,7 +12,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function OffersTeaser() {
   return (
-    <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 text-white sm:px-10 md:px-12">
+    <section className="home-offers relative z-10 mx-auto w-full max-w-7xl px-6 py-16 text-white sm:px-10 md:px-12">
       <motion.h2
         {...fadeUp()}
         className="text-center text-3xl uppercase sm:text-4xl"

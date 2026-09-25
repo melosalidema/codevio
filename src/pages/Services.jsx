@@ -62,7 +62,7 @@ export default function Services() {
           fixed-scope outcome.
         </motion.p>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="services-core-grid mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {CORE_SERVICES.map((service, i) => {
             const Icon = CORE_SERVICE_ICONS[i] ?? Compass;
 

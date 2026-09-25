@@ -16,7 +16,7 @@ export default function Contact() {
 
   return (
     <>
-      <main className="relative min-h-screen overflow-hidden px-6 py-24 text-white">
+        <main className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}

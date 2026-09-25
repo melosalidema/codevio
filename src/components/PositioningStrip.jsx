@@ -12,7 +12,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function PositioningStrip() {
   return (
-    <section className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center-safe px-6 py-12 text-center text-white sm:px-10 md:px-12">
+    <section className="home-positioning relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center-safe px-6 py-12 text-center text-white sm:px-10 md:px-12">
       <motion.span
         {...fadeUp()}
         className="block font-['Bebas_Neue'] text-lg uppercase tracking-[0.24em] text-[#f5b8c4]"

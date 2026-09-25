@@ -288,3 +288,14 @@
     bottom: 3rem;
   }
 }
+
+@media (min-width: 1025px) {
+  .lanyard-nav .sm-scope .staggered-menu-panel,
+  .lanyard-nav .sm-scope .sm-prelayers {
+    width: clamp(300px, 32vw, 390px);
+  }
+
+  .lanyard-nav .sm-scope .sm-panel-item {
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem) !important;
+  }
+}

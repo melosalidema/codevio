@@ -58,7 +58,7 @@ export default function Footer() {
         }
       `}</style>
 
-      <div className="mx-auto flex min-h-[620px] w-full max-w-7xl flex-col justify-between px-6 py-10 sm:px-8 md:min-h-[700px] md:px-12 md:py-14 lg:px-16">
+      <div className="compact-footer mx-auto flex min-h-[500px] w-full max-w-7xl flex-col justify-between px-6 py-8 sm:px-8 md:min-h-[560px] md:px-10 md:py-10 lg:px-12">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <Link to="/" className="inline-flex w-fit items-center">
             <img
@@ -76,12 +76,12 @@ export default function Footer() {
 
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
           <div>
-            <p className="max-w-4xl font-['Dela_Gothic_One'] text-[clamp(1.7rem,5.5vw,5rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-white">
-              Let&apos;s build{' '}
+              <p className="max-w-4xl font-['Dela_Gothic_One'] text-[clamp(1.7rem,5.5vw,5rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-white">
+              Let&apos;s build{' '}<br className="footer-desktop-break" />
               <Link to="/contact" className="footer-something">
                 something
-              </Link>{' '}
-              that moves.
+              </Link>{' '}<br className="footer-desktop-break" />
+              that{' '}<br className="footer-desktop-break" />moves.
             </p>
           </div>
 
