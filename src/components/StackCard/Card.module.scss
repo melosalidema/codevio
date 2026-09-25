@@ -1,13 +1,13 @@
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/dela-gothic-one@5.0.19/index.min.css');
 
 .cardContainer {
-  height: 85vh;
+  height: 72vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: sticky;
   top: 0;
-  padding: 0 24px;
+  padding: 0 18px;
 }
 
 .card {
@@ -15,10 +15,10 @@
   flex-direction: column;
   position: relative;
   top: 0;
-  width: min(1000px, 100%);
-  height: 500px;
-  border-radius: 25px;
-  padding: 50px;
+  width: min(900px, 100%);
+  height: 420px;
+  border-radius: 20px;
+  padding: 38px;
   transform-origin: top;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -53,8 +53,8 @@
   .body {
     display: flex;
     height: 100%;
-    margin-top: 40px;
-    gap: 50px;
+    margin-top: 30px;
+    gap: 38px;
     min-height: 0;
   }
 }
@@ -71,17 +71,17 @@
 
   .headline {
     font-family: 'Dela Gothic One', sans-serif;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 400;
     line-height: 1.1;
     letter-spacing: 0;
     color: #fff;
-    margin: 0 0 18px;
+    margin: 0 0 14px;
   }
 
   .price {
     font-family: 'Dela Gothic One', sans-serif;
-    font-size: 22px;
+    font-size: 19px;
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
@@ -101,12 +101,12 @@
 
   p {
     font-family: 'Dela Gothic One', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.7;
     color: #fff;
     opacity: 0.82;
-    margin: 0 0 24px;
+    margin: 0 0 18px;
   }
 
   span {

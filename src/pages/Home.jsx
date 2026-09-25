@@ -57,12 +57,13 @@ export default function Home() {
         logos={techLogos}
         speed={70}
         direction="left"
-        logoHeight={60}
-        gap={60}
+         logoHeight={60}
+         gap={60}
         hoverSpeed={0}
         scaleOnHover
         ariaLabel="Technology partners"
-        marginY="10rem"
+         marginY="10rem"
+         className="home-tech-loop"
       />
 
       <div className="relative z-10 mx-auto h-px w-full max-w-7xl bg-white/10" />

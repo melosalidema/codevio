@@ -20,7 +20,7 @@ const CORE_SERVICE_ICONS = [Compass, PenTool, CodeXml, Rocket];
 export default function Services() {
   return (
     <PageShell title="Services">
-      <section className="relative z-10 mx-auto max-w-6xl pt-28">
+      <section className="relative z-10 mx-auto max-w-6xl pt-28 pb-8">
         <motion.span
           {...fadeUp()}
           className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
@@ -62,7 +62,7 @@ export default function Services() {
           fixed-scope outcome.
         </motion.p>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="services-core-grid mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {CORE_SERVICES.map((service, i) => {
             const Icon = CORE_SERVICE_ICONS[i] ?? Compass;
 

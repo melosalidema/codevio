@@ -185,7 +185,7 @@ export default function About() {
 
   return (
     <>
-      <main className="relative min-h-screen overflow-hidden px-6 py-24 text-white">
+      <main className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}
@@ -228,7 +228,7 @@ export default function About() {
           />
         </div>
 
-        <section className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 pt-32 lg:grid-cols-2">
+        <section className="about-layout relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 pt-8 lg:grid-cols-2">
           <div className="flex flex-col gap-8">
             <span className="text-sm uppercase tracking-[0.3em] text-[#f5b8c4]">
               About Codevio

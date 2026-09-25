@@ -41,7 +41,7 @@ export default function Work() {
         </motion.p>
       </section>
 
-      <section className="relative z-10 mx-auto mt-16 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="work-grid relative z-10 mx-auto mt-16 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
         {CASE_STUDIES.map((project, i) => (
           <motion.div key={project.name} {...fadeUp(i * 0.08)}>
             <Link
