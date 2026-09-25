@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 import PageShell from '../components/PageShell';
 import { CASE_STUDIES } from '../data/site';
@@ -42,11 +43,12 @@ export default function Work() {
 
       <section className="relative z-10 mx-auto mt-16 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
         {CASE_STUDIES.map((project, i) => (
-          <motion.article
-            key={project.name}
-            {...fadeUp(i * 0.08)}
-            className="liquid-glass group flex flex-col overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-colors duration-300 hover:border-[#b02a3d]/70"
-          >
+          <motion.div key={project.name} {...fadeUp(i * 0.08)}>
+            <Link
+              to={`/work/${project.slug}`}
+              aria-label={`Read the ${project.name} case study`}
+              className="liquid-glass group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-colors duration-300 hover:border-[#b02a3d]/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#f5b8c4]"
+            >
             <div className="relative aspect-[16/10] overflow-hidden">
               <img
                 src={project.image}
@@ -86,8 +88,12 @@ export default function Work() {
                   </span>
                 ))}
               </div>
-            </div>
-          </motion.article>
+              <span className="mt-6 flex items-center gap-2 font-['Bebas_Neue'] text-xs uppercase tracking-[0.16em] text-[#f5b8c4]">
+                View case study <ArrowUpRight className="size-4" />
+              </span>
+              </div>
+            </Link>
+          </motion.div>
         ))}
       </section>
 

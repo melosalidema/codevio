@@ -338,28 +338,49 @@ export const ICP = {
 // studies (name, metric, image, tags) and remove `illustrative: true`.
 export const CASE_STUDIES = [
   {
+    slug: 'saas-waitlist-launch',
     name: 'SaaS waitlist launch',
     metric: 'Idea → live in 14 days',
     description:
       'Brand direction, landing page, and waitlist flow for a seed-stage B2B tool ahead of its demo day.',
+    challenge:
+      'The team had a strong product idea but needed a clear story and a credible launch presence before demo day.',
+    approach:
+      'We clarified the positioning, created a compact visual direction, and built a focused landing page around one conversion path: joining the waitlist.',
+    deliverables: ['Positioning and messaging', 'Visual direction', 'Responsive landing page', 'Waitlist flow'],
+    outcome: 'A focused launch presence, live in two weeks and ready to collect early demand.',
     tags: ['Brand', 'Website'],
     image: workImg1,
     illustrative: true,
   },
   {
+    slug: 'marketplace-mvp',
     name: 'Marketplace MVP',
     metric: 'Prototype → product in 31 days',
     description:
       'Two-sided marketplace MVP with payments and admin tooling, shipped on React and Supabase.',
+    challenge:
+      'The founders needed to test the complete marketplace loop with real users, not just present another clickable prototype.',
+    approach:
+      'We reduced the product to its essential buyer and seller flows, then built the core experience with payments and lightweight admin tooling.',
+    deliverables: ['Product scoping', 'Buyer and seller flows', 'Payments integration', 'Admin tooling'],
+    outcome: 'A working MVP that could support the first real marketplace transactions in 31 days.',
     tags: ['MVP', 'Full-stack'],
     image: workImg2,
     illustrative: true,
   },
   {
+    slug: 'rebrand-and-relaunch',
     name: 'Rebrand & relaunch',
     metric: 'Rebrand → relaunch in 21 days',
     description:
       'New identity system and site for an established brand that had outgrown its first website.',
+    challenge:
+      'The existing brand had grown beyond its original website, making the business look less established than it really was.',
+    approach:
+      'We sharpened the identity, organized the content around the customer journey, and rebuilt the site as a faster, clearer sales tool.',
+    deliverables: ['Identity refresh', 'Content structure', 'Responsive website', 'Launch and QA'],
+    outcome: 'A more confident brand and a relaunch shipped in three weeks.',
     tags: ['Branding', 'Website'],
     image: workImg3,
     illustrative: true,

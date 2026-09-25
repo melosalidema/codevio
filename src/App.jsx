@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import Mission from './pages/Mission';
 import Services from './pages/Services';
 import Work from './pages/Work';
+import CaseStudy from './pages/CaseStudy';
 import { PAGE_THEME } from './data/site';
 
 const ROUTE_TRANSITION_LABELS = {
@@ -34,6 +35,7 @@ function AppRoutes() {
         <Route path="/mission" element={<Mission />} />
         <Route path="/services" element={<Services />} />
         <Route path="/work" element={<Work />} />
+        <Route path="/work/:slug" element={<CaseStudy />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
