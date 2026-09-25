@@ -16,6 +16,18 @@ export const SITE = {
   responseTime: 'We reply within one business day.',
 };
 
+// The Formspree form ID is a public endpoint identifier, not a secret — it is
+// already visible in the markup of the no-JS form fallback. It is read from
+// VITE_FORMSPREE_FORM_ID so it stays out of the repository. Never put a
+// Formspree API key, SMTP credential, or other secret in a VITE_* variable:
+// those are inlined into the public client bundle.
+const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID || '';
+
+export const CONTACT_FORM = {
+  endpoint: formspreeFormId ? `https://formspree.io/f/${formspreeFormId}` : '',
+  isConfigured: Boolean(formspreeFormId),
+};
+
 export const PAGE_THEME = {
   backgroundColor: '#0a0a0f',
   gradientColors: ['#0a0a0f', '#db364e', '#7b2233'],
