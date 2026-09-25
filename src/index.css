@@ -310,8 +310,8 @@ html::-webkit-scrollbar {
   }
 
   .home-offers {
-    max-width: 1080px !important;
-    padding-top: 48px !important;
+    max-width: 1600px !important;
+    padding-top: 80px !important;
     padding-bottom: 128px !important;
   }
 
@@ -321,7 +321,7 @@ html::-webkit-scrollbar {
 
   .home-offers .rounded-2xl {
     padding: 21px !important;
-    padding-bottom: 64px !important;
+    padding-bottom: 18px !important;
   }
 
   .services-core-grid {
