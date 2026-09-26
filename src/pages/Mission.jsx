@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import PageShell from '../components/PageShell';
+import SpecularButton from '../components/SpecularButton';
 import { MISSION, VALUES, PROCESS } from '../data/site';
 
 import logo from '../assets/logo.png';
@@ -14,6 +15,8 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function Mission() {
+  const navigate = useNavigate();
+
   return (
     <PageShell title="Mission">
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
@@ -149,18 +152,9 @@ export default function Mission() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Link
-              to="/services"
-              className="rounded-full border border-white/40 px-6 py-3 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10"
-            >
-              See the sprints
-            </Link>
-            <Link
-              to="/contact"
-              className="rounded-full border border-[#b02a3d] bg-[#b02a3d] px-6 py-3 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#922235]"
-            >
+            <SpecularButton onClick={() => navigate('/contact')}>
               Start a project
-            </Link>
+            </SpecularButton>
           </div>
         </motion.div>
       </section>

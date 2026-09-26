@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, X, Plus, Compass, PenTool, CodeXml, Rocket } from 'lucide-react';
 
 import PageShell from '../components/PageShell';
 import StackCards from '../components/StackCard';
+import SpecularButton from '../components/SpecularButton';
 import { CORE_SERVICES, ICP, OFFERS, PACKAGE_RULES } from '../data/site';
 
 const fadeUp = (delay = 0) => ({
@@ -18,6 +19,8 @@ const offerCards = OFFERS.map(({ image, ...offer }) => ({ ...offer, src: image }
 const CORE_SERVICE_ICONS = [Compass, PenTool, CodeXml, Rocket];
 
 export default function Services() {
+  const navigate = useNavigate();
+
   return (
     <PageShell title="Services">
       <section className="relative z-10 mx-auto max-w-6xl pt-28 pb-8">
@@ -311,12 +314,9 @@ export default function Services() {
             in a sprint.
           </p>
 
-          <Link
-            to="/contact"
-            className="rounded-full border border-[#b02a3d] bg-[#b02a3d] px-6 py-3 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#922235]"
-          >
+          <SpecularButton onClick={() => navigate('/contact')}>
             Request a quote
-          </Link>
+          </SpecularButton>
         </motion.div>
       </section>
     </PageShell>

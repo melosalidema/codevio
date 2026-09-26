@@ -376,7 +376,7 @@ html::-webkit-scrollbar {
   }
 
   .compact-footer > div:nth-child(2) p {
-    font-size: clamp(3rem, 4.1vw, 4.25rem) !important;
+    font-size: clamp(2.5rem, 3.5vw, 3.5rem) !important;
     line-height: 0.9 !important;
   }
 }

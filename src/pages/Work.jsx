@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 import PageShell from '../components/PageShell';
+import SpecularButton from '../components/SpecularButton';
 import { CASE_STUDIES } from '../data/site';
 
 const fadeUp = (delay = 0) => ({
@@ -13,6 +14,8 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function Work() {
+  const navigate = useNavigate();
+
   return (
     <PageShell title="Work">
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
@@ -60,7 +63,7 @@ export default function Work() {
               </span>
 
               {project.illustrative && (
-                <span className="absolute right-4 top-4 rounded-full border border-white/15 bg-black/55 px-3 py-1 font-['Bebas_Neue'] text-[0.65rem] uppercase tracking-[0.14em] text-white/60 backdrop-blur-sm">
+                <span className="absolute left-4 top-14 rounded-full border border-white/15 bg-black/55 px-3 py-1 font-['Bebas_Neue'] text-[0.65rem] uppercase tracking-[0.14em] text-white/60 backdrop-blur-sm">
                   Illustrative
                 </span>
               )}
@@ -109,12 +112,9 @@ export default function Work() {
             Want the full walkthrough of a launch like these?
           </p>
 
-          <Link
-            to="/contact"
-            className="rounded-full border border-[#b02a3d] bg-[#b02a3d] px-6 py-3 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#922235]"
-          >
+          <SpecularButton onClick={() => navigate('/contact')}>
             Ask for case studies
-          </Link>
+          </SpecularButton>
         </motion.div>
       </section>
     </PageShell>
