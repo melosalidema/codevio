@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { motion } from 'framer-motion';
 import '@fontsource/dela-gothic-one';
 
 import Footer from '../components/Footer';
@@ -12,6 +12,12 @@ import logo from '../assets/logo.png';
 import logoAlt from '../assets/logo_alt.png';
 
 import '../components/Lanyard.css';
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+});
 
 function MacWindowControls() {
   return (
@@ -86,10 +92,40 @@ function MacWindowControls() {
           transform: translateY(0) scale(1);
         }
 
+        .code-line {
+          display: block;
+          clip-path: inset(0 100% 0 0);
+          animation: code-type 500ms steps(28, end) forwards;
+          animation-delay: var(--code-line-delay);
+        }
+
+        .code-line--number {
+          opacity: 0;
+          animation: code-number-in 220ms ease forwards;
+          animation-delay: var(--code-line-delay);
+        }
+
+        @keyframes code-type {
+          to {
+            clip-path: inset(0 0 0 0);
+          }
+        }
+
+        @keyframes code-number-in {
+          to {
+            opacity: 1;
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .mac-window-control,
-          .mac-window-control__symbol {
+          .mac-window-control__symbol,
+          .code-line,
+          .code-line--number {
             transition: none;
+            animation: none;
+            clip-path: none;
+            opacity: 1;
           }
         }
       `}</style>
@@ -228,44 +264,51 @@ export default function About() {
           />
         </div>
 
-        <section className="about-layout relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 pt-8 lg:grid-cols-2">
+        <section className="about-layout relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 pt-28 lg:gap-40 lg:grid-cols-2">
           <div className="flex flex-col gap-8">
-            <span className="text-sm uppercase tracking-[0.3em] text-[#f5b8c4]">
+            <motion.span
+              {...fadeUp()}
+              className="text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
+            >
               About Codevio
-            </span>
+            </motion.span>
 
-            <h1
+            <motion.h1
+              {...fadeUp(0.05)}
               className="text-4xl leading-tight sm:text-5xl md:text-6xl"
               style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
             >
               We design, build, and ship products people actually enjoy using.
-            </h1>
+            </motion.h1>
 
-            <p className="max-w-xl text-lg text-white/80 sm:text-xl">
+            <motion.p {...fadeUp(0.1)} className="max-w-xl text-lg text-white/80 sm:text-xl">
               Codevio is a two-to-three person studio of senior designers and
               engineers. We help early-stage founders turn ideas into launched,
               well-crafted digital products — brand, website, and working
               software shipped in fixed sprints, weeks not quarters.
-            </p>
+            </motion.p>
 
-            <p className="max-w-xl text-base text-white/60 sm:text-lg">
+            <motion.p {...fadeUp(0.15)} className="max-w-xl text-base text-white/60 sm:text-lg">
               We work end to end: product strategy, interface design, and
               full-stack development, so nothing gets lost between the people
               designing the experience and the people shipping it. Fixed scope,
               a named ship date, and no handoffs.
-            </p>
+            </motion.p>
 
-            <div className="mt-4 grid grid-cols-3 gap-8">
+            <motion.div
+              {...fadeUp(0.2)}
+              className="mt-4 grid grid-cols-3 gap-8"
+            >
               {STATS.map((stat) => (
                 <div key={stat.label}>
                   <p className="text-3xl font-semibold">{stat.value}</p>
                   <p className="text-sm text-white/60">{stat.label}</p>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          <div className="relative">
+          <motion.div {...fadeUp(0.1)} className="relative">
             <div className="absolute -inset-4 -z-10 rounded-3xl bg-[#db364e]/10 blur-2xl" />
             <div className="liquid-glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
               <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
@@ -275,11 +318,23 @@ export default function About() {
 
               <pre className="flex overflow-x-auto bg-black/55 p-6 text-left font-['Bebas_Neue'] text-sm leading-relaxed tracking-[0.04em]">
                 <code className="mr-4 select-none whitespace-pre text-white/30">
-                  {CODE_LINES.map((_, i) => `${i + 1}\n`).join('')}
+                  {CODE_LINES.map((_, i) => (
+                    <span
+                      key={i}
+                      className="code-line code-line--number"
+                      style={{ '--code-line-delay': `${i * 500}ms` }}
+                    >
+                      {i + 1}
+                    </span>
+                  ))}
                 </code>
                 <code className="whitespace-pre">
                   {CODE_LINES.map((line, i) => (
-                    <Fragment key={i}>
+                    <span
+                      key={i}
+                      className="code-line"
+                      style={{ '--code-line-delay': `${i * 500}ms` }}
+                    >
                       {line.length === 0
                         ? '\u00A0'
                         : line.map((token, j) => (
@@ -287,13 +342,12 @@ export default function About() {
                               {token.t}
                             </span>
                           ))}
-                      {'\n'}
-                    </Fragment>
+                    </span>
                   ))}
                 </code>
               </pre>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 

@@ -64,7 +64,7 @@ export default function Footer() {
             <img
               src={logo}
               alt="Codevio logo"
-              className="h-10 w-auto object-contain sm:h-12"
+              className="h-8 w-auto object-contain"
               draggable={false}
             />
           </Link>
@@ -76,12 +76,12 @@ export default function Footer() {
 
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
           <div>
-              <p className="max-w-4xl font-['Dela_Gothic_One'] text-[clamp(1.7rem,5.5vw,5rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-white">
-              Let&apos;s build{' '}<br className="footer-desktop-break" />
+              <p className="max-w-4xl text-left font-['Dela_Gothic_One'] text-[clamp(1.7rem,5.5vw,5rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-white">
+              <span className="whitespace-nowrap">Let&apos;s build</span>{' '}<br className="footer-desktop-break" />
               <Link to="/contact" className="footer-something">
                 something
               </Link>{' '}<br className="footer-desktop-break" />
-              that{' '}<br className="footer-desktop-break" />moves.
+              <span className="whitespace-nowrap">that moves.</span>
             </p>
           </div>
 
