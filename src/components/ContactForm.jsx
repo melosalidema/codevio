@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, CheckCircle2, Loader2, Send } from 'lucide-react';
+import { useForm } from '@formspree/react';
 
 import { CONTACT_FORM, SITE } from '../data/site';
 
@@ -46,53 +47,6 @@ function validate(values) {
   return errors;
 }
 
-function describeFailure(status, payload) {
-  const messages = Array.isArray(payload?.errors) ? payload.errors : [];
-  const summary = messages
-    .map((entry) => (typeof entry === 'string' ? entry : entry?.message))
-    .filter(Boolean);
-
-  if (summary.length > 0) {
-    return summary.join(' ');
-  }
-
-  if (typeof payload?.message === 'string' && payload.message.trim()) {
-    return payload.message.trim();
-  }
-
-  if (status === 404) {
-    return 'This form is not connected to an inbox yet. Please email us directly.';
-  }
-
-  if (status === 429) {
-    return 'Too many messages from this device. Please email us directly.';
-  }
-
-  if (status >= 500) {
-    return 'Our form service is having trouble right now. Please email us directly.';
-  }
-
-  return 'We could not send your message. Please email us directly.';
-}
-
-function splitServerErrors(payload) {
-  const entries = Array.isArray(payload?.errors) ? payload.errors : [];
-  const fieldErrors = {};
-  const general = [];
-
-  for (const entry of entries) {
-    if (!entry) continue;
-
-    if (entry.field && entry.message) {
-      fieldErrors[entry.field] = entry.message;
-    } else if (entry.message) {
-      general.push(entry.message);
-    }
-  }
-
-  return { fieldErrors, general };
-}
-
 const fieldClass =
   'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 font-[\'Bebas_Neue\'] text-lg tracking-[0.03em] text-white outline-none transition-colors duration-300 placeholder:text-white/40 hover:border-white/20 focus:border-[#f5b8c4]/70 focus:bg-white/10';
 
@@ -102,6 +56,7 @@ const errorClass =
   'mt-1.5 flex items-center gap-1.5 font-[\'Bebas_Neue\'] text-lg tracking-[0.04em] text-[#fcd34d]';
 
 export default function ContactForm() {
+  const [formspreeState, submitToFormspree] = useForm('xyeznlrj');
   const [values, setValues] = useState(EMPTY_VALUES);
   const [errors, setErrors] = useState({});
   const [honeypot, setHoneypot] = useState('');
@@ -130,6 +85,27 @@ export default function ContactForm() {
     setCanSendAnother(false);
     setStatus('success');
   }
+
+  useEffect(() => {
+    if (status !== 'submitting') return;
+
+    if (formspreeState.succeeded) {
+      const timer = setTimeout(() => {
+        submittingRef.current = false;
+        showSuccess();
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+
+    if (formspreeState.errors) {
+      const timer = setTimeout(() => {
+        submittingRef.current = false;
+        setFormError('We could not send your message. Please try again or email us directly.');
+        setStatus('error');
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [formspreeState.errors, formspreeState.succeeded, status]);
 
   function updateField(name, value) {
     setValues((previous) => ({ ...previous, [name]: value }));
@@ -181,53 +157,8 @@ export default function ContactForm() {
     submittingRef.current = true;
     setStatus('submitting');
 
-    const name = values.name.trim();
-    const email = values.email.trim();
-
     try {
-      const response = await fetch(CONTACT_FORM.endpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject: values.subject.trim(),
-          message: values.message.trim(),
-          _replyto: email,
-          _subject: `New enquiry from ${name} — ${values.subject.trim()}`,
-          _template: 'table',
-          _captcha: 'false',
-          _gotcha: '',
-          _honey: '',
-        }),
-      });
-
-      const payload = await response.json().catch(() => null);
-
-      // FormSubmit stores submissions made before the destination inbox
-      // confirms its one-time activation link and delivers them once activated,
-      // so from the visitor's point of view that response is a success.
-      const activationPending =
-        payload?.success === 'false' &&
-        typeof payload?.message === 'string' &&
-        /activat/i.test(payload.message);
-
-      if (!response.ok || (payload?.success === 'false' && !activationPending)) {
-        const { fieldErrors, general } = splitServerErrors(payload);
-
-        if (Object.keys(fieldErrors).length > 0) {
-          setErrors((previous) => ({ ...previous, ...fieldErrors }));
-        }
-
-        setFormError(general.join(' ') || describeFailure(response.status, payload));
-        setStatus('error');
-        return;
-      }
-
-      showSuccess();
+      await submitToFormspree(event);
     } catch {
       setFormError(
         'We could not reach the form service. Check your connection, or email us directly.',
@@ -288,7 +219,7 @@ export default function ContactForm() {
       noValidate
       aria-busy={isSubmitting}
       aria-labelledby="contact-form-heading"
-      action={CONTACT_FORM.fallbackAction}
+       action={CONTACT_FORM.endpoint}
       method="POST"
       className="liquid-glass relative rounded-2xl border border-white/10 p-6"
     >
