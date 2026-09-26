@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import { MISSION, SITE, STATS } from '../data/site';
+import SpecularButton from './SpecularButton';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -11,6 +12,8 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function PositioningStrip() {
+  const navigate = useNavigate();
+
   return (
     <section className="home-positioning relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center-safe px-6 py-12 text-center text-white sm:px-10 md:px-12">
       <motion.span
@@ -36,18 +39,12 @@ export default function PositioningStrip() {
       </motion.p>
 
       <motion.div {...fadeUp(0.15)} className="mt-10 flex flex-wrap justify-center gap-4">
-        <Link
-          to="/services"
-          className="rounded-full border border-[#b02a3d] bg-[#b02a3d] px-6 py-3 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#922235]"
-        >
+        <SpecularButton onClick={() => navigate('/services')}>
           See the sprints
-        </Link>
-        <Link
-          to="/work"
-          className="rounded-full border border-white/40 px-6 py-3 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10"
-        >
+        </SpecularButton>
+        <SpecularButton onClick={() => navigate('/work')}>
           Recent launches
-        </Link>
+        </SpecularButton>
       </motion.div>
 
       <motion.div
