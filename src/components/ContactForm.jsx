@@ -56,6 +56,10 @@ function describeFailure(status, payload) {
     return summary.join(' ');
   }
 
+  if (typeof payload?.message === 'string' && payload.message.trim()) {
+    return payload.message.trim();
+  }
+
   if (status === 404) {
     return 'This form is not connected to an inbox yet. Please email us directly.';
   }
@@ -194,13 +198,24 @@ export default function ContactForm() {
           message: values.message.trim(),
           _replyto: email,
           _subject: `New enquiry from ${name} — ${values.subject.trim()}`,
+          _template: 'table',
+          _captcha: 'false',
           _gotcha: '',
+          _honey: '',
         }),
       });
 
       const payload = await response.json().catch(() => null);
 
-      if (!response.ok) {
+      // FormSubmit stores submissions made before the destination inbox
+      // confirms its one-time activation link and delivers them once activated,
+      // so from the visitor's point of view that response is a success.
+      const activationPending =
+        payload?.success === 'false' &&
+        typeof payload?.message === 'string' &&
+        /activat/i.test(payload.message);
+
+      if (!response.ok || (payload?.success === 'false' && !activationPending)) {
         const { fieldErrors, general } = splitServerErrors(payload);
 
         if (Object.keys(fieldErrors).length > 0) {
@@ -221,42 +236,6 @@ export default function ContactForm() {
     } finally {
       submittingRef.current = false;
     }
-  }
-
-  if (!CONTACT_FORM.isConfigured) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="liquid-glass rounded-2xl border border-white/10 p-6"
-      >
-        <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
-          Send us a message
-        </p>
-
-        <p className="mt-3 font-['Bebas_Neue'] text-xl leading-snug tracking-[0.03em] text-white/70">
-          The online form is being connected to our inbox. Until then, the fastest way to
-          reach us is email or phone.
-        </p>
-
-        <div className="mt-5 flex flex-col gap-2 font-['Bebas_Neue'] text-xl tracking-[0.06em] text-white/80">
-          <a
-            href={`mailto:${SITE.email}`}
-            className="w-fit break-all transition-colors duration-300 hover:text-[#db364e]"
-          >
-            {SITE.email}
-          </a>
-          <a
-            href={`tel:${SITE.phoneHref}`}
-            className="w-fit transition-colors duration-300 hover:text-[#db364e]"
-          >
-            {SITE.phone}
-          </a>
-        </div>
-      </motion.div>
-    );
   }
 
   if (status === 'success') {
@@ -309,7 +288,7 @@ export default function ContactForm() {
       noValidate
       aria-busy={isSubmitting}
       aria-labelledby="contact-form-heading"
-      action={CONTACT_FORM.endpoint}
+      action={CONTACT_FORM.fallbackAction}
       method="POST"
       className="liquid-glass relative rounded-2xl border border-white/10 p-6"
     >

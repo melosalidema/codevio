@@ -9,27 +9,33 @@ Currently, two official plugins are available:
 
 ## Contact form
 
-The `/contact` page form submits straight to [Formspree](https://formspree.io) — no backend.
+The `/contact` page form submits to an email form service — no backend.
 
-1. Create a form at formspree.io and confirm the destination inbox from the email Formspree sends you.
-2. Copy the form ID out of the Integration tab's form URL (`https://formspree.io/f/<FORM_ID>`).
-3. Copy `.env.example` to `.env.local` and set:
+**Default (no configuration):** submissions go through [FormSubmit](https://formsubmit.co)
+to `SITE.email` in `src/data/site.js` (`info.codevio@gmail.com`). The inbox receives a
+one-time activation email on the first submission and must confirm it — FormSubmit holds
+submissions until then and delivers them after activation. Spam is handled by the client
+honeypot, the minimum-fill-time check, and FormSubmit's own filtering.
 
-   ```
-   VITE_FORMSPREE_FORM_ID=<FORM_ID>
-   ```
+**Optional (Formspree):** create a form at formspree.io, confirm the destination inbox
+from the email Formspree sends you, copy the form ID from the Integration tab's form URL
+(`https://formspree.io/f/<FORM_ID>`), then copy `.env.example` to `.env.local` and set:
 
-Until that is set, `/contact` shows the email and phone details instead of a dead form.
+```
+VITE_FORMSPREE_FORM_ID=<FORM_ID>
+```
+
+When the ID is set it takes precedence over FormSubmit. For extra spam protection, use
+Formspree's dashboard: **Restrict to Domain** (checks `Referer`) and CAPTCHA are the
+strongest layers and are server-side.
 
 `VITE_*` values are inlined into the public client bundle. The form ID is a public
-endpoint identifier and is already exposed in the no-JS `<form action>` fallback,
-so that is fine — but never put a Formspree API key, SMTP credential, or any
-other secret in a `VITE_*` variable. Use Formspree's dashboard for spam rules:
-**Restrict to Domain** (checks `Referer`) and CAPTCHA are the strongest layers and
-are server-side, so they cost nothing here.
+endpoint identifier and is already exposed in the no-JS `<form action>` fallback, so that
+is fine — but never put a Formspree API key, SMTP credential, or any other secret in a
+`VITE_*` variable.
 
-Formspree also forwards `_replyto` and `_subject`; the form uses both so replying
-to a notification reaches the sender.
+The form sends `_replyto` and `_subject`, so replying to a notification reaches the
+sender.
 
 ## React Compiler
 
