@@ -477,21 +477,21 @@ export const OFFERS = [
 // lives on the Services page.
 export const HOME_OFFERS = [
   {
+    title: 'Brand Sprint',
+    headline: 'From idea → recognizable brand.',
+    description:
+      'A focused visual identity that gives your business a clear direction across your website, social media, marketing, and customer experience.',
+    timeline: '1–3 weeks',
+    price: '€400+',
+    priceNote: 'one-time',
+  },
+  {
     title: 'Website Sprint',
     headline: 'From idea → live website.',
     description:
       'A fast, polished website designed around your brand, built to look credible, perform well, and turn visitors into customers.',
     timeline: '2–3 weeks',
     price: '€750+',
-    priceNote: 'one-time',
-  },
-  {
-    title: 'SaaS Sprint',
-    headline: 'From idea → working SaaS.',
-    description:
-      'We design and build the core product your users actually need — from the first flow to a functional, scalable MVP.',
-    timeline: '4–8 weeks',
-    price: '€3,000+',
     priceNote: 'one-time',
   },
   {
@@ -504,12 +504,12 @@ export const HOME_OFFERS = [
     priceNote: 'one-time',
   },
   {
-    title: 'Brand Sprint',
-    headline: 'From idea → recognizable brand.',
+    title: 'SaaS Sprint',
+    headline: 'From idea → working SaaS.',
     description:
-      'A focused visual identity that gives your business a clear direction across your website, social media, marketing, and customer experience.',
-    timeline: '1–3 weeks',
-    price: '€400+',
+      'We design and build the core product your users actually need — from the first flow to a functional, scalable MVP.',
+    timeline: '4–8 weeks',
+    price: '€3,000+',
     priceNote: 'one-time',
   },
 ];
