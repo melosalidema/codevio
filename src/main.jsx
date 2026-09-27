@@ -4,6 +4,10 @@ import './index.css';
 import App from './App.jsx';
 import '@fontsource/dela-gothic-one';
 
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

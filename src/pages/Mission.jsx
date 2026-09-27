@@ -47,7 +47,7 @@ export default function Mission() {
           className="liquid-glass mt-14 overflow-hidden rounded-2xl border border-white/10 p-8 shadow-2xl md:p-10"
         >
           <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
-            What the mission commits us to
+            What we commit to
           </p>
 
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
@@ -78,7 +78,7 @@ export default function Mission() {
             <motion.div
               key={value.title}
               {...fadeUp(i * 0.05)}
-              className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors duration-300 hover:border-[#b02a3d]/70"
+className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors duration-300 hover:border-[#b02a3d]/70"
             >
               <h3
                 className="text-lg"
@@ -148,12 +148,12 @@ export default function Mission() {
             className="max-w-2xl text-2xl leading-snug sm:text-3xl"
             style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
           >
-            Have an idea with a deadline? That is exactly what we are built for.
+            Have an idea? Let&apos;s build it.
           </p>
 
           <div className="flex flex-wrap gap-4">
             <SpecularButton onClick={() => navigate('/contact')}>
-              Start a project
+              Start a project →
             </SpecularButton>
           </div>
         </motion.div>

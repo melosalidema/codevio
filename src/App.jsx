@@ -10,7 +10,6 @@ import Services from './pages/Services';
 import Work from './pages/Work';
 import CaseStudy from './pages/CaseStudy';
 import PageTransition from './components/StackCard/PageTransition';
-import { PAGE_THEME } from './data/site';
 
 const SCROLL_INDICATOR_PADDING = 16;
 const SCROLL_INDICATOR_MIN_HEIGHT = 56;
@@ -92,11 +91,7 @@ export default function App() {
       <ScrollToTop />
       <ScrollIndicator />
 
-      <PageTransition
-        label="Codevio"
-        background={PAGE_THEME.transitionBackground}
-        textColor={PAGE_THEME.textColor}
-      >
+      <PageTransition>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/mission" element={<Mission />} />

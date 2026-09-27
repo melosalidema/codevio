@@ -200,6 +200,10 @@ html::-webkit-scrollbar {
     gap: 18px !important;
   }
 
+  .compact-layout .about-layout {
+    column-gap: 56px !important;
+  }
+
   .compact-layout .gap-8 {
     gap: 24px !important;
   }
@@ -210,6 +214,14 @@ html::-webkit-scrollbar {
 
   .compact-layout .rounded-2xl[class*='p-'] {
     padding: 21px !important;
+  }
+
+  .compact-layout .pricing-grid {
+    gap: 16px !important;
+  }
+
+  .compact-layout .pricing-card {
+    padding: 16px !important;
   }
 
   .compact-layout .text-6xl {

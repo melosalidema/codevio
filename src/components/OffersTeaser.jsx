@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { OFFERS } from '../data/site';
+import { HOME_OFFERS } from '../data/site';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -30,7 +30,7 @@ export default function OffersTeaser() {
       </motion.p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {OFFERS.map((offer, i) => (
+        {HOME_OFFERS.map((offer, i) => (
           <motion.div
             key={offer.title}
             {...fadeUp(i * 0.06)}

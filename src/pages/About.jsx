@@ -32,64 +32,79 @@ function MacWindowControls() {
         .mac-window-control {
           position: relative;
           display: grid;
-          width: 0.75rem;
-          height: 0.75rem;
+          width: 1.25rem;
+          height: 1.25rem;
+          margin: -0.25rem;
           place-items: center;
           border-radius: 9999px;
-          transform: translateY(0) scale(1);
-          transition:
-            transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
-            filter 180ms ease;
-          will-change: transform;
         }
 
-        .mac-window-control--close {
-          background: #ff5f56;
+        .mac-window-control__surface {
+          width: 0.75rem;
+          height: 0.75rem;
+          border-radius: inherit;
+          box-shadow:
+            inset 0 0 0 0.5px rgba(35, 0, 0, 0.12),
+            inset 0 1px 1px rgba(255, 255, 255, 0.2),
+            inset 0 -1px 1px rgba(0, 0, 0, 0.12);
+          transition: filter 160ms ease-out;
         }
 
-        .mac-window-control--minimize {
-          background: #ffbd2e;
+        .mac-window-control--close .mac-window-control__surface {
+          background:
+            radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.16), transparent 58%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.035)),
+            #ff5f56;
         }
 
-        .mac-window-control--maximize {
-          background: #28c840;
+        .mac-window-control--minimize .mac-window-control__surface {
+          background:
+            radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.2), transparent 58%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.045)),
+            #ffbd2e;
         }
 
-        .mac-window-control:hover {
-          filter: brightness(1.06);
-          transform: translateY(-1px) scale(1.18);
+        .mac-window-control--maximize .mac-window-control__surface {
+          background:
+            radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.18), transparent 58%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.04)),
+            #28c840;
+        }
+
+        .mac-window-control--close:hover .mac-window-control__surface {
+          filter: brightness(1.08);
+        }
+
+        .mac-window-control--minimize:hover .mac-window-control__surface {
+          filter: brightness(1.07);
+        }
+
+        .mac-window-control--maximize:hover .mac-window-control__surface {
+          filter: brightness(1.08);
         }
 
         .mac-window-control__symbol {
-          color: rgba(25, 0, 0, 0.62);
-          font-family: Arial, sans-serif;
-          font-size: 0.56rem;
-          font-weight: 600;
-          line-height: 1;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 7px;
+          height: 7px;
           opacity: 0;
-          transform: translateY(1px) scale(0.82);
+          transform: translate(-50%, -50%) scale(0.85);
+          transform-origin: center;
           transition:
-            opacity 180ms ease,
-            transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-          will-change: opacity, transform;
+            opacity 160ms ease-out,
+            transform 160ms ease-out;
+          pointer-events: none;
         }
 
-        .mac-window-control--close .mac-window-control__symbol {
-          font-size: 0.62rem;
-          font-weight: 400;
-        }
-
-        .mac-window-control--minimize .mac-window-control__symbol {
-          font-size: 0.62rem;
-        }
-
-        .mac-window-control--maximize .mac-window-control__symbol {
-          font-size: 0.55rem;
+        .mac-window-control__symbol path {
+          vector-effect: non-scaling-stroke;
         }
 
         .mac-window-control:hover .mac-window-control__symbol {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: translate(-50%, -50%) scale(1);
         }
 
         .code-line {
@@ -118,11 +133,18 @@ function MacWindowControls() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .mac-window-control,
+          .mac-window-control__surface,
           .mac-window-control__symbol,
+          .code-line {
+            transition: none;
+          }
+
+          .mac-window-control__symbol {
+            transform: translate(-50%, -50%);
+          }
+
           .code-line,
           .code-line--number {
-            transition: none;
             animation: none;
             clip-path: none;
             opacity: 1;
@@ -131,16 +153,44 @@ function MacWindowControls() {
       `}</style>
 
       <div className="mac-window-controls" aria-hidden="true">
-        {[
-          ['close', '×'],
-          ['minimize', '−'],
-          ['maximize', '+'],
-        ].map(([variant, symbol]) => (
+        {['close', 'minimize', 'maximize'].map((variant) => (
           <span
             className={`mac-window-control mac-window-control--${variant}`}
             key={variant}
           >
-            <span className="mac-window-control__symbol">{symbol}</span>
+            <span className="mac-window-control__surface" />
+            <svg
+              className="mac-window-control__symbol"
+              viewBox="0 0 8 8"
+              fill="none"
+              aria-hidden="true"
+            >
+              {variant === 'close' && (
+                <path
+                  d="M1.25 1.25 6.75 6.75M6.75 1.25 1.25 6.75"
+                  stroke="white"
+                  strokeWidth="0.9"
+                  strokeLinecap="round"
+                />
+              )}
+              {variant === 'minimize' && (
+                <path
+                  d="M1.25 3.75h5.5"
+                  stroke="#674600"
+                  strokeWidth="0.8"
+                  strokeLinecap="round"
+                />
+              )}
+              {variant === 'maximize' && (
+                <path
+                  d="M3.3 3.3 1.25 1.25M1.25 2.45v-1.2h1.2M4.7 3.3l2.05-2.05m-1.2 0h1.2v1.2M3.3 4.7l-2.05 2.05m0-1.2v1.2h1.2M4.7 4.7l2.05 2.05m-1.2 0h1.2v-1.2"
+                  stroke="#176026"
+                  strokeWidth="0.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              )}
+            </svg>
           </span>
         ))}
       </div>
