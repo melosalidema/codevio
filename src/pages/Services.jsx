@@ -4,7 +4,7 @@ import { Check, X, Compass, PenTool, CodeXml, Rocket } from 'lucide-react';
 
 import PageShell from '../components/PageShell';
 import SpecularButton from '../components/SpecularButton';
-import { CORE_SERVICES, ICP, OFFERS, PACKAGE_RULES } from '../data/site';
+import { CORE_SERVICES, ICP, OFFERS, PACKAGE_RULES, PRICING_PROMISE } from '../data/site';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -128,7 +128,7 @@ export default function Services() {
             >
               <div className="flex items-baseline justify-between gap-3">
                 <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
-                  {offer.category} · {offer.timeline}
+                  {offer.category}
                 </span>
                 <span className="font-['Bebas_Neue'] text-lg leading-none text-white">
                   {offer.price}
@@ -168,13 +168,44 @@ export default function Services() {
                 <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.06em] text-white/45">
                   {offer.forWho}
                 </p>
-
-                <p className="mt-2 border-t border-white/10 pt-3 font-['Bebas_Neue'] text-xs uppercase tracking-[0.14em] text-[#f5b8c4]">
-                  Next step → {offer.nextStep}
-                </p>
               </div>
             </motion.div>
           ))}
+
+          <motion.div
+            {...fadeUp(OFFERS.length * 0.06)}
+            className="pricing-card liquid-glass flex flex-col rounded-2xl border border-white/10 p-4 transition-colors duration-300 hover:border-[#b02a3d]/70"
+          >
+            <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
+              {PRICING_PROMISE.eyebrow}
+            </span>
+
+            <h3
+              className="mt-2 text-lg"
+              style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
+            >
+              {PRICING_PROMISE.quote}
+            </h3>
+
+            <p className="mt-2 font-['Bebas_Neue'] text-base tracking-[0.04em] text-white/70">
+              {PRICING_PROMISE.support}
+            </p>
+
+            <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
+              What you always get
+            </p>
+            <ul className="mt-2 flex flex-col gap-1.5">
+              {PRICING_PROMISE.points.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2.5 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/70"
+                >
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#db364e]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
       </section>
 
