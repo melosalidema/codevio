@@ -557,9 +557,32 @@ export const ICP = {
   ],
 };
 
-// ILLUSTRATIVE examples — not real client work yet. Replace with real case
-// studies (name, metric, image, tags) and remove `illustrative: true`.
+// Project examples marked `illustrative` are representative mock case studies.
 export const CASE_STUDIES = [
+  {
+    slug: 'tara-jewellery',
+    name: 'Tara Jewellery',
+    metric: 'Live Shopify storefront',
+    description:
+      'An e-commerce storefront for everyday gold and silver jewellery, with curated categories, featured pieces, and a direct shopping flow.',
+    challenge:
+      'Make it easy for shoppers to discover Tara Jewellery’s everyday gold and silver pieces and move from browsing to purchase.',
+    approach:
+      'Organize the Shopify store around necklace, bracelet, earring, and ring collections, highlight featured products, and connect the catalogue to cart and checkout.',
+    deliverables: [
+      'Shopify storefront',
+      'Collection and product pages',
+      'Featured product sections',
+      'Cart and checkout flow',
+      'Responsive shopping experience',
+    ],
+    outcome:
+      'A live online store where customers can browse Tara Jewellery’s collections and shop directly.',
+    tags: ['E-commerce', 'Shopify', 'Jewellery'],
+    image:
+      'https://www.tarajewellery.org/cdn/shop/files/angel_background1.png?v=1790331865&width=1600',
+    externalUrl: 'https://www.tarajewellery.org/',
+  },
   {
     slug: 'saas-waitlist-launch',
     name: 'SaaS waitlist launch',

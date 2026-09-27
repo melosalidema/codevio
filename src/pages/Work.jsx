@@ -38,9 +38,8 @@ export default function Work() {
           {...fadeUp(0.1)}
           className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75"
         >
-          The examples below illustrate the kind of launches we take on. Real
-          case studies are being written up — ask us for a walkthrough of a
-          recent sprint.
+          A mix of live client work and illustrative project examples. Explore
+          each project to see the goals, approach, and deliverables.
         </motion.p>
       </section>
 

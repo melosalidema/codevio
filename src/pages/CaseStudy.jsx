@@ -103,13 +103,28 @@ export default function CaseStudy() {
           </motion.div>
         </div>
 
-        <motion.div {...fadeUp(0.3)} className="mt-16 flex justify-between border-t border-white/10 pt-6">
+        <motion.div
+          {...fadeUp(0.3)}
+          className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between"
+        >
           <Link to="/work" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 hover:text-white">
             <ArrowLeft className="size-4" /> All work
           </Link>
-          <Link to="/contact" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-[#f5b8c4] hover:text-white">
-            Start a project <ArrowUpRight className="size-4" />
-          </Link>
+          <div className="flex flex-wrap items-center gap-6">
+            {project.externalUrl && (
+              <a
+                href={project.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white"
+              >
+                Visit live site <ArrowUpRight className="size-4" />
+              </a>
+            )}
+            <Link to="/contact" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-[#f5b8c4] hover:text-white">
+              Start a project <ArrowUpRight className="size-4" />
+            </Link>
+          </div>
         </motion.div>
       </article>
     </PageShell>
