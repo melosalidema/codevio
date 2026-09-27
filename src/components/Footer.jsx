@@ -85,7 +85,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center gap-5 text-center font-['Bebas_Neue'] text-base tracking-[0.07em] sm:text-lg md:min-w-[360px] md:items-end md:text-right">
+          <div className="flex w-full flex-col items-center gap-5 text-center font-['Bebas_Neue'] text-base tracking-[0.07em] sm:text-lg md:w-auto md:items-end md:text-right lg:min-w-[360px]">
             <div className="flex flex-col gap-2 text-white/60">
               <a
                 href={`mailto:${SITE.email}`}
@@ -102,7 +102,7 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-white/50 md:flex-nowrap md:justify-end">
+            <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-white/50 md:justify-end lg:flex-nowrap">
               {socials.map(social => (
                 <a
                   key={social.label}

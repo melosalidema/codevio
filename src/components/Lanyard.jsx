@@ -31,6 +31,9 @@ import './Lanyard.css';
 gsap.registerPlugin(ScrollTrigger);
 extend({ MeshLineGeometry, MeshLineMaterial });
 
+const isFiniteVec3 = (v) =>
+  Boolean(v) && Number.isFinite(v.x) && Number.isFinite(v.y) && Number.isFinite(v.z);
+
 function SplitWord({ text, className = '' }) {
   return (
     <span
@@ -334,40 +337,66 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
 
     if (fixed.current) {
       [j1, j2].forEach(ref => {
-        if (!ref.current.lerped) {
-          ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
+        const body = ref.current;
+        if (!body) return;
+
+        const translation = body.translation();
+        if (!body.lerped || !isFiniteVec3(body.lerped)) {
+          body.lerped = new THREE.Vector3().copy(translation);
         }
+
+        if (!isFiniteVec3(translation)) return;
 
         const clampedDistance = Math.max(
           0.1,
-          Math.min(1, ref.current.lerped.distanceTo(ref.current.translation()))
+          Math.min(1, body.lerped.distanceTo(translation))
         );
 
-        ref.current.lerped.lerp(
-          ref.current.translation(),
+        body.lerped.lerp(
+          translation,
           delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed))
         );
       });
 
-      curve.points[0].copy(j3.current.translation());
-      curve.points[1].copy(j2.current.lerped);
-      curve.points[2].copy(j1.current.lerped);
-      curve.points[3].copy(fixed.current.translation());
+      const j1Body = j1.current;
+      const j2Body = j2.current;
+      const j3Body = j3.current;
+      const cardBody = card.current;
 
-      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+      if (
+        j1Body?.lerped &&
+        isFiniteVec3(j1Body.lerped) &&
+        isFiniteVec3(j2Body?.lerped) &&
+        isFiniteVec3(j3Body?.translation()) &&
+        isFiniteVec3(fixed.current.translation())
+      ) {
+        curve.points[0].copy(j3Body.translation());
+        curve.points[1].copy(j2Body.lerped);
+        curve.points[2].copy(j1Body.lerped);
+        curve.points[3].copy(fixed.current.translation());
 
-      ang.copy(card.current.angvel());
-      rot.copy(card.current.rotation());
+        if (band.current?.geometry) {
+          const points = curve.getPoints(isMobile ? 16 : 32);
+          if (points.every(isFiniteVec3)) {
+            band.current.geometry.setPoints(points);
+          }
+        }
+      }
 
-      if (spinning) {
-        card.current.setAngvel({ x: ang.x, y: 1.5, z: ang.z });
-      } else if (active) {
-        const facingFront = Math.cos(rot.y) > 0.999;
-        card.current.setAngvel({
-          x: ang.x,
-          y: facingFront ? 0 : 1.2,
-          z: ang.z,
-        });
+      if (cardBody) {
+        ang.copy(cardBody.angvel());
+        rot.copy(cardBody.rotation());
+
+        if (spinning) {
+          cardBody.setAngvel({ x: ang.x, y: 1.5, z: ang.z });
+        } else if (active) {
+          const facingFront = Math.cos(rot.y) > 0.999;
+          cardBody.setAngvel({
+            x: ang.x,
+            y: facingFront ? 0 : 1.2,
+            z: ang.z,
+          });
+        }
       }
     }
   });
