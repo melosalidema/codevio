@@ -61,7 +61,7 @@ export default function Contact() {
         </div>
 
         {/* A div, not a section: index.css forces `section` to 1080px on desktop. */}
-        <div className="relative z-10 mx-auto max-w-4xl pt-28">
+        <div className="relative z-10 mx-auto max-w-4xl pt-28 pb-8 min-[1025px]:pt-[84px]">
           <div className="text-center">
             <span className="block text-sm uppercase tracking-[0.3em] text-[#f5b8c4]">
               Get in touch
@@ -82,58 +82,60 @@ export default function Contact() {
           <div className="mt-10 grid items-start gap-6 md:grid-cols-2">
             <ContactForm />
 
-            <div className="liquid-glass rounded-2xl border border-white/10 p-6">
-              <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
-                Direct
-              </p>
+            <div className="grid gap-6">
+              <div className="liquid-glass rounded-2xl border border-white/10 p-6 text-center">
+                <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
+                  Direct
+                </p>
 
-              <a
-                href={`mailto:${SITE.email}`}
-                className="mt-4 block break-all font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white transition-colors duration-300 hover:text-[#db364e]"
-              >
-                {SITE.email}
-              </a>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="mt-4 block break-all font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white transition-colors duration-300 hover:text-[#db364e]"
+                >
+                  {SITE.email}
+                </a>
 
-              <a
-                href={`tel:${SITE.phoneHref}`}
-                className="mt-1 block w-fit font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white/80 transition-colors duration-300 hover:text-[#db364e]"
-              >
-                {SITE.phone}
-              </a>
+                <a
+                  href={`tel:${SITE.phoneHref}`}
+                  className="mx-auto mt-1 block w-fit font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white/80 transition-colors duration-300 hover:text-[#db364e]"
+                >
+                  {SITE.phone}
+                </a>
 
-              <p className="mt-3 font-['Bebas_Neue'] text-lg tracking-[0.04em] text-white/55">
-                {SITE.responseTime}
-              </p>
+                <p className="mt-3 font-['Bebas_Neue'] text-lg tracking-[0.04em] text-white/55">
+                  {SITE.responseTime}
+                </p>
 
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                {SOCIAL_ITEMS.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors duration-300 hover:border-[#db364e] hover:text-[#db364e]"
-                  >
-                    <SocialIcon label={social.label} className="size-4 shrink-0" />
-                  </a>
-                ))}
+                <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+                  {SOCIAL_ITEMS.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors duration-300 hover:border-[#db364e] hover:text-[#db364e]"
+                    >
+                      <SocialIcon label={social.label} className="size-4 shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="liquid-glass rounded-2xl border border-white/10 p-6 text-center">
+                <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
+                  Helpful things to include
+                </p>
+
+                <ul className="mt-4 flex flex-col items-center gap-2 font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white/70">
+                  <li>What you are building, in one sentence</li>
+                  <li>Your launch date or deadline</li>
+                  <li>
+                    The package you have in mind — {OFFERS.map((offer) => offer.title).join(', ')}
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-
-          <div className="liquid-glass mt-6 rounded-2xl border border-white/10 p-6">
-            <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
-              Helpful things to include
-            </p>
-
-            <ul className="mt-4 flex flex-col gap-2 font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white/70">
-              <li>What you are building, in one sentence</li>
-              <li>Your launch date or deadline</li>
-              <li>
-                The package you have in mind — {OFFERS.map((offer) => offer.title).join(', ')}
-              </li>
-            </ul>
           </div>
         </div>
       </main>

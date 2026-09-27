@@ -14,7 +14,7 @@
 }
 
 .site-route-content > main {
-  min-height: 0;
+  min-height: calc(100svh + 1px);
   flex: 1;
 }
 
