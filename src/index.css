@@ -355,8 +355,12 @@ html::-webkit-scrollbar {
     padding-bottom: 18px !important;
   }
 
+  .compact-layout .services-core-section {
+    max-width: 1400px !important;
+  }
+
   .services-core-grid {
-    max-width: 1080px !important;
+    max-width: 1400px !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     gap: 18px !important;
   }

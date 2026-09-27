@@ -46,7 +46,7 @@ export default function Services() {
         </motion.p>
       </section>
 
-      <section className="relative z-10 mx-auto mt-24 max-w-6xl">
+      <section className="services-core-section relative z-10 mx-auto mt-24 max-w-6xl">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
