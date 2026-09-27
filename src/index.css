@@ -216,6 +216,19 @@ html::-webkit-scrollbar {
     padding: 21px !important;
   }
 
+  .compact-layout .contact-layout {
+    column-gap: 48px !important;
+    row-gap: 24px !important;
+  }
+
+  .compact-layout .contact-layout > .flex {
+    gap: 24px !important;
+  }
+
+  .compact-layout .rounded-2xl.contact-panel {
+    padding: 32px !important;
+  }
+
   .compact-layout .pricing-grid {
     gap: 16px !important;
   }

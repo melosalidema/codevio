@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { AlertCircle, CheckCircle2, Loader2, Send } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { useForm } from '@formspree/react';
 
+import SpecularButton from './SpecularButton';
 import { CONTACT_FORM, SITE } from '../data/site';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -12,9 +13,27 @@ const SEND_ANOTHER_DELAY_MS = 600;
 const EMPTY_VALUES = { name: '', email: '', subject: '', message: '' };
 
 const FIELDS = [
-  { name: 'name', label: 'Name', type: 'text', autoComplete: 'name' },
-  { name: 'email', label: 'Email', type: 'email', autoComplete: 'email' },
-  { name: 'subject', label: 'Subject', type: 'text', autoComplete: 'off' },
+  {
+    name: 'name',
+    label: 'Name',
+    placeholder: 'Your name',
+    type: 'text',
+    autoComplete: 'name',
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    placeholder: 'you@email.com',
+    type: 'email',
+    autoComplete: 'email',
+  },
+  {
+    name: 'subject',
+    label: 'Subject',
+    placeholder: "What's this about?",
+    type: 'text',
+    autoComplete: 'off',
+  },
 ];
 
 function validate(values) {
@@ -197,14 +216,15 @@ export default function ContactForm() {
           .
         </p>
 
-        <button
+        <SpecularButton
           type="button"
+          size="md"
           onClick={reset}
           disabled={!canSendAnother}
-          className="mt-5 rounded-full border border-white/40 px-5 py-2.5 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-white/40 disabled:hover:bg-transparent"
+          className="mt-5 w-full font-['Bebas_Neue'] uppercase tracking-[0.12em]"
         >
           Send another
-        </button>
+        </SpecularButton>
       </motion.div>
     );
   }
@@ -221,23 +241,30 @@ export default function ContactForm() {
       aria-labelledby="contact-form-heading"
        action={CONTACT_FORM.endpoint}
       method="POST"
-      className="liquid-glass relative rounded-2xl border border-white/10 p-6"
+      className="contact-panel liquid-glass relative h-full rounded-2xl border border-white/10 p-6"
     >
-      <p
+      <h2
         id="contact-form-heading"
-        className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]"
+        className="text-2xl leading-tight text-white sm:text-3xl"
+        style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
       >
-        Start a project
-      </p>
+        Send a Message
+      </h2>
 
-      <div className="mt-4 flex flex-col gap-3">
+      <div className="mt-7 grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2">
         {FIELDS.map((field) => {
           const errorId = `contact-${field.name}-error`;
           const hasError = Boolean(errors[field.name]);
 
           return (
-            <div key={field.name}>
-              <label htmlFor={`contact-${field.name}`} className="sr-only">
+            <div
+              key={field.name}
+              className={`text-left ${field.name === 'subject' ? 'sm:col-span-2' : ''}`}
+            >
+              <label
+                htmlFor={`contact-${field.name}`}
+                className="mb-2 block text-left font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45"
+              >
                 {field.label}
               </label>
 
@@ -249,12 +276,12 @@ export default function ContactForm() {
                 }}
                 type={field.type}
                 autoComplete={field.autoComplete}
-                placeholder={field.label}
+                placeholder={field.placeholder}
                 value={values[field.name]}
                 onChange={(event) => updateField(field.name, event.target.value)}
                 aria-invalid={hasError}
                 aria-describedby={hasError ? errorId : undefined}
-                className={`${fieldClass} ${hasError ? invalidClass : ''}`}
+                className={`${fieldClass} text-left ${hasError ? invalidClass : ''}`}
               />
 
               {hasError && (
@@ -267,8 +294,11 @@ export default function ContactForm() {
           );
         })}
 
-        <div>
-          <label htmlFor="contact-message" className="sr-only">
+        <div className="text-left sm:col-span-2">
+          <label
+            htmlFor="contact-message"
+            className="mb-2 block text-left font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45"
+          >
             Message
           </label>
 
@@ -278,13 +308,13 @@ export default function ContactForm() {
               fieldRefs.current.message = node;
             }}
             name="message"
-            rows={4}
+            rows={5}
             value={values.message}
             onChange={(event) => updateField('message', event.target.value)}
-            placeholder="What are you building, and when does it need to be live?"
+            placeholder="Tell us about your project or question..."
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? 'contact-message-error' : undefined}
-            className={`${fieldClass} min-h-28 resize-y ${
+            className={`${fieldClass} min-h-36 resize-y text-left ${
               errors.message ? invalidClass : ''
             }`}
           />
@@ -323,25 +353,17 @@ export default function ContactForm() {
         </p>
       )}
 
-      <div className="mt-5 text-left">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="inline-flex items-center gap-2 rounded-full border border-[#b02a3d] bg-[#b02a3d] px-5 py-2.5 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#922235] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-[#b02a3d]"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="size-3.5 animate-spin" aria-hidden="true" />
-              Sending
-            </>
-          ) : (
-            <>
-              <Send className="size-3.5" aria-hidden="true" />
-              Send
-            </>
-          )}
-        </button>
-      </div>
+      <SpecularButton
+        size="md"
+        type="submit"
+        disabled={isSubmitting}
+        className="mt-6 w-full font-['Bebas_Neue'] uppercase tracking-[0.12em]"
+      >
+        <span className="inline-flex items-center justify-center gap-2">
+          {isSubmitting && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
+          {isSubmitting ? 'Sending' : 'Send Message'}
+        </span>
+      </SpecularButton>
     </motion.form>
   );
 }
