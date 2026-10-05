@@ -23,7 +23,7 @@ export default function OffersTeaser() {
 
       <motion.p
         {...fadeUp(0.05)}
-        className="mx-auto mt-4 max-w-2xl text-center font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
+        className="mx-auto mt-4 max-w-2xl text-center text-xl text-white/60"
       >
         Fixed scope, fixed timeline, a named ship date. Pick the sprint that
         matches where your idea is right now.
@@ -55,17 +55,17 @@ export default function OffersTeaser() {
               {offer.title}
             </h3>
 
-            <p className="mt-4 font-['Bebas_Neue'] text-lg tracking-[0.04em] text-white/75">
+            <p className="mt-4 text-lg tracking-[0.01em] text-white/75">
               {offer.headline}
             </p>
 
-            <p className="mt-3 flex-1 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/60">
+            <p className="mt-3 flex-1 text-lg leading-snug text-white/60">
               {offer.description}
             </p>
 
             <Link
               to="/services"
-              className="mt-6 w-fit font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#fcdfe4] transition-colors duration-300 hover:text-white"
+              className="mt-6 inline-flex w-fit items-center py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#fcdfe4] transition-colors duration-300 hover:text-white"
             >
               What's included →
             </Link>

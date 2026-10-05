@@ -198,6 +198,18 @@ const Grainient = ({
     ro.observe(container);
     setSize();
 
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) {
+      return () => {
+        ro.disconnect();
+        ctxMap.delete(container);
+        try { container.removeChild(canvas); } catch { /* ignore */ }
+      };
+    }
+
     let raf = 0;
     let isVisible = true;
     let isPageVisible = !document.hidden;

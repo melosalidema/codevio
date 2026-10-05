@@ -13,11 +13,14 @@ import logoAlt from '../assets/logo_alt.png';
 import '../components/Lanyard.css';
 
 export default function Contact() {
-  useDocumentTitle('Contact');
+  useDocumentTitle(
+    'Contact',
+    'Tell Codevio about your idea and deadline. We reply within one business day.'
+  );
 
   return (
     <>
-        <main className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
+        <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}
@@ -74,7 +77,7 @@ export default function Contact() {
               We&rsquo;d love to hear from you
             </h1>
 
-            <p className="mx-auto mt-3 max-w-lg font-['Bebas_Neue'] text-xl leading-snug tracking-[0.04em] text-white/65">
+            <p className="mx-auto mt-3 max-w-lg text-xl leading-snug text-white/65">
               Tell us the idea and the deadline. {SITE.responseTime}
             </p>
           </div>
@@ -100,7 +103,7 @@ export default function Contact() {
                       </p>
                       <a
                         href={`mailto:${SITE.email}`}
-                        className="mt-1 block break-all font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white transition-colors hover:text-[#db364e]"
+                        className="mt-1 block break-all text-lg tracking-[0.01em] text-white transition-colors hover:text-[#db364e]"
                       >
                         {SITE.email}
                       </a>
@@ -117,7 +120,7 @@ export default function Contact() {
                       </p>
                       <a
                         href={`tel:${SITE.phoneHref}`}
-                        className="mt-1 block font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white transition-colors hover:text-[#db364e]"
+                        className="mt-1 block text-lg tracking-[0.01em] text-white transition-colors hover:text-[#db364e]"
                       >
                         {SITE.phone}
                       </a>
@@ -132,12 +135,12 @@ export default function Contact() {
                       <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45">
                         Business Hours
                       </p>
-                      <p className="mt-1 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/80">
+                      <p className="mt-1 text-lg leading-snug text-white/80">
                         Mon – Fri: 9:00 AM – 8:00 PM
                         <br />
                         Sat: 10:00 AM – 4:00 PM
                       </p>
-                      <p className="mt-1 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/50">
+                      <p className="mt-1 text-lg leading-snug text-white/50">
                         Sun: Closed
                       </p>
                     </div>
@@ -152,7 +155,7 @@ export default function Contact() {
                 >
                   Response Time
                 </h2>
-                <p className="mt-4 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.04em] text-white/55">
+                <p className="mt-4 text-lg leading-snug text-white/55">
                   We typically respond to all inquiries within{' '}
                   <span className="font-semibold text-[#f5b8c4]">one business day</span>.
                 </p>

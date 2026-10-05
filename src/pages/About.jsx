@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import '@fontsource/dela-gothic-one';
 
 import Footer from '../components/Footer';
 import Grainient from '../components/Grainient';
@@ -267,11 +266,14 @@ const CODE_LINES = [
 ];
 
 export default function About() {
-  useDocumentTitle('About');
+  useDocumentTitle(
+    'About',
+    'Codevio is a two-to-three person studio of senior designers and engineers shipping early-stage products in fixed sprints.'
+  );
 
   return (
     <>
-      <main className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
+      <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}

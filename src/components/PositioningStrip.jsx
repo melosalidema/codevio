@@ -23,17 +23,17 @@ export default function PositioningStrip() {
         Codevio
       </motion.span>
 
-      <motion.h2
+      <motion.h1
         {...fadeUp(0.05)}
-        className="mx-auto mt-6 max-w-5xl text-center text-5xl leading-tight sm:text-6xl md:text-7xl"
+        className="mx-auto mt-6 mb-2 max-w-5xl text-center text-5xl leading-tight sm:text-6xl md:text-7xl"
         style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
       >
         {SITE.tagline}
-      </motion.h2>
+      </motion.h1>
 
       <motion.p
         {...fadeUp(0.1)}
-        className="mx-auto mt-8 max-w-3xl font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/80 sm:text-2xl"
+        className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/80 sm:text-2xl"
       >
         {MISSION.body}
       </motion.p>

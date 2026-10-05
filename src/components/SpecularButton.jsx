@@ -133,11 +133,11 @@ export default function SpecularButton({
     let idleAngle = 2.4;
     let brightness = 0;
     let last = performance.now();
-    let frame = 0;
+    let frame = null;
+    let isVisible = true;
     const lineColorValue = new Color();
     const baseColorValue = new Color();
     const update = (now) => {
-      frame = requestAnimationFrame(update);
       const delta = Math.min((now - last) / 1000, 0.05);
       last = now;
       const props = propsRef.current;
@@ -159,11 +159,48 @@ export default function SpecularButton({
       program.uniforms.uShineFade.value = (props.shineFade * Math.PI) / 180;
       program.uniforms.uThickness.value = props.thickness * dpr;
       renderer.render({ scene: mesh });
+      frame = requestAnimationFrame(update);
     };
-    frame = requestAnimationFrame(update);
+
+    const start = () => {
+      if (frame === null && isVisible && !document.hidden) {
+        last = performance.now();
+        frame = requestAnimationFrame(update);
+      }
+    };
+
+    const stop = () => {
+      if (frame !== null) {
+        cancelAnimationFrame(frame);
+        frame = null;
+      }
+    };
+
+    const io =
+      typeof IntersectionObserver === 'function'
+        ? new IntersectionObserver(
+            ([entry]) => {
+              isVisible = entry.isIntersecting;
+              if (isVisible) start();
+              else stop();
+            },
+            { threshold: 0 }
+          )
+        : null;
+    io?.observe(button);
+
+    const onVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    start();
 
     return () => {
-      cancelAnimationFrame(frame);
+      stop();
+      io?.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
       observer.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       if (gl.canvas.parentNode === effect) effect.removeChild(gl.canvas);

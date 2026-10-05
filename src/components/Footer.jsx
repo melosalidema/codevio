@@ -1,30 +1,39 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import logo from '../assets/logo.png';
 import SocialIcon from './SocialIcon';
 import { NAV_ITEMS, SOCIAL_ITEMS, SITE } from '../data/site';
 
-function MenuAnimation({ items }) {
+function MenuAnimation({ items, pathname }) {
   return (
     <div className="grid w-full grid-cols-2 gap-x-8 gap-y-3 overflow-visible md:flex md:w-auto md:min-w-fit md:flex-col md:items-end">
-      {items.map((item, index) => (
-        <Link
-          key={index}
-          to={item.to}
-          className="group/menu flex items-center justify-center gap-2 no-underline md:justify-end"
-        >
-          <span className="z-10 translate-x-6 cursor-pointer font-['Dela_Gothic_One'] text-sm uppercase tracking-[0.08em] text-white/70 transition duration-300 ease-out group-hover/menu:translate-x-0 group-hover/menu:text-[#db364e] sm:text-base md:translate-x-7">
-            {item.label}
-          </span>
+      {items.map((item, index) => {
+        const isActive =
+          item.to === '/'
+            ? pathname === '/'
+            : pathname === item.to || pathname.startsWith(`${item.to}/`);
 
-          <ArrowLeft className="size-4 translate-x-0 text-white opacity-0 transition duration-300 ease-out md:size-5 md:translate-x-full md:group-hover/menu:translate-x-0 md:group-hover/menu:text-[#db364e] md:group-hover/menu:opacity-100" />
-        </Link>
-      ))}
+        return (
+          <Link
+            key={index}
+            to={item.to}
+            aria-current={isActive ? 'page' : undefined}
+            className="group/menu flex items-center justify-center gap-2 py-1 no-underline md:justify-end"
+          >
+            <span className="z-10 translate-x-6 cursor-pointer font-['Dela_Gothic_One'] text-sm uppercase tracking-[0.08em] text-white/70 transition duration-300 ease-out group-hover/menu:translate-x-0 group-hover/menu:text-[#db364e] sm:text-base md:translate-x-7">
+              {item.label}
+            </span>
+
+            <ArrowLeft className="size-4 translate-x-0 text-white opacity-0 transition duration-300 ease-out md:size-5 md:translate-x-full md:group-hover/menu:translate-x-0 md:group-hover/menu:text-[#db364e] md:group-hover/menu:opacity-100" />
+          </Link>
+        );
+      })}
     </div>
   );
 }
 
 export default function Footer() {
+  const { pathname } = useLocation();
   const links = NAV_ITEMS.map(({ label, link }) => ({ label, to: link }));
 
   const socials = SOCIAL_ITEMS.map(({ label, link }) => ({ label, href: link }));
@@ -70,7 +79,7 @@ export default function Footer() {
           </Link>
 
           <nav aria-label="Footer navigation" className="w-full max-w-[240px] -translate-x-4 self-center md:w-auto md:max-w-none md:translate-x-0 md:self-auto">
-            <MenuAnimation items={links} />
+            <MenuAnimation items={links} pathname={pathname} />
           </nav>
         </div>
 
@@ -85,18 +94,18 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex w-full flex-col items-center gap-5 text-center font-['Bebas_Neue'] text-base tracking-[0.07em] sm:text-lg md:w-auto md:items-end md:text-right lg:min-w-[360px]">
+          <div className="flex w-full flex-col items-center gap-5 text-center text-base tracking-[0.03em] sm:text-lg md:w-auto md:items-end md:text-right lg:min-w-[360px]">
             <div className="flex flex-col gap-2 text-white/60">
               <a
                 href={`mailto:${SITE.email}`}
-                className="whitespace-nowrap transition-colors duration-300 hover:text-[#db364e]"
+                className="whitespace-nowrap py-0.5 transition-colors duration-300 hover:text-[#db364e]"
               >
                 {SITE.email}
               </a>
 
               <a
                 href={`tel:${SITE.phoneHref}`}
-                className="whitespace-nowrap transition-colors duration-300 hover:text-[#db364e]"
+                className="whitespace-nowrap py-0.5 transition-colors duration-300 hover:text-[#db364e]"
               >
                 {SITE.phone}
               </a>
@@ -109,7 +118,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 whitespace-nowrap uppercase transition-colors duration-300 hover:text-[#db364e]"
+                  className="inline-flex items-center gap-2 whitespace-nowrap py-1 uppercase transition-colors duration-300 hover:text-[#db364e]"
                 >
                   <SocialIcon label={social.label} className="size-4 shrink-0" />
                   {social.label}
@@ -120,7 +129,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-3 border-t border-white/10 pt-6 text-center font-['Dela_Gothic_One'] text-xs uppercase tracking-[0.14em] text-white/40 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <div className="flex flex-col items-center gap-3 border-t border-white/10 pt-6 text-center font-['Dela_Gothic_One'] text-xs uppercase tracking-[0.14em] text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>© {new Date().getFullYear()} Codevio</p>
           <p>{SITE.tagline}</p>
         </div>

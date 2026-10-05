@@ -1,15 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 
 import ScrollToTop from './components/ScrollToTop';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Mission from './pages/Mission';
-import Services from './pages/Services';
-import Work from './pages/Work';
-import CaseStudy from './pages/CaseStudy';
 import PageTransition from './components/StackCard/PageTransition';
+
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Mission = lazy(() => import('./pages/Mission'));
+const Services = lazy(() => import('./pages/Services'));
+const Work = lazy(() => import('./pages/Work'));
+const CaseStudy = lazy(() => import('./pages/CaseStudy'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const SCROLL_INDICATOR_PADDING = 16;
 const SCROLL_INDICATOR_MIN_HEIGHT = 56;
@@ -85,23 +88,50 @@ function ScrollIndicator() {
   );
 }
 
+function RouteFallback() {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="fixed inset-0 z-[9998] flex items-center justify-center bg-black"
+    >
+      <span className="sr-only">Loading</span>
+      <span
+        aria-hidden="true"
+        className="text-[30px] tracking-[0.01em] text-[#fcdfe4]"
+        style={{ fontFamily: "'Dela Gothic One', Helvetica, Arial, sans-serif" }}
+      >
+        codevio
+      </span>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <ScrollToTop />
       <ScrollIndicator />
 
-      <PageTransition>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/work/:slug" element={<CaseStudy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </PageTransition>
+      <MotionConfig reducedMotion="user">
+        <PageTransition>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/mission" element={<Mission />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/work" element={<Work />} />
+              <Route path="/work/:slug" element={<CaseStudy />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </PageTransition>
+      </MotionConfig>
     </BrowserRouter>
   );
 }

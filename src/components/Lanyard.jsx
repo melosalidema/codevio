@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unknown-property */
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
 import {
@@ -57,12 +56,17 @@ export default function Lanyard({
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.innerWidth < 768
   );
-  const [active, setActive] = useState(false);
+  const [activated, setActivated] = useState(false);
+  const active = activated || textVisible === true;
   const [spinning, setSpinning] = useState(true);
 
   const wrapperRef = useRef(null);
   const leftDecoRef = useRef(null);
   const rightDecoRef = useRef(null);
+
+  useEffect(() => {
+    useGLTF.preload(cardGLB);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -73,11 +77,11 @@ export default function Lanyard({
 
   useEffect(() => {
     if (textVisible === undefined) {
-      const t = setTimeout(() => setActive(true), 300);
+      const t = setTimeout(() => setActivated(true), 300);
       return () => clearTimeout(t);
     }
 
-    if (textVisible) setActive(true);
+    return undefined;
   }, [textVisible]);
 
   useEffect(() => {
@@ -88,7 +92,7 @@ export default function Lanyard({
   }, [active]);
 
   useEffect(() => {
-    const t = setTimeout(() => setActive(true), 3000);
+    const t = setTimeout(() => setActivated(true), 3000);
     return () => clearTimeout(t);
   }, []);
 
@@ -99,6 +103,11 @@ export default function Lanyard({
     const allChars = [...leftChars, ...rightChars];
 
     if (!wrapper || !allChars.length) return;
+
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(allChars, { opacity: 1, yPercent: 0 });
+      return undefined;
+    }
 
     gsap.set(allChars, {
       opacity: 0,
@@ -182,6 +191,7 @@ export default function Lanyard({
           <div className="lanyard-wrapper">
             <div className="lanyard-deco lanyard-deco--right" ref={rightDecoRef} />
 
+            <Suspense fallback={null}>
             <Canvas
               camera={{ position, fov }}
               dpr={[1, isMobile ? 1.5 : 2]}
@@ -230,6 +240,7 @@ export default function Lanyard({
                 />
               </Environment>
             </Canvas>
+            </Suspense>
           </div>
 
           <div className="lanyard-textbox">
@@ -269,15 +280,22 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
   const { nodes, materials } = useGLTF(cardGLB);
   const texture = useTexture(lanyard);
 
-  const [curve] = useState(
-    () =>
-      new THREE.CatmullRomCurve3([
-        new THREE.Vector3(),
-        new THREE.Vector3(),
-        new THREE.Vector3(),
-        new THREE.Vector3(),
-      ])
-  );
+  const [curve] = useState(() => {
+    const initialCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(),
+      new THREE.Vector3(),
+      new THREE.Vector3(),
+      new THREE.Vector3(),
+    ]);
+    initialCurve.curveType = 'chordal';
+    return initialCurve;
+  });
+
+  useLayoutEffect(() => {
+    // drei's cached texture must be shared with repeat wrapping for the band material.
+    // eslint-disable-next-line react-hooks/immutability
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  }, [texture]);
 
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
@@ -401,9 +419,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
     }
   });
 
-  curve.curveType = 'chordal';
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-
   return (
     <>
       <group position={[0, 4, 0]}>
@@ -486,8 +501,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
           lineWidth={1}
         />
       </mesh>
-    </>
-  );
-}
-
-useGLTF.preload(cardGLB);
+      </>
+    );
+  }
+  

@@ -10,12 +10,12 @@ import logoAlt from '../assets/logo_alt.png';
 
 import './Lanyard.css';
 
-export default function PageShell({ title, children }) {
-  useDocumentTitle(title);
+export default function PageShell({ title, description, children }) {
+  useDocumentTitle(title, description);
 
   return (
     <>
-      <main className="compact-layout relative min-h-screen px-6 py-24 text-white">
+      <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen px-6 py-24 text-white">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}

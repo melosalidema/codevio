@@ -69,7 +69,7 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
   }, [onLoad, seqRef, dependencies]);
 };
 
-const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical) => {
+const useAnimationLoop = (trackRef, containerRef, targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical) => {
   const rafRef = useRef(null);
   const lastTimestampRef = useRef(null);
   const offsetRef = useRef(0);
@@ -77,6 +77,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
 
   useEffect(() => {
     const track = trackRef.current;
+    const container = containerRef.current;
     if (!track) return;
 
     const prefersReduced =
@@ -100,6 +101,10 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
         lastTimestampRef.current = null;
       };
     }
+
+    let frame = null;
+    let isVisible = !container;
+    let isPageVisible = !document.hidden;
 
     const animate = timestamp => {
       if (lastTimestampRef.current === null) {
@@ -125,19 +130,56 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
         track.style.transform = transformValue;
       }
 
-      rafRef.current = requestAnimationFrame(animate);
+      frame = requestAnimationFrame(animate);
+      rafRef.current = frame;
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    const start = () => {
+      if (frame === null && isVisible && isPageVisible) {
+        lastTimestampRef.current = null;
+        frame = requestAnimationFrame(animate);
+        rafRef.current = frame;
+      }
+    };
 
-    return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
+    const stop = () => {
+      if (frame !== null) {
+        cancelAnimationFrame(frame);
+        frame = null;
         rafRef.current = null;
       }
       lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
+
+    const io =
+      container && typeof IntersectionObserver === 'function'
+        ? new IntersectionObserver(
+            ([entry]) => {
+              isVisible = entry.isIntersecting;
+              if (isVisible) start();
+              else stop();
+            },
+            { threshold: 0 }
+          )
+        : null;
+    io?.observe(container);
+
+    const onVisibility = () => {
+      isPageVisible = !document.hidden;
+      if (isPageVisible) start();
+      else stop();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    start();
+
+    return () => {
+      stop();
+      io?.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
+      lastTimestampRef.current = null;
+    };
+  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef, containerRef]);
 };
 
 export const LogoLoop = memo(
@@ -219,7 +261,7 @@ export const LogoLoop = memo(
 
     useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
 
-    useAnimationLoop(trackRef, targetVelocity, seqWidth, seqHeight, isHovered, effectiveHoverSpeed, isVertical);
+    useAnimationLoop(trackRef, containerRef, targetVelocity, seqWidth, seqHeight, isHovered, effectiveHoverSpeed, isVertical);
 
     const cssVariables = useMemo(
       () => ({
@@ -255,7 +297,7 @@ export const LogoLoop = memo(
     }, [effectiveHoverSpeed]);
 
     const renderLogoItem = useCallback(
-      (item, key) => {
+      (item, key, isClone = false) => {
         if (renderItem) {
           return (
             <li
@@ -325,6 +367,7 @@ export const LogoLoop = memo(
             )}
             href={item.href}
             aria-label={itemAriaLabel || 'logo link'}
+            tabIndex={isClone ? -1 : undefined}
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -359,9 +402,12 @@ export const LogoLoop = memo(
             key={`copy-${copyIndex}`}
             role="list"
             aria-hidden={copyIndex > 0}
+            inert={copyIndex > 0}
             ref={copyIndex === 0 ? seqRef : undefined}
           >
-            {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`))}
+            {logos.map((item, itemIndex) =>
+              renderLogoItem(item, `${copyIndex}-${itemIndex}`, copyIndex > 0)
+            )}
           </ul>
         )),
       [copyCount, logos, renderLogoItem, isVertical]

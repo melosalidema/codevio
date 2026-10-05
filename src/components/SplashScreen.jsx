@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
 export default function SplashScreen({ onComplete }) {
-  const [phase, setPhase] = useState("hidden"); // hidden -> reveal -> hold -> fadeout -> done
+  const [phase, setPhase] = useState(() => (prefersReducedMotion() ? "done" : "hidden")); // hidden -> reveal -> hold -> fadeout -> done
 
   useEffect(() => {
+    if (prefersReducedMotion()) {
+      onComplete?.();
+      return undefined;
+    }
+
     const t1 = setTimeout(() => setPhase("reveal"), 300);
     const t2 = setTimeout(() => setPhase("hold"), 1200);
     const t3 = setTimeout(() => setPhase("fadeout"), 2800);
@@ -13,7 +22,7 @@ export default function SplashScreen({ onComplete }) {
     }, 3600);
 
     return () => [t1, t2, t3, t4].forEach(clearTimeout);
-  }, []);
+  }, [onComplete]);
 
   if (phase === "done") return null;
 

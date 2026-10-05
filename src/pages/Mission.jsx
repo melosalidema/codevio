@@ -18,7 +18,10 @@ export default function Mission() {
   const navigate = useNavigate();
 
   return (
-    <PageShell title="Mission">
+    <PageShell
+      title="Mission"
+      description="What Codevio stands for: a small senior studio shipping brands, websites, and products in fixed sprints."
+    >
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}
@@ -54,7 +57,7 @@ export default function Mission() {
             {MISSION.commitments.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 font-['Bebas_Neue'] text-xl tracking-[0.04em] text-white/80"
+                className="flex items-start gap-3 text-xl leading-snug text-white/80"
               >
                 <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#db364e]" />
                 {item}
@@ -86,7 +89,7 @@ className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors
               >
                 {value.title}
               </h3>
-              <p className="mt-4 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/65">
+              <p className="mt-4 text-lg leading-snug text-white/65">
                 {value.body}
               </p>
             </motion.div>
@@ -131,7 +134,7 @@ className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors
               >
                 {phase.title}
               </span>
-              <span className="font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/60">
+              <span className="text-lg leading-snug text-white/60">
                 {phase.body}
               </span>
             </motion.div>

@@ -15,11 +15,23 @@ const fadeUp = (delay = 0) => ({
 
 const CORE_SERVICE_ICONS = [Compass, PenTool, CodeXml, Rocket];
 
+const groupOffersByCategory = (offers) =>
+  offers.reduce((groups, offer) => {
+    const existing = groups.find((group) => group.category === offer.category);
+    if (existing) existing.items.push(offer);
+    else groups.push({ category: offer.category, items: [offer] });
+    return groups;
+  }, []);
+
 export default function Services() {
   const navigate = useNavigate();
+  const offerGroups = groupOffersByCategory(OFFERS);
 
   return (
-    <PageShell title="Services">
+    <PageShell
+      title="Services"
+      description="Starting-from pricing for websites, SaaS, AI automation, branding, graphic design, and monthly support."
+    >
       <section className="relative z-10 mx-auto max-w-6xl pt-28 pb-8">
         <motion.span
           {...fadeUp()}
@@ -57,7 +69,7 @@ export default function Services() {
 
         <motion.p
           {...fadeUp(0.05)}
-          className="mx-auto mt-4 max-w-2xl text-center font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
+          className="mx-auto mt-4 max-w-2xl text-center text-xl text-white/60"
         >
           Choose the service that matches what you need now. We define the
           exact scope, timeline, and deliverables before work begins.
@@ -82,7 +94,7 @@ export default function Services() {
                   {service.title}
                 </h3>
 
-                <p className="mt-4 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/60">
+                <p className="mt-4 text-lg leading-snug text-white/60">
                   {service.summary}
                 </p>
 
@@ -90,7 +102,7 @@ export default function Services() {
                   {service.includes.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-3 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/50"
+                      className="flex items-start gap-3 text-base leading-snug text-white/50"
                     >
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#db364e]" />
                       {item}
@@ -114,99 +126,119 @@ export default function Services() {
 
         <motion.p
           {...fadeUp(0.05)}
-          className="mx-auto mt-4 max-w-2xl text-center font-['Bebas_Neue'] text-xl tracking-[0.05em] text-white/60"
+          className="mx-auto mt-4 max-w-2xl text-center text-xl text-white/60"
         >
           All prices are starting points. Additional scope is defined in the proposal.
         </motion.p>
 
-        <div className="pricing-grid mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {OFFERS.map((offer, i) => (
+        {offerGroups.map((group) => (
+          <div key={group.category} className="mt-12">
             <motion.div
-              key={offer.title}
-              {...fadeUp(i * 0.06)}
-              className="pricing-card liquid-glass flex flex-col rounded-2xl border border-white/10 p-4"
+              {...fadeUp()}
+              className="flex items-center gap-4"
             >
-              <div className="flex items-baseline justify-between gap-3">
-                <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
-                  {offer.category}
-                </span>
-                <span className="font-['Bebas_Neue'] text-lg leading-none text-white">
-                  {offer.price}
-                  <span className="ml-1 text-xs uppercase tracking-[0.12em] text-white/50">
-                    {offer.priceNote}
-                  </span>
-                </span>
-              </div>
+              <h3 className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.3em] text-[#f5b8c4]">
+                {group.category}
+              </h3>
+              <span className="h-px flex-1 bg-white/10" aria-hidden="true" />
+            </motion.div>
+
+            <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {group.items.map((offer, i) => (
+                <motion.div
+                  key={offer.title}
+                  {...fadeUp(i * 0.06)}
+                  className="pricing-card liquid-glass flex flex-col rounded-2xl border border-white/10 p-4"
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
+                      {offer.category}
+                    </span>
+                    <span className="font-['Bebas_Neue'] text-lg leading-none text-white">
+                      {offer.price}
+                      <span className="ml-1 text-xs uppercase tracking-[0.12em] text-white/50">
+                        {offer.priceNote}
+                      </span>
+                    </span>
+                  </div>
+
+                  <h3
+                    className="mt-2 text-lg"
+                    style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
+                  >
+                    {offer.title}
+                  </h3>
+
+                  <p className="mt-2 text-base leading-snug text-white/70">
+                    {offer.headline}
+                  </p>
+
+                  <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
+                    What&apos;s included
+                  </p>
+                  <ul className="mt-2 flex flex-col gap-1.5">
+                    {offer.deliverables.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-base leading-snug text-white/70"
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#db364e]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto pt-6">
+                    <p className="text-sm text-white/45">
+                      {offer.forWho}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <motion.div
+          {...fadeUp()}
+          className="pricing-card pricing-card--promise liquid-glass relative mt-12 overflow-hidden rounded-2xl border border-[#db364e]/50 p-6 md:p-8"
+        >
+          <div
+            className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#db364e]/20 blur-3xl"
+            aria-hidden="true"
+          />
+
+          <div className="relative grid gap-6 md:grid-cols-[1fr_1.1fr] md:items-center">
+            <div>
+              <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
+                {PRICING_PROMISE.eyebrow}
+              </span>
 
               <h3
-                className="mt-2 text-lg"
+                className="mt-2 text-2xl leading-snug"
                 style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
               >
-                {offer.title}
+                {PRICING_PROMISE.quote}
               </h3>
 
-              <p className="mt-2 font-['Bebas_Neue'] text-base tracking-[0.04em] text-white/70">
-                {offer.headline}
+              <p className="mt-3 text-base leading-relaxed text-white/70">
+                {PRICING_PROMISE.support}
               </p>
+            </div>
 
-              <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
-                 What&apos;s included
-              </p>
-              <ul className="mt-2 flex flex-col gap-1.5">
-                {offer.deliverables.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2.5 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/70"
-                  >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#db364e]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-               <div className="mt-auto pt-6">
-                <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.06em] text-white/45">
-                  {offer.forWho}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-
-          <motion.div
-            {...fadeUp(OFFERS.length * 0.06)}
-            className="pricing-card liquid-glass flex flex-col rounded-2xl border border-white/10 p-4 transition-colors duration-300 hover:border-[#b02a3d]/70"
-          >
-            <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
-              {PRICING_PROMISE.eyebrow}
-            </span>
-
-            <h3
-              className="mt-2 text-lg"
-              style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
-            >
-              {PRICING_PROMISE.quote}
-            </h3>
-
-            <p className="mt-2 font-['Bebas_Neue'] text-base tracking-[0.04em] text-white/70">
-              {PRICING_PROMISE.support}
-            </p>
-
-            <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
-              What you always get
-            </p>
-            <ul className="mt-2 flex flex-col gap-1.5">
+            <ul className="grid gap-2.5 sm:grid-cols-2 md:grid-cols-1">
               {PRICING_PROMISE.points.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2.5 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/70"
+                  className="flex items-start gap-2.5 text-base leading-snug text-white/80"
                 >
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#db364e]" />
                   {item}
                 </li>
               ))}
             </ul>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </section>
 
       <section className="relative z-10 mx-auto mt-28 max-w-6xl">
@@ -236,7 +268,7 @@ export default function Services() {
                 {rule.title}
               </h3>
 
-              <p className="mt-2 font-['Bebas_Neue'] text-base leading-snug tracking-[0.03em] text-white/60">
+              <p className="mt-2 text-base leading-snug text-white/60">
                 {rule.body}
               </p>
             </motion.div>
@@ -265,7 +297,7 @@ export default function Services() {
               {ICP.builtFor.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/80"
+                  className="flex items-start gap-3 text-lg leading-snug text-white/80"
                 >
                   <Check className="mt-1 size-4 shrink-0 text-[#27c93f]" strokeWidth={3} />
                   {item}
@@ -285,7 +317,7 @@ export default function Services() {
               {ICP.notFor.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/50"
+                  className="flex items-start gap-3 text-lg leading-snug text-white/50"
                 >
                   <X className="mt-1 size-4 shrink-0 text-[#b02a3d]" strokeWidth={3} />
                   {item}

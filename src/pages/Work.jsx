@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 import PageShell from '../components/PageShell';
+import SafeImage from '../components/SafeImage';
 import SpecularButton from '../components/SpecularButton';
 import { CASE_STUDIES } from '../data/site';
 
@@ -17,7 +18,10 @@ export default function Work() {
   const navigate = useNavigate();
 
   return (
-    <PageShell title="Work">
+      <PageShell
+        title="Work"
+        description="A mix of live client work and illustrative project examples from the Codevio launch studio."
+      >
       <section className="relative z-10 mx-auto max-w-6xl pt-28">
         <motion.span
           {...fadeUp()}
@@ -52,10 +56,15 @@ export default function Work() {
               className="liquid-glass group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-colors duration-300 hover:border-[#b02a3d]/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#f5b8c4]"
             >
             <div className="relative aspect-[16/10] overflow-hidden">
-              <img
+              <SafeImage
                 src={project.image}
+                srcSet={project.imageSrcSet}
+                sizes="(min-width: 1024px) 342px, (min-width: 768px) 50vw, 100vw"
                 alt={project.name}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fallbackClassName="h-full w-full"
               />
               <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/55 px-4 py-1.5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.14em] text-[#fcdfe4] backdrop-blur-sm">
                 {project.metric}
@@ -76,7 +85,7 @@ export default function Work() {
                 {project.name}
               </h2>
 
-              <p className="mt-4 flex-1 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/65">
+              <p className="mt-4 flex-1 text-lg leading-snug text-white/65">
                 {project.description}
               </p>
 

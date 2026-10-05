@@ -1,13 +1,21 @@
-import webImg from '../assets/web.png';
-import marketingImg from '../assets/marketing.png';
-import brandingImg from '../assets/branding.png';
+import taraImg from '../assets/tara-jewellery.webp';
+import taraImg_480 from '../assets/tara-jewellery-480.webp';
+import taraImg_800 from '../assets/tara-jewellery-800.webp';
+import taraImg_1200 from '../assets/tara-jewellery-1200.webp';
 import workImg1 from '../assets/sidescroll1.jpg';
+import workImg1_480 from '../assets/sidescroll1-480.jpg';
 import workImg2 from '../assets/sidescroll2.jpg';
+import workImg2_480 from '../assets/sidescroll2-480.jpg';
+import workImg2_800 from '../assets/sidescroll2-800.jpg';
 import workImg3 from '../assets/sidescroll3.jpg';
-import entryImg from '../assets/sidescroll4.jpg';
+import workImg3_480 from '../assets/sidescroll3-480.jpg';
+import workImg3_800 from '../assets/sidescroll3-800.jpg';
+
+export const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://codevio.net';
 
 export const SITE = {
   name: 'Codevio',
+  url: SITE_URL,
   tagline: 'From idea to launch, in weeks.',
   bottomLine: 'Launch partner for early-stage founders',
   email: 'info.codevio@gmail.com',
@@ -176,7 +184,6 @@ export const OFFERS = [
     forWho: 'For launches, campaigns, and early-stage ideas.',
     excludes: [],
     addOns: [],
-    image: entryImg,
     color: '#f5b8c4',
   },
   {
@@ -196,7 +203,6 @@ export const OFFERS = [
     forWho: 'For service businesses and growing teams.',
     excludes: [],
     addOns: [],
-    image: webImg,
     color: '#db364e',
   },
   {
@@ -216,7 +222,6 @@ export const OFFERS = [
     forWho: 'For ambitious brands and complex marketing sites.',
     excludes: [],
     addOns: [],
-    image: marketingImg,
     color: '#1a1a2e',
   },
   {
@@ -236,7 +241,6 @@ export const OFFERS = [
     forWho: 'For product businesses ready to sell online.',
     excludes: [],
     addOns: [],
-    image: brandingImg,
     color: '#fcdfe4',
   },
   {
@@ -256,7 +260,6 @@ export const OFFERS = [
     forWho: 'For teams building software around a real operational need.',
     excludes: [],
     addOns: [],
-    image: webImg,
     color: '#f5b8c4',
   },
   {
@@ -270,7 +273,6 @@ export const OFFERS = [
     forWho: 'For teams starting with a focused AI use case.',
     excludes: [],
     addOns: [],
-    image: marketingImg,
     color: '#db364e',
   },
   {
@@ -284,7 +286,6 @@ export const OFFERS = [
     forWho: 'For teams ready to automate multi-step processes.',
     excludes: [],
     addOns: [],
-    image: entryImg,
     color: '#1a1a2e',
   },
   {
@@ -298,7 +299,6 @@ export const OFFERS = [
     forWho: 'For organizations with complex automation requirements.',
     excludes: [],
     addOns: [],
-    image: brandingImg,
     color: '#fcdfe4',
   },
   {
@@ -312,7 +312,6 @@ export const OFFERS = [
     forWho: 'For new businesses and early-stage launches.',
     excludes: [],
     addOns: [],
-    image: entryImg,
     color: '#f5b8c4',
   },
   {
@@ -326,7 +325,6 @@ export const OFFERS = [
     forWho: 'For businesses ready to establish a consistent brand.',
     excludes: [],
     addOns: [],
-    image: webImg,
     color: '#db364e',
   },
   {
@@ -340,7 +338,6 @@ export const OFFERS = [
     forWho: 'For brands investing in a complete visual language.',
     excludes: [],
     addOns: [],
-    image: brandingImg,
     color: '#1a1a2e',
   },
   {
@@ -354,7 +351,6 @@ export const OFFERS = [
     forWho: 'For one-off design needs.',
     excludes: [],
     addOns: [],
-    image: marketingImg,
     color: '#fcdfe4',
   },
   {
@@ -368,7 +364,6 @@ export const OFFERS = [
     forWho: 'For campaigns and launches that need a consistent visual set.',
     excludes: [],
     addOns: [],
-    image: webImg,
     color: '#f5b8c4',
   },
   {
@@ -382,7 +377,6 @@ export const OFFERS = [
     forWho: 'For teams that need recurring design support.',
     excludes: [],
     addOns: [],
-    image: brandingImg,
     color: '#db364e',
   },
   {
@@ -396,7 +390,6 @@ export const OFFERS = [
     forWho: 'For businesses that need their website maintained.',
     excludes: [],
     addOns: [],
-    image: entryImg,
     color: '#f5b8c4',
   },
   {
@@ -410,7 +403,6 @@ export const OFFERS = [
     forWho: 'For businesses actively improving their digital presence.',
     excludes: [],
     addOns: [],
-    image: webImg,
     color: '#db364e',
   },
   {
@@ -424,7 +416,6 @@ export const OFFERS = [
     forWho: 'For teams that need ongoing technical momentum.',
     excludes: [],
     addOns: [],
-    image: marketingImg,
     color: '#1a1a2e',
   },
 ];
@@ -552,8 +543,8 @@ export const CASE_STUDIES = [
     outcome:
       'A live online store where customers can browse Tara Jewellery’s collections and shop directly.',
     tags: ['E-commerce', 'Shopify', 'Jewellery'],
-    image:
-      'https://www.tarajewellery.org/cdn/shop/files/angel_background1.png?v=1790331865&width=1600',
+    image: taraImg,
+    imageSrcSet: `${taraImg_480} 480w, ${taraImg_800} 800w, ${taraImg_1200} 1200w, ${taraImg} 1600w`,
     externalUrl: 'https://www.tarajewellery.org/',
   },
   {
@@ -570,6 +561,7 @@ export const CASE_STUDIES = [
     outcome: 'A focused launch presence, live in two weeks and ready to collect early demand.',
     tags: ['Brand', 'Website'],
     image: workImg1,
+    imageSrcSet: `${workImg1_480} 480w, ${workImg1} 720w`,
     illustrative: true,
   },
   {
@@ -586,6 +578,7 @@ export const CASE_STUDIES = [
     outcome: 'A working MVP that could support the first real marketplace transactions in 31 days.',
     tags: ['MVP', 'Full-stack'],
     image: workImg2,
+    imageSrcSet: `${workImg2_480} 480w, ${workImg2_800} 800w, ${workImg2} 1080w`,
     illustrative: true,
   },
   {
@@ -602,6 +595,7 @@ export const CASE_STUDIES = [
     outcome: 'A more confident brand and a relaunch shipped in three weeks.',
     tags: ['Branding', 'Website'],
     image: workImg3,
+    imageSrcSet: `${workImg3_480} 480w, ${workImg3_800} 800w, ${workImg3} 1080w`,
     illustrative: true,
   },
 ];

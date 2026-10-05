@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import PageShell from '../components/PageShell';
+import SafeImage from '../components/SafeImage';
 import { CASE_STUDIES } from '../data/site';
 
 const fadeUp = (delay = 0) => ({
@@ -18,12 +19,12 @@ export default function CaseStudy() {
   if (!project) return <Navigate to="/work" replace />;
 
   return (
-    <PageShell title={project.name}>
+    <PageShell title={project.name} description={project.description}>
       <article className="relative z-10 mx-auto max-w-5xl pt-12">
         <motion.div {...fadeUp()}>
           <Link
             to="/work"
-            className="inline-flex items-center gap-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#f5b8c4] transition-colors hover:text-white"
+            className="inline-flex items-center gap-2 py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#f5b8c4] transition-colors hover:text-white"
           >
             <ArrowLeft className="size-4" /> Back to work
           </Link>
@@ -44,7 +45,7 @@ export default function CaseStudy() {
 
           <motion.p
             {...fadeUp(0.1)}
-            className="font-['Bebas_Neue'] text-xl leading-snug tracking-[0.03em] text-white/70"
+            className="text-xl leading-snug text-white/70"
           >
             {project.description}
           </motion.p>
@@ -54,10 +55,13 @@ export default function CaseStudy() {
           {...fadeUp(0.15)}
           className="relative mt-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
         >
-          <img
+          <SafeImage
             src={project.image}
+            srcSet={project.imageSrcSet}
+            sizes="(min-width: 1024px) 1024px, 100vw"
             alt={project.name}
             className="aspect-[16/6] w-full object-cover"
+            fallbackClassName="aspect-[16/6] w-full"
           />
           <span className="absolute bottom-5 left-5 rounded-full border border-white/20 bg-black/60 px-4 py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.14em] text-[#fcdfe4] backdrop-blur-sm">
             {project.metric}
@@ -71,7 +75,7 @@ export default function CaseStudy() {
             </p>
             <ul className="mt-4 flex flex-col gap-2.5">
               {project.deliverables.map((item) => (
-                <li key={item} className="border-b border-white/10 pb-2.5 font-['Bebas_Neue'] text-base text-white/75">
+                <li key={item} className="border-b border-white/10 pb-2.5 text-base text-white/75">
                   {item}
                 </li>
               ))}
@@ -87,15 +91,15 @@ export default function CaseStudy() {
 
           <motion.div {...fadeUp(0.25)} className="flex flex-col gap-8">
             <section>
-              <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">The challenge</p>
+              <h2 className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">The challenge</h2>
               <p className="mt-3 text-xl leading-snug text-white/85">{project.challenge}</p>
             </section>
             <section>
-              <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">Our approach</p>
+              <h2 className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">Our approach</h2>
               <p className="mt-3 text-xl leading-snug text-white/85">{project.approach}</p>
             </section>
             <section className="rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-6">
-              <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">The outcome</p>
+              <h2 className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">The outcome</h2>
               <p className="mt-3 text-xl leading-snug" style={{ fontFamily: "'Dela Gothic One', sans-serif" }}>
                 {project.outcome}
               </p>
@@ -107,7 +111,7 @@ export default function CaseStudy() {
           {...fadeUp(0.3)}
           className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between"
         >
-          <Link to="/work" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 hover:text-white">
+          <Link to="/work" className="inline-flex items-center gap-2 py-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 hover:text-white">
             <ArrowLeft className="size-4" /> All work
           </Link>
           <div className="flex flex-wrap items-center gap-6">

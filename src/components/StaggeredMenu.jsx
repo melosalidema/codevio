@@ -1,5 +1,5 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 
 const SOCIAL_ICONS = {
@@ -85,6 +85,11 @@ export const StaggeredMenu = ({
 }) => {
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
+  const { pathname } = useLocation();
+  const prefersReducedMotionRef = useRef(
+    typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  );
 
   const panelRef = useRef(null);
   const preLayersRef = useRef(null);
@@ -220,17 +225,22 @@ export const StaggeredMenu = ({
 
     openTlRef.current = tl;
     return tl;
-  }, []);
+  }, [position]);
 
   const playOpen = useCallback(() => {
     if (busyRef.current) return;
     busyRef.current = true;
     const tl = buildOpenTimeline();
     if (tl) {
-      tl.eventCallback('onComplete', () => {
+      if (prefersReducedMotionRef.current) {
+        tl.progress(1, false).pause();
         busyRef.current = false;
-      });
-      tl.play(0);
+      } else {
+        tl.eventCallback('onComplete', () => {
+          busyRef.current = false;
+        });
+        tl.play(0);
+      }
     } else {
       busyRef.current = false;
     }
@@ -252,7 +262,7 @@ export const StaggeredMenu = ({
 
     closeTweenRef.current = gsap.to(all, {
       xPercent: offscreen,
-      duration: 0.32,
+      duration: prefersReducedMotionRef.current ? 0 : 0.32,
       ease: 'power3.in',
       overwrite: 'auto',
       onComplete: () => {
@@ -280,6 +290,18 @@ export const StaggeredMenu = ({
 
     spinTweenRef.current?.kill();
 
+    if (prefersReducedMotionRef.current) {
+      if (opening) {
+        gsap.set(h, { rotate: 45 });
+        gsap.set(v, { rotate: -45 });
+      } else {
+        gsap.set(h, { rotate: 0 });
+        gsap.set(v, { rotate: 90 });
+        gsap.set(icon, { rotate: 0 });
+      }
+      return;
+    }
+
     if (opening) {
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
       spinTweenRef.current = gsap
@@ -302,7 +324,7 @@ export const StaggeredMenu = ({
       colorTweenRef.current?.kill();
       if (changeMenuColorOnOpen) {
         const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        colorTweenRef.current = gsap.to(btn, { color: targetColor, delay: 0.18, duration: 0.3, ease: 'power2.out' });
+        colorTweenRef.current = gsap.to(btn, { color: targetColor, delay: prefersReducedMotionRef.current ? 0 : 0.18, duration: prefersReducedMotionRef.current ? 0 : 0.3, ease: 'power2.out' });
       } else {
         gsap.set(btn, { color: menuButtonColor });
       }
@@ -368,6 +390,53 @@ export const StaggeredMenu = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [closeOnClickAway, open, closeMenu]);
+
+  React.useEffect(() => {
+    if (!open) return undefined;
+
+    const panel = panelRef.current;
+    const toggle = toggleBtnRef.current;
+    if (!panel) return undefined;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const firstItem = panel.querySelector(focusableSelector);
+    firstItem?.focus();
+
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMenu();
+        toggle?.focus();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const nodes = [
+        toggle,
+        ...Array.from(panel.querySelectorAll(focusableSelector)),
+      ].filter(Boolean);
+      if (!nodes.length) return;
+
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [open, closeMenu]);
 
   return (
     <div
@@ -465,6 +534,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel absolute top-0 right-0 h-full flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10 pointer-events-auto"
           aria-hidden={!open}
+          inert={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
@@ -479,6 +549,11 @@ export const StaggeredMenu = ({
                       className="sm-panel-item relative font-semibold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]"
                       to={it.link}
                       aria-label={it.ariaLabel}
+                      aria-current={
+                        (it.link === '/' ? pathname === '/' : pathname === it.link || pathname.startsWith(`${it.link}/`))
+                          ? 'page'
+                          : undefined
+                      }
                       data-index={idx + 1}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
@@ -499,8 +574,7 @@ export const StaggeredMenu = ({
             </ul>
 
             {displaySocials && socialItems && socialItems.length > 0 && (
-              <div className="sm-socials mt-auto pt-8 flex flex-col gap-3" aria-label="Social links">
-                <h3 className="sm-socials-title m-0 text-base font-medium [color:var(--sm-accent,#db364e)]"></h3>
+              <nav className="sm-socials mt-auto pt-8 flex flex-col gap-3" aria-label="Social links">
                 <ul
                   className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap"
                   role="list"
@@ -519,7 +593,7 @@ export const StaggeredMenu = ({
                     </li>
                   ))}
                 </ul>
-              </div>
+              </nav>
             )}
           </div>
         </aside>
@@ -768,8 +842,8 @@ export const StaggeredMenu = ({
   color: var(--sm-text, #1c1210);
   text-decoration: none;
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   padding: 8px;
   display: inline-flex;
   align-items: center;
@@ -858,8 +932,8 @@ export const StaggeredMenu = ({
   }
 
   .sm-scope .sm-socials-link {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
   }
 
   .sm-scope .sm-logo-img {

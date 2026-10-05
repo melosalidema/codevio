@@ -279,9 +279,7 @@
 
 @media (max-width: 768px) {
   .lanyard-desktop-note {
-    font-size: 12px;
-    bottom: 1rem;
-    width: calc(100% - 2rem);
+    display: none;
   }
 
   .lanyard-textbox {

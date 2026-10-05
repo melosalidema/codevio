@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import '@fontsource/dela-gothic-one';
+import { useCallback, useState } from 'react';
 
 import Footer from '../components/Footer';
 import SplashScreen from '../components/SplashScreen';
@@ -7,6 +6,7 @@ import Lanyard from '../components/Lanyard';
 import LogoLoop from '../components/LogoLoop';
 import PositioningStrip from '@/components/PositioningStrip';
 import OffersTeaser from '@/components/OffersTeaser';
+import useDocumentTitle from '../lib/useDocumentTitle';
 
 import {
   SiReact,
@@ -21,6 +21,8 @@ import {
   SiNodedotjs,
   SiFigma,
 } from 'react-icons/si';
+
+const SPLASH_SESSION_KEY = 'codevio-splash-shown';
 
 const IconWrapper = ({ children }) => (
   <span style={{ color: 'white', display: 'inline-flex', alignItems: 'center' }}>
@@ -42,45 +44,65 @@ const techLogos = [
   { node: <IconWrapper><SiFigma /></IconWrapper>, title: 'Figma', href: 'https://www.figma.com/' },
 ];
 
+const shouldSkipSplash = () => {
+  if (typeof window === 'undefined') return true;
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return true;
+  try {
+    return window.sessionStorage.getItem(SPLASH_SESSION_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
+
 export default function Home() {
-  const [splashDone, setSplashDone] = useState(false);
+  useDocumentTitle(
+    'Codevio — From idea to launch, in weeks.',
+    'Codevio is a launch studio for early-stage founders. Brand, website, and MVP shipped in fixed 2–4 week sprints — senior design and engineering, zero handoffs.'
+  );
+
+  const [splashDone, setSplashDone] = useState(shouldSkipSplash);
+
+  const handleSplashComplete = useCallback(() => {
+    try {
+      window.sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+    } catch {
+      /* sessionStorage can be unavailable in private modes */
+    }
+    setSplashDone(true);
+  }, []);
 
   return (
     <>
-      <Lanyard
-        position={[0, 0, 20]}
-        gravity={[0, -40, 0]}
-        textVisible={splashDone}
-      />
+      <main id="main" tabIndex={-1}>
+        <Lanyard
+          position={[0, 0, 20]}
+          gravity={[0, -40, 0]}
+          textVisible={splashDone}
+        />
 
-      <LogoLoop
-        logos={techLogos}
-        speed={70}
-        direction="left"
-         logoHeight={60}
-         gap={60}
-        hoverSpeed={0}
-        scaleOnHover
-        ariaLabel="Technology partners"
-         marginY="10rem"
-         className="home-tech-loop"
-      />
+        <LogoLoop
+          logos={techLogos}
+          speed={70}
+          direction="left"
+           logoHeight={60}
+           gap={60}
+          hoverSpeed={0}
+          scaleOnHover
+          ariaLabel="Technology partners"
+           marginY="10rem"
+           className="home-tech-loop"
+        />
 
-      <div className="relative z-10 mx-auto h-px w-full max-w-7xl bg-white/10" />
+        <div className="relative z-10 mx-auto h-px w-full max-w-7xl bg-white/10" />
 
-      <PositioningStrip />
-      <OffersTeaser />
-
-      {/* <ImagesParallax /> 
-      <Gallery />
-      */}
-      
-
+        <PositioningStrip />
+        <OffersTeaser />
+      </main>
 
       <Footer />
 
       {!splashDone && (
-        <SplashScreen onComplete={() => setSplashDone(true)} />
+        <SplashScreen onComplete={handleSplashComplete} />
       )}
     </>
   );

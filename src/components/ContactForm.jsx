@@ -67,12 +67,12 @@ function validate(values) {
 }
 
 const fieldClass =
-  'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 font-[\'Bebas_Neue\'] text-lg tracking-[0.03em] text-white outline-none transition-colors duration-300 placeholder:text-white/40 hover:border-white/20 focus:border-[#f5b8c4]/70 focus:bg-white/10';
+  'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-base text-white outline-none transition-colors duration-300 placeholder:text-white/40 hover:border-white/20 focus:border-[#f5b8c4]/70 focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#f5b8c4]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]';
 
 const invalidClass = 'border-[#fcd34d]/70 bg-[#fcd34d]/5';
 
 const errorClass =
-  'mt-1.5 flex items-center gap-1.5 font-[\'Bebas_Neue\'] text-lg tracking-[0.04em] text-[#fcd34d]';
+  'mt-1.5 flex items-center gap-1.5 text-base leading-snug text-[#fcd34d]';
 
 export default function ContactForm() {
   const [formspreeState, submitToFormspree] = useForm('xyeznlrj');
@@ -205,7 +205,7 @@ export default function ContactForm() {
           Message sent
         </p>
 
-        <p className="mt-2 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-white/70">
+        <p className="mt-2 text-lg leading-snug text-white/70">
           Thanks for reaching out. {SITE.responseTime} If it is urgent, call{' '}
           <a
             href={`tel:${SITE.phoneHref}`}
@@ -280,6 +280,7 @@ export default function ContactForm() {
                 value={values[field.name]}
                 onChange={(event) => updateField(field.name, event.target.value)}
                 aria-invalid={hasError}
+                aria-required="true"
                 aria-describedby={hasError ? errorId : undefined}
                 className={`${fieldClass} text-left ${hasError ? invalidClass : ''}`}
               />
@@ -313,6 +314,7 @@ export default function ContactForm() {
             onChange={(event) => updateField('message', event.target.value)}
             placeholder="Tell us about your project or question..."
             aria-invalid={Boolean(errors.message)}
+            aria-required="true"
             aria-describedby={errors.message ? 'contact-message-error' : undefined}
             className={`${fieldClass} min-h-36 resize-y text-left ${
               errors.message ? invalidClass : ''
@@ -346,7 +348,7 @@ export default function ContactForm() {
       {formError && (
         <p
           role="alert"
-          className="mt-4 flex items-start gap-2 rounded-xl border border-[#fcd34d]/40 bg-[#fcd34d]/10 px-4 py-2.5 font-['Bebas_Neue'] text-lg leading-snug tracking-[0.03em] text-[#fcd34d]"
+          className="mt-4 flex items-start gap-2 rounded-xl border border-[#fcd34d]/40 bg-[#fcd34d]/10 px-4 py-2.5 text-base leading-snug text-[#fcd34d]"
         >
           <AlertCircle className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
           {formError}
