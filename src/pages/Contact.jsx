@@ -98,7 +98,7 @@ export default function Contact() {
                       <Mail className="size-5" strokeWidth={1.7} aria-hidden="true" />
                     </span>
                     <div className="min-w-0">
-                      <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45">
+                      <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/60">
                         Email
                       </p>
                       <a
@@ -115,7 +115,7 @@ export default function Contact() {
                       <Phone className="size-5" strokeWidth={1.7} aria-hidden="true" />
                     </span>
                     <div>
-                      <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45">
+                      <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/60">
                         Phone
                       </p>
                       <a
@@ -132,7 +132,7 @@ export default function Contact() {
                       <Clock3 className="size-5" strokeWidth={1.7} aria-hidden="true" />
                     </span>
                     <div>
-                      <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45">
+                      <p className="font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/60">
                         Business Hours
                       </p>
                       <p className="mt-1 text-lg leading-snug text-white/80">

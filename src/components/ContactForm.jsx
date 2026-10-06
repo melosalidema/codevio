@@ -4,7 +4,7 @@ import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { useForm } from '@formspree/react';
 
 import SpecularButton from './SpecularButton';
-import { CONTACT_FORM, SITE } from '../data/site';
+import { CONTACT_FORM, FORMSPREE_FORM_ID, SITE } from '../data/site';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MIN_FILL_TIME_MS = 1500;
@@ -75,7 +75,7 @@ const errorClass =
   'mt-1.5 flex items-center gap-1.5 text-base leading-snug text-[#fcd34d]';
 
 export default function ContactForm() {
-  const [formspreeState, submitToFormspree] = useForm('xyeznlrj');
+  const [formspreeState, submitToFormspree] = useForm(FORMSPREE_FORM_ID);
   const [values, setValues] = useState(EMPTY_VALUES);
   const [errors, setErrors] = useState({});
   const [honeypot, setHoneypot] = useState('');
@@ -263,7 +263,7 @@ export default function ContactForm() {
             >
               <label
                 htmlFor={`contact-${field.name}`}
-                className="mb-2 block text-left font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/45"
+                className="mb-2 block text-left font-['Bebas_Neue'] text-sm uppercase tracking-[0.12em] text-white/60"
               >
                 {field.label}
               </label>

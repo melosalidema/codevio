@@ -173,7 +173,7 @@ export default function Services() {
                     {offer.headline}
                   </p>
 
-                  <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/40">
+                  <p className="mt-5 font-['Bebas_Neue'] text-xs uppercase tracking-[0.18em] text-white/60">
                     What&apos;s included
                   </p>
                   <ul className="mt-2 flex flex-col gap-1.5">
@@ -189,7 +189,7 @@ export default function Services() {
                   </ul>
 
                   <div className="mt-auto pt-6">
-                    <p className="text-sm text-white/45">
+                    <p className="text-sm text-white/60">
                       {offer.forWho}
                     </p>
                   </div>
@@ -310,7 +310,7 @@ export default function Services() {
             {...fadeUp(0.06)}
             className="liquid-glass rounded-2xl border border-white/10 p-8"
           >
-            <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-white/45">
+            <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-white/60">
               Probably not a fit
             </p>
             <ul className="mt-6 flex flex-col gap-4">

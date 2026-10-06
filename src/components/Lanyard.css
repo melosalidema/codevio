@@ -222,30 +222,7 @@
   }
 }
 
-.lanyard-mobile-note {
-  display: none;
-}
-
 @media (max-width: 768px) {
-  .lanyard-mobile-note {
-    position: absolute;
-    left: 50%;
-    bottom: 1.25rem;
-    transform: translateX(-50%);
-    display: block;
-    width: calc(100% - 2rem);
-    max-width: 320px;
-    color: rgba(255, 255, 255, 0.72);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    line-height: 1.2;
-    text-align: center;
-    text-transform: uppercase;
-    z-index: 6;
-    pointer-events: none;
-  }
-
   .lanyard-textbox {
     bottom: 3.25rem;
   }

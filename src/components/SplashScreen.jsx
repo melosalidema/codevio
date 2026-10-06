@@ -13,13 +13,13 @@ export default function SplashScreen({ onComplete }) {
       return undefined;
     }
 
-    const t1 = setTimeout(() => setPhase("reveal"), 300);
-    const t2 = setTimeout(() => setPhase("hold"), 1200);
-    const t3 = setTimeout(() => setPhase("fadeout"), 2800);
+    const t1 = setTimeout(() => setPhase("reveal"), 200);
+    const t2 = setTimeout(() => setPhase("hold"), 700);
+    const t3 = setTimeout(() => setPhase("fadeout"), 1200);
     const t4 = setTimeout(() => {
       setPhase("done");
       onComplete?.();
-    }, 3600);
+    }, 1500);
 
     return () => [t1, t2, t3, t4].forEach(clearTimeout);
   }, [onComplete]);
@@ -46,6 +46,7 @@ const styles = {
     opacity: phase === "fadeout" ? 0 : 1,
     transition: phase === "fadeout" ? "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
     overflow: "hidden",
+    pointerEvents: "none",
   }),
 
   text: (phase) => ({

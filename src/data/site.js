@@ -28,12 +28,12 @@ export const SITE = {
 // already visible in the markup of the no-JS form fallback. Never put a
 // Formspree API key, SMTP credential, or other secret in a VITE_* variable:
 // those are inlined into the public client bundle.
-const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID || 'xyeznlrj';
+export const FORMSPREE_FORM_ID = import.meta.env.VITE_FORMSPREE_FORM_ID || 'xyeznlrj';
 
 export const CONTACT_FORM = {
   provider: 'formspree',
-  endpoint: `https://formspree.io/f/${formspreeFormId}`,
-  fallbackAction: `https://formspree.io/f/${formspreeFormId}`,
+  endpoint: `https://formspree.io/f/${FORMSPREE_FORM_ID}`,
+  fallbackAction: `https://formspree.io/f/${FORMSPREE_FORM_ID}`,
 };
 
 export const PAGE_THEME = {
@@ -455,7 +455,7 @@ export const HOME_OFFERS = [
     description:
       'A fast, polished website designed around your brand, built to look credible, perform well, and turn visitors into customers.',
     timeline: '2–3 weeks',
-    price: '€750+',
+    price: '€800+',
     priceNote: 'one-time',
   },
   {

@@ -1,5 +1,3 @@
-'use client';
-
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
@@ -30,8 +28,16 @@ import './Lanyard.css';
 gsap.registerPlugin(ScrollTrigger);
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-const isFiniteVec3 = (v) =>
-  Boolean(v) && Number.isFinite(v.x) && Number.isFinite(v.y) && Number.isFinite(v.z);
+const MAX_SCENE_COORD = 1e4;
+
+const isSaneVec3 = (v) =>
+  Boolean(v) &&
+  Number.isFinite(v.x) &&
+  Number.isFinite(v.y) &&
+  Number.isFinite(v.z) &&
+  Math.abs(v.x) < MAX_SCENE_COORD &&
+  Math.abs(v.y) < MAX_SCENE_COORD &&
+  Math.abs(v.z) < MAX_SCENE_COORD;
 
 function SplitWord({ text, className = '' }) {
   return (
@@ -57,7 +63,12 @@ export default function Lanyard({
     () => typeof window !== 'undefined' && window.innerWidth < 768
   );
   const [activated, setActivated] = useState(false);
-  const active = activated || textVisible === true;
+  const [warmedUp, setWarmedUp] = useState(false);
+  // Gravity is held off for a short mount-relative warm-up on every entry so
+  // the rope does not start under load while the spherical joint is still
+  // resolving. Without this, returning from another route (where the splash is
+  // skipped) exposed a violent settle that the first-load splash used to hide.
+  const active = (activated || textVisible === true) && warmedUp;
   const [spinning, setSpinning] = useState(true);
 
   const wrapperRef = useRef(null);
@@ -93,6 +104,11 @@ export default function Lanyard({
 
   useEffect(() => {
     const t = setTimeout(() => setActivated(true), 3000);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => setWarmedUp(true), 700);
     return () => clearTimeout(t);
   }, []);
 
@@ -346,11 +362,15 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
 
       [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
 
-      card.current?.setNextKinematicTranslation({
+      const dragTarget = {
         x: vec.x - dragged.x,
         y: vec.y - dragged.y,
         z: vec.z - dragged.z,
-      });
+      };
+
+      if (isSaneVec3(dragTarget)) {
+        card.current?.setNextKinematicTranslation(dragTarget);
+      }
     }
 
     if (fixed.current) {
@@ -359,11 +379,11 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
         if (!body) return;
 
         const translation = body.translation();
-        if (!body.lerped || !isFiniteVec3(body.lerped)) {
+        if (!body.lerped || !isSaneVec3(body.lerped)) {
           body.lerped = new THREE.Vector3().copy(translation);
         }
 
-        if (!isFiniteVec3(translation)) return;
+        if (!isSaneVec3(translation)) return;
 
         const clampedDistance = Math.max(
           0.1,
@@ -383,10 +403,10 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
 
       if (
         j1Body?.lerped &&
-        isFiniteVec3(j1Body.lerped) &&
-        isFiniteVec3(j2Body?.lerped) &&
-        isFiniteVec3(j3Body?.translation()) &&
-        isFiniteVec3(fixed.current.translation())
+        isSaneVec3(j1Body.lerped) &&
+        isSaneVec3(j2Body?.lerped) &&
+        isSaneVec3(j3Body?.translation()) &&
+        isSaneVec3(fixed.current.translation())
       ) {
         curve.points[0].copy(j3Body.translation());
         curve.points[1].copy(j2Body.lerped);
@@ -395,7 +415,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
 
         if (band.current?.geometry) {
           const points = curve.getPoints(isMobile ? 16 : 32);
-          if (points.every(isFiniteVec3)) {
+          if (points.every(isSaneVec3)) {
             band.current.geometry.setPoints(points);
           }
         }
@@ -404,6 +424,10 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
       if (cardBody) {
         ang.copy(cardBody.angvel());
         rot.copy(cardBody.rotation());
+
+        if (!isSaneVec3(ang)) {
+          ang.set(0, 0, 0);
+        }
 
         if (spinning) {
           cardBody.setAngvel({ x: ang.x, y: 1.5, z: ang.z });
@@ -437,7 +461,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, active, spinning 
         </RigidBody>
 
         <RigidBody
-          position={[2, 6, 0]}
+          position={[1.5, -1.5, 0]}
           ref={card}
           {...segmentProps}
           type={dragged && !isMobile ? 'kinematicPosition' : 'dynamic'}

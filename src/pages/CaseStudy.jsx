@@ -69,8 +69,8 @@ export default function CaseStudy() {
         </motion.div>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
-          <motion.aside {...fadeUp(0.2)} className="lg:sticky lg:top-10 lg:self-start">
-            <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-white/45">
+          <motion.div {...fadeUp(0.2)} className="lg:sticky lg:top-10 lg:self-start">
+            <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-white/60">
               What we shipped
             </p>
             <ul className="mt-4 flex flex-col gap-2.5">
@@ -87,7 +87,7 @@ export default function CaseStudy() {
                 </span>
               ))}
             </div>
-          </motion.aside>
+          </motion.div>
 
           <motion.div {...fadeUp(0.25)} className="flex flex-col gap-8">
             <section>
