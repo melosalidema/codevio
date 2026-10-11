@@ -486,8 +486,10 @@ export const StaggeredMenu = ({
           })()}
         </div>
 
+        <div className={`sm-header-backdrop${scrolled ? ' is-scrolled' : ''}`} aria-hidden="true" />
+
         <header
-          className={`staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20${scrolled && !open ? ' is-scrolled' : ''}`}
+          className={`staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20${scrolled ? ' is-scrolled' : ''}`}
           aria-label="Main navigation header"
         >
           <Link
@@ -628,16 +630,55 @@ export const StaggeredMenu = ({
   background: transparent;
   pointer-events: none;
   z-index: 20;
+  transition: padding 280ms ease;
+}
+
+/* Blurred top strip lives on its own layer so it can sit behind the menu panel
+   (it stays visible while the menu is open) and feather out towards the bottom
+   instead of ending on a hard line. */
+.sm-scope .sm-header-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(4.5rem, 7.5vw, 6rem);
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 320ms ease;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 15, 0.92) 0%,
+    rgba(10, 10, 15, 0.6) 45%,
+    rgba(10, 10, 15, 0) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgba(0, 0, 0, 0.45) 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgba(0, 0, 0, 0.45) 80%, transparent 100%);
+}
+
+.sm-scope .sm-header-backdrop.is-scrolled {
+  opacity: 1;
 }
 
 .sm-scope .staggered-menu-header > * {
   pointer-events: auto;
 }
 
-.sm-scope .staggered-menu-header.is-scrolled {
-  background: linear-gradient(to bottom, rgba(10,10,15,0.9) 0%, rgba(10,10,15,0.55) 55%, rgba(10,10,15,0) 100%);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+/* Desktop: the header collapses to a slimmer strip once the page scrolls. */
+@media (min-width: 1025px) {
+  .sm-scope .staggered-menu-header.is-scrolled {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sm-scope .staggered-menu-header,
+  .sm-scope .sm-header-backdrop {
+    transition: none;
+  }
 }
 
 .sm-scope .sm-logo {
