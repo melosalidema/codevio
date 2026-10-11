@@ -30,7 +30,7 @@ export default function Services() {
   return (
     <PageShell
       title="Services"
-      description="Starting-from pricing for websites, SaaS, AI automation, branding, graphic design, and monthly support."
+      description="Package pricing for landing pages, websites, e-commerce, brand identity, AI automation, product MVPs, and monthly retainers."
     >
       <section className="relative z-10 mx-auto max-w-6xl pt-14 pb-8 sm:pt-28">
         <motion.span
@@ -52,9 +52,10 @@ export default function Services() {
           {...fadeUp(0.1)}
           className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75 max-sm:mt-4"
         >
-          Starting-from pricing for websites, SaaS, AI automation, branding,
-          graphic design, and monthly support. Final scope is defined around
-          your functionality, integrations, users, and technical requirements.
+          Fixed-price packages for landing pages, websites, e-commerce, brand
+          identity, AI automation, and product builds — plus monthly retainers.
+          Final scope is defined around your functionality, integrations,
+          users, and technical requirements.
         </motion.p>
       </section>
 
@@ -154,20 +155,33 @@ export default function Services() {
                     <span className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-[#f5b8c4]">
                       {offer.category}
                     </span>
-                    <span className="font-['Bebas_Neue'] text-lg leading-none text-white">
-                      {offer.price}
-                      <span className="ml-1 text-xs uppercase tracking-[0.12em] text-white/50">
-                        {offer.priceNote}
+                    <span className="flex flex-col items-end text-right">
+                      <span className="font-['Bebas_Neue'] text-lg leading-none text-white">
+                        {offer.price}
+                        <span className="ml-1 text-xs uppercase tracking-[0.12em] text-white/50">
+                          {offer.priceNote}
+                        </span>
+                      </span>
+                      <span className="mt-1 font-['Bebas_Neue'] text-[0.65rem] uppercase tracking-[0.14em] text-white/50">
+                        {offer.timeline}
                       </span>
                     </span>
                   </div>
 
-                  <h3
-                    className="mt-2 text-lg"
-                    style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
-                  >
-                    {offer.title}
-                  </h3>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <h3
+                      className="text-lg"
+                      style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
+                    >
+                      {offer.title}
+                    </h3>
+
+                    {offer.badge && (
+                      <span className="rounded-full border border-[#db364e]/50 bg-[#db364e]/15 px-2.5 py-0.5 font-['Bebas_Neue'] text-[0.65rem] uppercase tracking-[0.14em] text-[#fcdfe4]">
+                        {offer.badge}
+                      </span>
+                    )}
+                  </div>
 
                   <p className="mt-2 text-base leading-snug text-white/70">
                     {offer.headline}
