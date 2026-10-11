@@ -263,9 +263,7 @@ export default function Lanyard({
             ENGINEERING DIGITAL EXCELLENCE. TRANSFORMING VISIONS INTO POWERFUL,
             LASTING BRAND EXPERIENCES.
           </div>
-          <div className="lanyard-desktop-note">
-  Desktop view supports dragging
-</div>
+          
         </div>
       </div>
     </>
