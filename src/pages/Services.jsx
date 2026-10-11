@@ -32,7 +32,7 @@ export default function Services() {
       title="Services"
       description="Starting-from pricing for websites, SaaS, AI automation, branding, graphic design, and monthly support."
     >
-      <section className="relative z-10 mx-auto max-w-6xl pt-28 pb-8">
+      <section className="relative z-10 mx-auto max-w-6xl pt-14 pb-8 sm:pt-28">
         <motion.span
           {...fadeUp()}
           className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
@@ -42,7 +42,7 @@ export default function Services() {
 
         <motion.h1
           {...fadeUp(0.05)}
-          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight max-sm:mt-3 sm:text-5xl md:text-6xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           Websites, products, brands, and ongoing support.
@@ -50,7 +50,7 @@ export default function Services() {
 
         <motion.p
           {...fadeUp(0.1)}
-          className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75"
+          className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75 max-sm:mt-4"
         >
           Starting-from pricing for websites, SaaS, AI automation, branding,
           graphic design, and monthly support. Final scope is defined around
@@ -58,7 +58,7 @@ export default function Services() {
         </motion.p>
       </section>
 
-      <section className="services-core-section relative z-10 mx-auto mt-24 max-w-6xl">
+      <section className="services-core-section relative z-10 mx-auto mt-12 max-w-6xl sm:mt-24">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
@@ -75,7 +75,7 @@ export default function Services() {
           exact scope, timeline, and deliverables before work begins.
         </motion.p>
 
-        <div className="services-core-grid mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="services-core-grid mt-10 grid gap-6 max-sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
           {CORE_SERVICES.map((service, i) => {
             const Icon = CORE_SERVICE_ICONS[i] ?? Compass;
 
@@ -115,7 +115,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
@@ -132,7 +132,7 @@ export default function Services() {
         </motion.p>
 
         {offerGroups.map((group) => (
-          <div key={group.category} className="mt-12">
+          <div key={group.category} className="mt-12 max-sm:mt-8">
             <motion.div
               {...fadeUp()}
               className="flex items-center gap-4"
@@ -201,7 +201,7 @@ export default function Services() {
 
         <motion.div
           {...fadeUp()}
-          className="pricing-card pricing-card--promise liquid-glass relative mt-12 overflow-hidden rounded-2xl border border-[#db364e]/50 p-6 md:p-8"
+          className="pricing-card pricing-card--promise liquid-glass relative mt-12 overflow-hidden rounded-2xl border border-[#db364e]/50 p-6 max-sm:mt-8 md:p-8"
         >
           <div
             className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#db364e]/20 blur-3xl"
@@ -241,7 +241,7 @@ export default function Services() {
         </motion.div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
@@ -250,7 +250,7 @@ export default function Services() {
           How packages work
         </motion.h2>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 max-sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
           {PACKAGE_RULES.map((rule, i) => (
             <motion.div
               key={rule.title}
@@ -276,7 +276,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
@@ -285,7 +285,7 @@ export default function Services() {
           Who this is for
         </motion.h2>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 max-sm:mt-8 md:grid-cols-2">
           <motion.div
             {...fadeUp()}
             className="liquid-glass rounded-2xl border border-white/10 p-8"
@@ -328,10 +328,10 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.div
           {...fadeUp()}
-          className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-10 backdrop-blur-md md:flex-row md:items-center"
+          className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-10 backdrop-blur-md max-sm:gap-6 md:flex-row md:items-center"
         >
           <p
             className="max-w-2xl text-2xl leading-snug sm:text-3xl"

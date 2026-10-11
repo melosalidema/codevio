@@ -20,11 +20,11 @@ export default function CaseStudy() {
 
   return (
     <PageShell title={project.name} description={project.description}>
-      <article className="relative z-10 mx-auto max-w-5xl pt-12">
+      <article className="relative z-10 mx-auto max-w-5xl pt-8 sm:pt-12">
         <motion.div {...fadeUp()}>
           <Link
             to="/work"
-            className="inline-flex items-center gap-2 py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#f5b8c4] transition-colors hover:text-white"
+            className="inline-flex items-center gap-2 py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#f5b8c4] transition-colors hover:text-white max-sm:min-h-11"
           >
             <ArrowLeft className="size-4" /> Back to work
           </Link>
@@ -68,7 +68,7 @@ export default function CaseStudy() {
           </span>
         </motion.div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
+        <div className="mt-12 grid gap-10 max-sm:mt-8 max-sm:gap-6 lg:grid-cols-[0.7fr_1.3fr]">
           <motion.div {...fadeUp(0.2)} className="lg:sticky lg:top-10 lg:self-start">
             <p className="font-['Bebas_Neue'] text-xs uppercase tracking-[0.2em] text-white/60">
               What we shipped
@@ -109,9 +109,9 @@ export default function CaseStudy() {
 
         <motion.div
           {...fadeUp(0.3)}
-          className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between"
+          className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-6 max-sm:mt-10 sm:flex-row sm:items-center sm:justify-between"
         >
-          <Link to="/work" className="inline-flex items-center gap-2 py-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 hover:text-white">
+          <Link to="/work" className="inline-flex items-center gap-2 py-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 hover:text-white max-sm:min-h-11">
             <ArrowLeft className="size-4" /> All work
           </Link>
           <div className="flex flex-wrap items-center gap-6">
@@ -120,12 +120,12 @@ export default function CaseStudy() {
                 href={project.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white"
+                className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white max-sm:min-h-11"
               >
                 Visit live site <ArrowUpRight className="size-4" />
               </a>
             )}
-            <Link to="/contact" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-[#f5b8c4] hover:text-white">
+            <Link to="/contact" className="inline-flex items-center gap-2 font-['Bebas_Neue'] uppercase tracking-[0.16em] text-[#f5b8c4] hover:text-white max-sm:min-h-11">
               Start a project <ArrowUpRight className="size-4" />
             </Link>
           </div>

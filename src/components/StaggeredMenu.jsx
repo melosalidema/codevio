@@ -84,6 +84,7 @@ export const StaggeredMenu = ({
   onMenuClose
 }) => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const openRef = useRef(false);
   const { pathname } = useLocation();
   const prefersReducedMotionRef = useRef(
@@ -372,6 +373,13 @@ export const StaggeredMenu = ({
   }, [playClose, animateIcon, animateColor, onMenuClose]);
 
   React.useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 8);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  React.useEffect(() => {
     if (!closeOnClickAway || !open) return;
 
     const handleClickOutside = event => {
@@ -479,7 +487,7 @@ export const StaggeredMenu = ({
         </div>
 
         <header
-          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20"
+          className={`staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20${scrolled && !open ? ' is-scrolled' : ''}`}
           aria-label="Main navigation header"
         >
           <Link
@@ -624,6 +632,12 @@ export const StaggeredMenu = ({
 
 .sm-scope .staggered-menu-header > * {
   pointer-events: auto;
+}
+
+.sm-scope .staggered-menu-header.is-scrolled {
+  background: linear-gradient(to bottom, rgba(10,10,15,0.9) 0%, rgba(10,10,15,0.55) 55%, rgba(10,10,15,0) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .sm-scope .sm-logo {
@@ -894,6 +908,10 @@ export const StaggeredMenu = ({
     padding-top: 5.5rem;
   }
 
+  .sm-scope .sm-logo {
+    min-height: 44px;
+  }
+
   .sm-scope .sm-panel-list {
     gap: 0.45rem;
   }
@@ -903,6 +921,8 @@ export const StaggeredMenu = ({
     line-height: 0.92;
     letter-spacing: -0.025em;
     padding-right: 1.05em;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
     white-space: nowrap;
   }
 

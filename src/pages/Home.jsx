@@ -89,7 +89,7 @@ export default function Home() {
           hoverSpeed={0}
           scaleOnHover
           ariaLabel="Technology partners"
-           marginY="10rem"
+           marginY="clamp(4rem, 12vw, 10rem)"
            className="home-tech-loop"
         />
 

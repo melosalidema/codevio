@@ -15,7 +15,7 @@ export default function PositioningStrip() {
   const navigate = useNavigate();
 
   return (
-    <section className="home-positioning relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center-safe px-6 py-12 text-center text-white sm:px-10 md:px-12">
+    <section className="home-positioning relative z-10 mx-auto flex min-h-0 w-full max-w-7xl flex-col justify-center-safe px-6 py-8 text-center text-white sm:min-h-screen sm:px-10 sm:py-12 md:px-12">
       <motion.span
         {...fadeUp()}
         className="block font-['Bebas_Neue'] text-lg uppercase tracking-[0.24em] text-[#f5b8c4]"
@@ -25,7 +25,7 @@ export default function PositioningStrip() {
 
       <motion.h1
         {...fadeUp(0.05)}
-        className="mx-auto mt-6 mb-2 max-w-5xl text-center text-5xl leading-tight sm:text-6xl md:text-7xl"
+        className="mx-auto mt-3 mb-2 max-w-5xl text-center text-5xl leading-tight sm:mt-6 sm:text-6xl md:text-7xl"
         style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
       >
         {SITE.tagline}
@@ -33,12 +33,12 @@ export default function PositioningStrip() {
 
       <motion.p
         {...fadeUp(0.1)}
-        className="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-white/80 sm:text-2xl"
+        className="mx-auto mt-3 max-w-3xl text-xl leading-relaxed text-white/80 sm:mt-8 sm:text-2xl"
       >
         {MISSION.body}
       </motion.p>
 
-      <motion.div {...fadeUp(0.15)} className="mt-10 flex flex-wrap justify-center gap-4">
+      <motion.div {...fadeUp(0.15)} className="mt-6 flex flex-wrap justify-center gap-4 sm:mt-10">
         <SpecularButton onClick={() => navigate('/services')}>
           See the sprints
         </SpecularButton>
@@ -49,7 +49,7 @@ export default function PositioningStrip() {
 
       <motion.div
         {...fadeUp(0.2)}
-        className="mx-auto mt-16 grid max-w-3xl grid-cols-1 gap-8 border-t border-white/10 pt-8 sm:grid-cols-3"
+        className="mx-auto mt-16 grid max-w-3xl grid-cols-1 gap-8 border-t border-white/10 pt-8 max-sm:mt-10 max-sm:gap-6 max-sm:pt-6 sm:grid-cols-3"
       >
         {STATS.map((stat) => (
           <div key={stat.label}>

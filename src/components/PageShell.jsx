@@ -15,7 +15,7 @@ export default function PageShell({ title, description, children }) {
 
   return (
     <>
-      <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen px-6 py-24 text-white">
+      <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen px-6 py-14 text-white sm:py-24">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}

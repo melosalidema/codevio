@@ -18,7 +18,7 @@ function MenuAnimation({ items, pathname }) {
             key={index}
             to={item.to}
             aria-current={isActive ? 'page' : undefined}
-            className="group/menu flex items-center justify-center gap-2 py-1 no-underline md:justify-end"
+            className="group/menu flex min-h-11 items-center justify-center gap-2 py-1 no-underline md:min-h-0 md:justify-end"
           >
             <span className="z-10 translate-x-6 cursor-pointer font-['Dela_Gothic_One'] text-sm uppercase tracking-[0.08em] text-white/70 transition duration-300 ease-out group-hover/menu:translate-x-0 group-hover/menu:text-[#db364e] sm:text-base md:translate-x-7">
               {item.label}
@@ -68,8 +68,8 @@ export default function Footer() {
       `}</style>
 
       <div className="compact-footer mx-auto flex min-h-[500px] w-full max-w-7xl flex-col justify-between px-6 py-8 text-center sm:px-8 md:min-h-[560px] md:px-10 md:py-10 md:text-left lg:px-12">
-      <div className="flex flex-col items-start gap-10 md:flex-row md:items-start md:justify-between">
-          <Link to="/" className="inline-flex w-fit items-center">
+      <div className="flex flex-col items-start gap-6 sm:gap-10 md:flex-row md:items-start md:justify-between">
+          <Link to="/" className="inline-flex min-h-11 w-fit items-center md:min-h-0">
             <img
               src={logo}
               alt="Codevio logo"
@@ -83,7 +83,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+        <div className="grid gap-6 sm:gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
           <div className="hidden md:block">
               <p className="max-w-4xl text-center font-['Dela_Gothic_One'] text-[clamp(1.7rem,5.5vw,5rem)] font-bold uppercase leading-[0.95] tracking-[-0.02em] text-white md:text-left">
               <span className="whitespace-nowrap">Let&apos;s build</span>{' '}<br className="footer-desktop-break" />
@@ -98,14 +98,14 @@ export default function Footer() {
             <div className="flex flex-col gap-2 text-white/60">
               <a
                 href={`mailto:${SITE.email}`}
-                className="whitespace-nowrap py-0.5 transition-colors duration-300 hover:text-[#db364e]"
+                className="min-h-11 whitespace-nowrap py-0.5 transition-colors duration-300 hover:text-[#db364e] md:min-h-0"
               >
                 {SITE.email}
               </a>
 
               <a
                 href={`tel:${SITE.phoneHref}`}
-                className="whitespace-nowrap py-0.5 transition-colors duration-300 hover:text-[#db364e]"
+                className="min-h-11 whitespace-nowrap py-0.5 transition-colors duration-300 hover:text-[#db364e] md:min-h-0"
               >
                 {SITE.phone}
               </a>
@@ -118,7 +118,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 whitespace-nowrap py-1 uppercase transition-colors duration-300 hover:text-[#db364e]"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 whitespace-nowrap py-1 uppercase transition-colors duration-300 hover:text-[#db364e] md:min-h-0 md:min-w-0"
                 >
                   <SocialIcon label={social.label} className="size-4 shrink-0" />
                   {social.label}

@@ -12,7 +12,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function OffersTeaser() {
   return (
-    <section className="home-offers relative z-10 mx-auto mt-16 w-full max-w-7xl border-t border-white/10 px-6 pt-20 pb-32 text-white sm:px-10 md:px-12">
+    <section className="home-offers relative z-10 mx-auto mt-12 w-full max-w-7xl border-t border-white/10 px-6 pt-12 pb-20 text-white sm:mt-16 sm:px-10 sm:pt-20 sm:pb-32 md:px-12">
       <motion.h2
         {...fadeUp()}
         className="text-center text-3xl uppercase sm:text-4xl"
@@ -29,7 +29,7 @@ export default function OffersTeaser() {
         matches where your idea is right now.
       </motion.p>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-6 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
         {HOME_OFFERS.map((offer, i) => (
           <motion.div
             key={offer.title}
@@ -65,7 +65,7 @@ export default function OffersTeaser() {
 
             <Link
               to="/services"
-              className="mt-6 inline-flex w-fit items-center py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#fcdfe4] transition-colors duration-300 hover:text-white"
+              className="mt-6 inline-flex w-fit items-center py-2 font-['Bebas_Neue'] text-sm uppercase tracking-[0.16em] text-[#fcdfe4] transition-colors duration-300 hover:text-white max-sm:min-h-11"
             >
               What's included →
             </Link>

@@ -20,7 +20,7 @@ export default function Contact() {
 
   return (
     <>
-        <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
+        <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen overflow-hidden px-6 py-14 text-white sm:py-24">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}
@@ -64,7 +64,7 @@ export default function Contact() {
         </div>
 
         {/* A div, not a section: index.css forces `section` to 1080px on desktop. */}
-        <div className="relative z-10 mx-auto max-w-4xl pt-28 pb-8 min-[1025px]:pt-[84px]">
+        <div className="relative z-10 mx-auto max-w-4xl pt-14 pb-8 sm:pt-28 min-[1025px]:pt-[84px]">
           <div className="text-center">
             <span className="block text-sm uppercase tracking-[0.3em] text-[#f5b8c4]">
               Get in touch
@@ -82,7 +82,7 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="contact-layout mt-10 grid items-stretch gap-6 lg:grid-cols-2">
+          <div className="contact-layout mt-10 grid items-stretch gap-6 max-sm:mt-8 lg:grid-cols-2">
             <div className="flex flex-col gap-6">
               <section className="contact-panel liquid-glass rounded-2xl border border-white/10 p-6 text-left">
                 <h2
@@ -103,7 +103,7 @@ export default function Contact() {
                       </p>
                       <a
                         href={`mailto:${SITE.email}`}
-                        className="mt-1 block break-all text-lg tracking-[0.01em] text-white transition-colors hover:text-[#db364e]"
+                        className="mt-1 block break-all text-lg tracking-[0.01em] text-white transition-colors hover:text-[#db364e] max-sm:py-2"
                       >
                         {SITE.email}
                       </a>
@@ -120,7 +120,7 @@ export default function Contact() {
                       </p>
                       <a
                         href={`tel:${SITE.phoneHref}`}
-                        className="mt-1 block text-lg tracking-[0.01em] text-white transition-colors hover:text-[#db364e]"
+                        className="mt-1 block text-lg tracking-[0.01em] text-white transition-colors hover:text-[#db364e] max-sm:py-2"
                       >
                         {SITE.phone}
                       </a>

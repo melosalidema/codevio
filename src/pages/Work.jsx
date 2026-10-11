@@ -22,7 +22,7 @@ export default function Work() {
         title="Work"
         description="A mix of live client work and illustrative project examples from the Codevio launch studio."
       >
-      <section className="relative z-10 mx-auto max-w-6xl pt-28">
+      <section className="relative z-10 mx-auto max-w-6xl pt-14 sm:pt-28">
         <motion.span
           {...fadeUp()}
           className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
@@ -32,7 +32,7 @@ export default function Work() {
 
         <motion.h1
           {...fadeUp(0.05)}
-          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight max-sm:mt-3 sm:text-5xl md:text-6xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           Launch examples.
@@ -40,14 +40,14 @@ export default function Work() {
 
         <motion.p
           {...fadeUp(0.1)}
-          className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75"
+          className="mx-auto mt-8 max-w-2xl text-center text-lg text-white/75 max-sm:mt-4"
         >
           A mix of live client work and illustrative project examples. Explore
           each project to see the goals, approach, and deliverables.
         </motion.p>
       </section>
 
-      <section className="work-grid relative z-10 mx-auto mt-16 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="work-grid relative z-10 mx-auto mt-16 grid max-w-6xl gap-8 max-sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
         {CASE_STUDIES.map((project, i) => (
           <motion.div key={project.name} {...fadeUp(i * 0.08)}>
             <Link
@@ -108,10 +108,10 @@ export default function Work() {
         ))}
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.div
           {...fadeUp()}
-          className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-10 backdrop-blur-md md:flex-row md:items-center"
+          className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-10 backdrop-blur-md max-sm:gap-6 md:flex-row md:items-center"
         >
           <p
             className="max-w-2xl text-2xl leading-snug sm:text-3xl"

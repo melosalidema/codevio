@@ -115,6 +115,7 @@ function MacWindowControls() {
 
         .code-line--number {
           opacity: 0;
+          clip-path: none;
           animation: code-number-in 220ms ease forwards;
           animation-delay: var(--code-line-delay);
         }
@@ -273,7 +274,7 @@ export default function About() {
 
   return (
     <>
-      <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen overflow-hidden px-6 py-24 text-white">
+      <main id="main" tabIndex={-1} className="compact-layout relative min-h-screen overflow-hidden px-6 py-14 text-white sm:py-24">
         <div className="pixelblast-bg">
           <Grainient
             color1={PAGE_THEME.backgroundColor}
@@ -316,7 +317,7 @@ export default function About() {
           />
         </div>
 
-        <section className="about-layout relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 pt-28 lg:gap-40 lg:grid-cols-2">
+        <section className="about-layout relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-[2rem] pt-14 sm:gap-16 sm:pt-28 lg:gap-40 lg:grid-cols-2">
           <div className="flex flex-col gap-8">
             <motion.span
               {...fadeUp()}

@@ -22,7 +22,7 @@ export default function Mission() {
       title="Mission"
       description="What Codevio stands for: a small senior studio shipping brands, websites, and products in fixed sprints."
     >
-      <section className="relative z-10 mx-auto max-w-6xl pt-28">
+      <section className="relative z-10 mx-auto max-w-6xl pt-14 sm:pt-28">
         <motion.span
           {...fadeUp()}
           className="block text-center text-sm uppercase tracking-[0.3em] text-[#f5b8c4]"
@@ -32,7 +32,7 @@ export default function Mission() {
 
         <motion.h1
           {...fadeUp(0.05)}
-          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl leading-tight max-sm:mt-3 sm:text-5xl md:text-6xl"
           style={{ fontFamily: "'Dela Gothic One', sans-serif" }}
         >
           {MISSION.statement}
@@ -40,14 +40,14 @@ export default function Mission() {
 
         <motion.p
           {...fadeUp(0.1)}
-          className="mx-auto mt-8 max-w-3xl text-center text-lg text-white/80 sm:text-xl"
+          className="mx-auto mt-8 max-w-3xl text-center text-lg text-white/80 max-sm:mt-4 sm:text-xl"
         >
           {MISSION.body}
         </motion.p>
 
         <motion.div
           {...fadeUp(0.15)}
-          className="liquid-glass mt-14 overflow-hidden rounded-2xl border border-white/10 p-8 shadow-2xl md:p-10"
+          className="liquid-glass mt-14 overflow-hidden rounded-2xl border border-white/10 p-8 shadow-2xl max-sm:mt-8 md:p-10"
         >
           <p className="font-['Bebas_Neue'] text-lg uppercase tracking-[0.12em] text-[#f5b8c4]">
             What we commit to
@@ -67,7 +67,7 @@ export default function Mission() {
         </motion.div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
@@ -76,7 +76,7 @@ export default function Mission() {
           How we think
         </motion.h2>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 max-sm:mt-8 md:grid-cols-2 lg:grid-cols-3">
           {VALUES.map((value, i) => (
             <motion.div
               key={value.title}
@@ -109,7 +109,7 @@ className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.h2
           {...fadeUp()}
           className="text-center text-3xl uppercase sm:text-4xl"
@@ -118,7 +118,7 @@ className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors
           How we work
         </motion.h2>
 
-        <div className="mt-10 flex flex-col">
+        <div className="mt-10 flex flex-col max-sm:mt-8">
           {PROCESS.map((phase, i) => (
             <motion.div
               key={phase.title}
@@ -142,10 +142,10 @@ className="liquid-glass rounded-2xl border border-white/10 p-7 transition-colors
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-28 max-w-6xl">
+      <section className="relative z-10 mx-auto mt-14 max-w-6xl sm:mt-28">
         <motion.div
           {...fadeUp()}
-          className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-10 backdrop-blur-md md:flex-row md:items-center"
+          className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-[#db364e]/40 bg-[#db364e]/10 p-10 backdrop-blur-md max-sm:gap-6 md:flex-row md:items-center"
         >
           <p
             className="max-w-2xl text-2xl leading-snug sm:text-3xl"
